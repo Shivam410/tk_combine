@@ -84,13 +84,13 @@ const About = () => {
       <div className="top-banner">
         <div className="about-banner">
           <div className="about-banner-desc">
-            <h1>About</h1>
+            <h1>About Us</h1>
           </div>
         </div>
       </div>
 
       <div className="about-content-title">
-        <img src={about1} alt="about image" loading="lazy" />
+       
 
         <p>
           Welcome to TK Production Film, your premier destination for capturing
@@ -129,9 +129,7 @@ const About = () => {
         </p>
       </div>
 
-      <div className="about-big-img" data-aos="fade-up">
-        <img src={bg17} alt="About Us" loading="lazy" />
-      </div>
+      
 
       <div className="about-overlay">
         <img src={overlay3} alt="about image" loading="lazy" />
