@@ -1,0 +1,130 @@
+.singleContact {
+  margin-top: 20px;
+  .singleContact-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h1 {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      .portfolio-icon {
+        font-size: 30px;
+      }
+    }
+    .singleContact-top-btns {
+      display: flex;
+      gap: 10px;
+      button {
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+        background-color: #ffa500;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        outline: none;
+        gap: 8px;
+
+        &:last-child {
+          background-color: red;
+
+          &:hover {
+            background: rgb(170, 28, 28);
+          }
+
+          &:active {
+            background-color: rgb(224, 61, 61);
+          }
+
+          &:focus {
+            box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.76);
+          }
+        }
+
+        &:hover {
+          background-color: #e69500;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        &:active {
+          background-color: #cc8400;
+          transform: translateY(0);
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        &:focus {
+          box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.5);
+        }
+
+        &:disabled {
+          background-color: #cccccc;
+          cursor: not-allowed;
+          opacity: 0.7;
+        }
+
+        .button-icon {
+          font-size: 20px;
+          transition: transform 0.3s ease;
+        }
+
+        &:hover .button-icon {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  .singleContact-content {
+    max-width: 800px;
+    margin: 40px auto; // Some vertical spacing
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .singleContact-content-desc {
+      padding: 10px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap; 
+
+      p {
+        margin: 0;
+        font-size: 18px;
+        color: #555;
+        line-height: 1.6;
+
+        &:first-child {
+          color: #585858;
+          font-size: 14px;
+          text-transform: uppercase;
+          font-weight: bold;
+        }
+      }
+    }
+
+    // Footer section of the card (optional)
+    .singleContact-content-footer {
+      padding: 15px 20px;
+      background-color: #f7f7f7;
+      text-align: right;
+      font-size: 14px;
+      color: #999;
+      border-top: 1px solid #eaeaea;
+    }
+  }
+}

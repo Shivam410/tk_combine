@@ -1,0 +1,259 @@
+@use "../../styles/responsive.scss" as *;
+
+.gallery {
+  .gallery-top-banner {
+    padding: 100px 30px 0px 30px;
+
+    @include md {
+      padding: 100px 10px 0px 10px;
+    }
+
+    .gallery-banner {
+      background-image: url("../../assets/images/bg15.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 500px;
+      position: relative;
+
+      @include md {
+        height: 300px;
+      }
+
+      .gallery-banner-desc {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        width: 100%;
+
+        @include lg {
+          width: 90%;
+        }
+
+        h1 {
+          text-align: center;
+          font-size: 60px;
+          color: #fff;
+          position: relative;
+
+          @include md {
+            font-size: 50px;
+          }
+
+          @include sm {
+            font-size: 40px;
+          }
+
+          @include lg {
+            &::before {
+              display: none;
+            }
+
+            &::after {
+              display: none;
+            }
+          }
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0; // Align to the left of the parent element
+            width: 400px;
+            height: 1px;
+            background-color: rgba(
+              255,
+              255,
+              255,
+              0.3
+            ); // Ensure RGBA value is correct
+            transform: translateY(-50%); // Adjust vertical positioning
+          }
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 0; // Align to the left of the parent element
+            width: 400px;
+            height: 1px;
+            background-color: rgba(
+              255,
+              255,
+              255,
+              0.3
+            ); // Ensure RGBA value is correct
+            transform: translateY(-50%); // Adjust vertical positioning
+          }
+        }
+      }
+    }
+  }
+
+  .gallery-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0px 10px;
+
+    .gallery-container-top {
+      margin-top: 60px;
+      text-align: center;
+      h1 {
+        font-size: 60px;
+
+        @include sm {
+          font-size: 35px;
+        }
+      }
+      p {
+        font-size: 23px;
+        color: #585858;
+        @include sm {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .gallery-cards {
+      column-count: 3;
+      column-gap: 15px;
+      margin-top: 50px;
+
+      @include md {
+        column-count: 2;
+      }
+
+      .gallery-card {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 10px;
+        break-inside: avoid;
+        position: relative;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+
+        .card-content {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-align: center;
+          color: #000;
+          z-index: 2;
+          opacity: 0;
+          transition: opacity 0.5s ease;
+          width: 100%;
+        }
+
+        &:hover .card-content {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  list-style: none;
+  align-items: center;
+  margin-bottom: 20px;
+  .page-item {
+    margin: 0 5px;
+    display: block;
+
+    @include sm {
+      margin: 0;
+    }
+  }
+
+  a {
+    color: #585858;
+  }
+
+  .page-link {
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 50%;
+    padding: 10px 15px;
+    color: #000;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+
+    &:not(.prev-icon):not(.next-icon):hover {
+      background-color: #fff;
+      color: #000;
+    }
+  }
+
+  .prev-icon,
+  .next-icon {
+    padding: 1.5px 0;
+    pointer-events: none; // This prevents hover effects
+  }
+
+  .page-link:hover {
+    background-color: $primary-color;
+    color: #fff;
+  }
+
+  .active .page-link {
+    background-color: #b90808;
+    color: #fff;
+  }
+
+  .page-item.disabled .page-link {
+    cursor: not-allowed;
+    color: #ccc;
+    background-color: #f8f8f8;
+  }
+
+  .page-link:focus {
+    outline: none;
+    border: none;
+  }
+
+  .page-item {
+    list-style: none;
+  }
+}
+///////////////
+
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  img {
+    max-width: 90%;
+    max-height: 90%;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+  }
+}

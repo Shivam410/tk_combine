@@ -1,0 +1,162 @@
+@use "../../styles/responsive.scss" as *;
+
+.photoAlbums {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+
+  h1 {
+    font-size: 50px;
+    text-transform: uppercase;
+
+    @include sm {
+      font-size: 35px;
+      text-align: center;
+    }
+  }
+
+  .photoAlbums-desc {
+    margin: 20px 0px;
+    font-size: 25px;
+    text-align: center;
+  }
+
+  .photoAlbums-cards {
+    width: 100%;
+    max-width: 1400px;
+    position: relative;
+    overflow: visible;
+
+    .photoAlbums-slider {
+      position: relative;
+
+      .swiper-button-next,
+      .swiper-button-prev {
+        color: #000;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+
+    .photoAlbums-card {
+      position: relative;
+
+      .photoAlbums-card-content {
+        position: relative;
+        width: 100%;
+
+        img {
+          width: 100%;
+          max-width: 100%;
+          height: 500px;
+          display: block;
+          object-fit: contain;
+
+          @include lg {
+            height: auto;
+          }
+
+          @include md {
+            object-fit: contain;
+          }
+
+          @include sm {
+            height: 300px;
+            object-fit: contain;
+          }
+        }
+
+        .photoAlbums-card-content-desc {
+          position: absolute;
+          bottom: 20%;
+          left: 10%;
+          transform: translateY(20px);
+          transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+          color: #fff;
+          cursor: pointer;
+          opacity: 0;
+
+          transform: translateY(100px);
+          transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+          &.animate {
+            .photoAlbums-card-content-desc {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+
+          h3 {
+            font-size: 25px;
+            margin-bottom: 5px;
+            transition: all 0.3s ease-in-out;
+
+            @include sm {
+              font-size: 22px;
+            }
+
+            &:hover {
+              color: $primary-color;
+            }
+          }
+
+          p {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.swiper-slide {
+  overflow: visible !important;
+  display: flex;
+  justify-content: center;
+}
+
+.pa-swiper-prev,
+.pa-swiper-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $primary-color;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 100;
+  font-size: 20px;
+  transition: background 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 5px 14px;
+
+  &:active {
+    transform: translateY(-50%) scale(0.95);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.pa-swiper-prev {
+  left: 10px;
+}
+
+.pa-swiper-next {
+  right: 10px;
+}
+
+.pa-swiper-prev:hover,
+.pa-swiper-next:hover {
+  background: $primary-color;
+  color: #fff;
+}

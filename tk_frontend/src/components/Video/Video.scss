@@ -1,0 +1,98 @@
+@use "../../styles/responsive.scss" as *;
+
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9; 
+  overflow: hidden; 
+  border-radius: 12px; 
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px); /* Subtle hover lift effect */
+    cursor: pointer;
+  }
+
+  .thumbnail {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* ✅ Cover entire container */
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05); /* Zoom effect on hover */
+      }
+    }
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none; /* ✅ Remove black border */
+    display: block; /* Prevents inline gap */
+    overflow: hidden; /* No black edges */
+  }
+  .thumbnail {
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .player {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background: $primary-color;
+      transform: translate(-50%, -50%);
+      height: 120px;
+      width: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      cursor: pointer;
+
+      &.wedding {
+        width: 50px;
+        height: 50px;
+
+        .player-icon {
+          font-size: 20px;
+        }
+      }
+
+      @include sm {
+        width: 50px;
+        height: 50px;
+      }
+
+      .player-icon {
+        color: #fff;
+        font-size: 40px;
+
+        @include sm {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}

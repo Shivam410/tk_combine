@@ -1,0 +1,359 @@
+@use "../../../styles/responsive.scss" as *;
+
+.service3 {
+  padding-bottom: 20px;
+  .service3-top-banner {
+    padding: 100px 30px 00px 30px;
+
+    @include lg {
+      padding: 100px 10px 0px 10px;
+    }
+
+    .service3-banner {
+      background-image: url("../../../assets/images/bg22.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: top;
+      height: 500px;
+      position: relative;
+      z-index: 1;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+      }
+
+      @include md {
+        height: 300px;
+      }
+
+      .service3-banner-desc {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        width: 100%;
+
+        @include lg {
+          width: 90%;
+        }
+
+        @include sm {
+          width: 100%;
+        }
+
+        h1 {
+          text-align: center;
+          font-size: 60px;
+          color: #fff;
+          position: relative;
+
+          @include md {
+            font-size: 50px;
+          }
+
+          @include sm {
+            font-size: 40px;
+          }
+
+          @include xl {
+            &::before {
+              display: none;
+            }
+
+            &::after {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .service3-container {
+    padding: 30px 30px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    gap: 50px;
+    overflow: hidden;
+
+    @include lg {
+      padding: 10px 10px;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .service3-container-content {
+      color: #000;
+      width: 100%;
+      overflow: hidden;
+
+      .service3-container-content-top {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        width: 100%;
+        overflow: hidden;
+        .services-img-slide {
+          max-width: 100%;
+          width: 100%;
+          .services-slide {
+            width: 100%;
+            height: 500px;
+            aspect-ratio: 16 / 9;
+
+            @include md {
+              height: auto;
+            }
+
+            .service_slide {
+              width: 100%;
+              height: 100%;
+
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                display: block;
+              }
+            }
+          }
+        }
+
+        h1 {
+          font-size: 35px;
+
+          @include sm {
+            font-size: 30px;
+          }
+        }
+
+        p {
+          color: #585858;
+          line-height: 1.5;
+          font-size: 18px;
+        }
+      }
+
+      .service3-services {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 30px;
+        h1 {
+          text-transform: uppercase;
+          font-size: 20px;
+          position: relative;
+
+          &::after {
+            content: "";
+            width: 70px;
+            height: 2px;
+            border-radius: 1px;
+            background-color: #000;
+            display: block;
+          }
+        }
+        ul {
+          list-style: none;
+          margin-left: 30px;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          li {
+            color: #585858;
+            display: flex;
+            align-items: center;
+
+            .check-icon {
+              color: $primary-color;
+              margin-right: 30px;
+              flex-shrink: 0;
+            }
+
+            .services-desc {
+              p {
+                font-size: 18px;
+                white-space: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                &:first-child {
+                  color: #000;
+                  margin-bottom: 10px;
+                  font-weight: 500;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .service3-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 30px;
+        h1 {
+          text-transform: uppercase;
+          font-size: 20px;
+          position: relative;
+
+          &::after {
+            content: "";
+            width: 70px;
+            height: 2px;
+            border-radius: 1px;
+            background-color: #000;
+            display: block;
+          }
+        }
+        ul {
+          list-style: none;
+          margin-left: 30px;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          li {
+            color: #585858;
+            display: flex;
+            align-items: center;
+
+            p {
+              font-size: 18px;
+              line-height: 1.5;
+              &:first-child {
+                margin-right: 30px;
+                color: $primary-color;
+              }
+
+              span {
+                font-weight: 500;
+                color: #000;
+              }
+            }
+          }
+        }
+
+        p {
+          line-height: 1.5;
+          font-size: 18px;
+        }
+      }
+    }
+
+    hr {
+      margin: 10px 0px;
+      background: $primary-color;
+      height: 2px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .service-films {
+      h2 {
+        text-align: center;
+        margin: 30px 0px;
+        @include sm {
+          font-size: 25px;
+        }
+      }
+
+      .subscribe-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px;
+        gap: 10px;
+        margin-bottom: 10px;
+        p {
+          font-size: 20px;
+          font-weight: 500;
+          color: $primary-color;
+          text-align: center;
+
+          @include md {
+            font-size: 16px;
+          }
+
+          @include sm {
+            font-size: 14px;
+          }
+        }
+
+        .sub-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 12px 24px;
+          font-size: 16px;
+          font-weight: 600;
+          color: #fff;
+          background-color: #ff0000;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background 0.3s ease, transform 0.2s ease;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+
+          &:hover {
+            background-color: #cc0000;
+            transform: scale(1.05);
+          }
+
+          &:active {
+            background-color: #990000;
+            transform: scale(0.98);
+          }
+
+          &:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+          }
+
+          @include md {
+            padding: 10px 20px;
+            font-size: 14px;
+          }
+
+          @include sm {
+            padding: 8px 16px;
+            font-size: 12px;
+          }
+        }
+      }
+
+      .service-videos {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+
+        @include xl {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include md {
+          grid-template-columns: repeat(1, 1fr);
+        }
+
+        .service-video {
+        }
+      }
+    }
+  }
+
+  .service-contact {
+    @include lg {
+      margin-top: 30px;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+# Root-level ignores
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+
+# IDE
+.vscode/
+.idea/
+
+# Env
+.env
+.env.*
+
+# Build outputs
+**/dist/
+**/build/
+
+# Dependencies
+**/node_modules/
+
+# Coverage
+**/coverage/
+
+# Local tooling
+.qodo/
+
+**/.git_disabled/
+
+**/data/config.env

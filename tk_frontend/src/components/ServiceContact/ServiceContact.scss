@@ -1,0 +1,150 @@
+@use "../../styles/responsive.scss" as *;
+
+.serviceContact {
+  padding: 0px 20px 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 80px;
+
+  @include lg {
+    padding: 0px 10px;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .serviceContact-left {
+    color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    .serviceContact-left-top {
+      h1 {
+        font-size: 60px;
+
+        @include sm {
+          font-size: 40px;
+        }
+      }
+      .serviceContact-left-desc {
+        font-size: 25px;
+
+        @include sm {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .serviceContact-left-desc {
+   
+      p {
+        font-size: 23px;
+        font-weight: 600;
+
+        @include sm {
+          font-size: 17px;
+        }
+        
+        &.s2-no{
+          margin-top: 15px;
+        }
+     
+
+        &:first-child {
+          text-transform: uppercase;
+          font-size: 18px;
+          color: #585858;
+          font-weight: normal;
+          margin-bottom: 10px;
+        }
+      }
+
+      span {
+        text-transform: uppercase;
+        border-bottom: 1px solid #000;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+
+      
+
+        &:hover {
+          color: $primary-color;
+          border-bottom: 1px solid $primary-color;
+        }
+      }
+    }
+  }
+
+  .serviceContact-right {
+    width: 100%;
+    .serviceContact-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+
+      @include md {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group {
+        position: relative;
+
+        input,
+        textarea {
+          width: 100%;
+          padding: 15px 12px;
+          border: 1px solid #e0e0e0;
+          font-size: 18px;
+          color: #333;
+          background-color: #f9f9f9;
+          transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+          &:focus {
+            border-color: #b90808;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(185, 8, 8, 0.1);
+          }
+
+          &::placeholder {
+            color: #999;
+          }
+        }
+
+        textarea {
+          resize: vertical;
+          min-height: 150px;
+          font-family: "Sora", serif;
+        }
+      }
+
+      .form-group:nth-child(3),
+      .form-group:nth-child(4) {
+        grid-column: span 2;
+      }
+    }
+
+    button {
+      // grid-column: span 2;
+      background: $primary-color;
+      color: #fff;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.5s ease-in-out;
+      overflow: hidden;
+      text-transform: uppercase;
+      &:hover {
+        background-color: #fff;
+        color: $primary-color;
+      }
+    }
+  }
+}

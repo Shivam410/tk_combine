@@ -1,0 +1,280 @@
+@use "../../styles/responsive.scss" as *;
+
+.ourCore {
+  max-width: 1140px;
+  margin: 0 auto;
+  overflow: hidden;
+  // display: none;
+
+  @include xl {
+    margin: 0;
+  }
+
+  .ourCore-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20%;
+
+    @include xl {
+      gap: 30%;
+    }
+
+    @include lg {
+      gap: 0;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 50px;
+      text-transform: uppercase;
+      white-space: nowrap;
+
+      @include sm {
+        font-size: 35px;
+        margin-bottom: 10px;
+      }
+    }
+
+    p {
+      font-size: 18px;
+      color: #585858;
+      line-height: 1.75rem;
+
+      .bold-text {
+        color: #000;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .ourCore-slider {
+    margin-top: 30px;
+    padding-top: 20px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+
+    @include xl {
+      padding-top: 60px;
+    }
+
+    @include lg {
+      padding-top: 60px;
+    }
+
+    @include sm {
+      padding-top: 60px;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      position: absolute;
+      transform: translateY(-50%);
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 10;
+      color: #000;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+
+    .ourCore-slider-card {
+      width: 100%;
+      transition: all 0.3s ease-in-out;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      &:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: -10px;
+        height: 100%;
+        width: 1px;
+        background-color: #dddddd;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        height: 400px;
+        object-position: top;
+
+        @include sm {
+          max-width: 100%;
+        }
+      }
+
+      h2 {
+        font-size: 25px;
+        margin-top: 10px;
+      }
+
+      p {
+        margin-top: 10px;
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  // Ensure no overflow happens for smaller screens
+  @include sm {
+    .ourCore {
+      max-width: 100%; // Allow the container to fill the available space
+      padding: 10px; // Add some padding on smaller screens to avoid edge-to-edge content
+    }
+
+    .ourCore-top {
+      gap: 0;
+      text-align: center; // Center text for better presentation
+    }
+
+    .ourCore-slider {
+      margin-top: 20px; // Adjust margin for smaller screens
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      font-size: 16px; // Adjust swiper button size for smaller screens
+      padding: 8px;
+    }
+  }
+}
+
+.ourCore {
+  position: relative;
+}
+
+.custom-prev,
+.custom-next {
+  position: absolute;
+  top: 15%;
+  right: 30px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  color: #000; /* Ensure the icons are visible (white color) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+
+  @include xl {
+    top: 20%;
+  }
+
+  @include lg {
+    top: 20%;
+  }
+
+  @media (max-width: 800px) {
+    top: 25%;
+  }
+
+  @media (max-width: 800px) {
+    top: 25%;
+  }
+
+  @media (max-width: 750px) {
+    top: 25%;
+  }
+
+  @media (max-width: 700px) {
+    top: 25%;
+  }
+
+  @media (max-width: 650px) {
+    top: 26%;
+  }
+
+  @media (max-width: 600px) {
+    top: 28%;
+  }
+
+  @include sm {
+    top: 28%;
+  }
+
+  @media (max-width: 420px) {
+    top: 30%;
+  }
+
+  @media (max-width: 340px) {
+    top: 30%;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px dashed #585858; // Ensure border is visible
+    border-radius: 50%;
+    z-index: 1; // Ensure it appears above background
+    pointer-events: none; // Prevents click interference
+    display: block;
+  }
+
+  &:hover::before {
+    animation: rotateBorder 5s linear infinite;
+  }
+
+  @keyframes rotateBorder {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+}
+
+.custom-prev {
+  left: 85%;
+
+  @include lg {
+    left: 78%;
+  }
+
+  @include md {
+    left: 70%;
+  }
+
+  @media (max-width: 600px) {
+    left: 65%;
+  }
+
+  @include sm {
+    left: 58%;
+  }
+
+  @media (max-width: 420px) {
+    left: 50%;
+  }
+
+  @media (max-width: 340px) {
+    left: 40%;
+  }
+}
+
+.custom-next {
+  // right: 10%;
+}

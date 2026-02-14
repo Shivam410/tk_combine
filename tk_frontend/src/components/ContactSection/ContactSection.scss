@@ -1,0 +1,131 @@
+@use "../../styles/responsive.scss" as *;
+
+.contactSection {
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  padding-bottom: 20px;
+  padding: 0px 20px;
+  align-items: center;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-content: center;
+
+  .contactSection-left-cont {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    @include lg{
+      flex-direction: row;
+    }
+
+    @include md{
+      flex-direction: column;
+    }
+  }
+
+  @include lg {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+  }
+
+  .contactSection-card {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    text-align: start;
+    // flex-direction: column;
+
+    @include xl {
+    }
+
+    @include lg {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 10px;
+    }
+
+    .contactSection-left {
+      .contactSection-icon {
+        font-size: 60px;
+        background: $primary-color;
+        color: #fff;
+        border-radius: 50%;
+        padding: 10px;
+        box-shadow: 0 4px 10px rgba(185, 8, 8, 0.6);
+      }
+    }
+    .contactSection-right {
+      &.address-tk {
+        text-align: start;
+        display: flex;
+        flex-direction: column;
+       
+
+        @include lg {
+          text-align: center;
+          gap: 20px;
+        }
+        span {
+          border-bottom: none;
+          text-transform: capitalize;
+          &:hover {
+            border-bottom: none;
+          }
+        }
+
+        .address {
+          .sm-address {
+        
+            }
+
+            .view-map {
+              border-bottom: 1px solid #000;
+              text-transform: uppercase;
+              margin-top: 10px;
+              &:hover {
+                color: $primary-color;
+                border-bottom: 1px solid $primary-color;
+              }
+          }
+        }
+      }
+
+      p {
+        color: #585858;
+        margin: 10px 0px;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+
+        @include lg {
+          justify-content: center;
+        }
+
+        img {
+          width: 20px;
+          margin: 0px 5px;
+        }
+      }
+      span {
+        display: inline-block;
+        border-bottom: 1px solid #000;
+        border-radius: 2px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease-in-out;
+        text-transform: uppercase;
+
+        &:hover {
+          color: $primary-color;
+          border-bottom: 1px solid $primary-color;
+        }
+      }
+    }
+  }
+}

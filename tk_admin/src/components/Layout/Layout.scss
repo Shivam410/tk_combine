@@ -1,0 +1,35 @@
+@import "../../styles/responsive.scss";
+
+.layout {
+  height: 100vh;
+  padding: 20px;
+
+  .layout-container {
+    display: grid;
+    grid-template-columns: 300px auto; // Sidebar (Left) + Content (Right)
+    gap: 20px;
+    height: 100vh;
+
+    .layout-left {
+    }
+
+    .layout-right {
+      background-color: #ffdee9;
+      background-image: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%);
+      border-radius: 10px;
+      padding: 20px;
+
+      .layout-content{
+        margin-top: 20px;
+      }
+    }
+
+    // @include md {
+    //   grid-template-columns: 250px auto; // Adjust for medium screens
+    // }
+
+    // @include sm {
+    //   grid-template-columns: 1fr; // Full width on small screens (Sidebar collapses)
+    // }
+  }
+}

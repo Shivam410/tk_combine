@@ -1,0 +1,51 @@
+.table {
+    
+  .admin-table {
+    height: 500px;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .ag-theme-alpine {
+    --ag-font-family: "Sora", serif;
+
+    --ag-background-color: #f4f4f4;
+    --ag-header-background-color: #000;
+    --ag-header-text-color: white;
+    --ag-odd-row-background-color: #f9f9f9;
+    --ag-even-row-background-color: white;
+
+    --ag-cell-horizontal-padding: 15px; // Left & right padding
+    --ag-cell-vertical-padding: 50px; // Top & bottom padding
+
+    .ag-row .ag-cell:nth-child(1) {
+      justify-content: unset;
+    }
+
+    .ag-header-cell {
+      font-weight: bold;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ag-header-cell-label {
+      display: flex;
+      justify-content: center;
+    }
+
+    .ag-cell {
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ag-row:hover {
+      background-color: #ddd !important;
+    }
+  }
+}

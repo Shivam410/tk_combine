@@ -1,0 +1,228 @@
+@use "../../styles/responsive.scss" as *;
+
+.ourService {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  .ourService-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10%;
+
+    @include lg {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    h1 {
+      font-size: 50px;
+      text-transform: uppercase;
+      white-space: nowrap;
+
+      @include sm {
+        white-space: wrap;
+        text-align: center;
+        font-size: 35px;
+      }
+    }
+
+    .ourService-top-right {
+      display: flex;
+      flex-direction: column;
+
+      p {
+        font-size: 18px;
+        color: #585858;
+        line-height: 1.75rem;
+
+        .bold-text {
+          color: #000;
+          font-weight: 500;
+        }
+
+        @include md {
+          text-align: justify;
+        }
+      }
+
+      .read-more {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+        text-transform: uppercase;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        color: #000;
+        position: relative;
+        overflow: hidden;
+        align-self: flex-end;
+        font-weight: 600;
+
+        &:hover {
+          color: $primary-color;
+          .right-arrow {
+            transform: translateX(5px);
+          }
+
+          &::after {
+            width: 100%;
+          }
+        }
+
+        .right-arrow {
+          font-size: 25px;
+          margin-left: 5px;
+          transition: transform 0.3s ease-in-out;
+        }
+      }
+    }
+  }
+
+  .overlay {
+    img {
+      object-fit: contain;
+      position: absolute;
+      bottom: 20%;
+    }
+  }
+
+  .ourService-bottom {
+    .ourService-top-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 30px;
+      gap: 40px;
+
+      @include xl {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @include lg {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      @include md {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+
+      @include sm {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+      }
+      .ourService-top-card {
+        width: 270px;
+        height: 340px;
+        padding: 40px 20px;
+        border-radius: 35px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border: 1px solid #dddddd;
+        transition: all 0.5s ease-in-out;
+        position: relative;
+        overflow: hidden;
+        background: #f5f5f5;
+        margin: 0 auto;
+        align-items: center;
+
+        @include lg {
+          margin: 0 auto;
+          padding: 20px 10px;
+          width: 250px;
+          height: 280px;
+        }
+
+        @include md {
+          width: 100%;
+          padding: 20px;
+          height: 280px;
+        }
+
+        @include sm {
+          margin: 0 auto;
+          width: 270px;
+          height: 220px;
+        }
+
+        &:hover {
+          border: 1px solid #989898;
+          background: $primary-color;
+          box-shadow: 0px 35px 40px 10px rgba(0, 0, 0, 0.25);
+
+          p {
+            color: #fff;
+          }
+
+          h1 {
+            color: #fff;
+          }
+
+          img {
+            filter: invert(1);
+            transition: filter 0.3s ease-in-out;
+            animation: bounce 0.8s ease-in-out;
+          }
+
+          .ourService-top-card-desc {
+            h5 {
+              color: #fff;
+            }
+          }
+        }
+
+        img {
+          width: 90px;
+          transition: transform 0.3s ease-in-out;
+
+          @include sm {
+            width: 70px;
+          }
+        }
+
+        .ourService-top-card-desc {
+          h1 {
+            font-size: 20px;
+            transition: all 0.5s ease-in-out;
+            text-align: center;
+
+            @include sm {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @keyframes border-glow {
+        0% {
+          opacity: 0.5;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.05);
+        }
+        100% {
+          opacity: 0.5;
+          transform: scale(1);
+        }
+      }
+    }
+  }
+}

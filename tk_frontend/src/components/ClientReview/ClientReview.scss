@@ -1,0 +1,280 @@
+@use "../../styles/responsive.scss" as *;
+
+.clientReview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  .clientReview-img {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      height: 600px;
+      object-fit: cover;
+      width: 100%;
+      object-position: top;
+    }
+
+    .clientReview-card {
+      overflow: visible;
+      width: 90%;
+      max-width: 700px;
+      background: #fff;
+      padding: 40px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      position: absolute;
+      left: 30%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      margin: 0px auto;
+      min-height: 100px;
+      z-index: 5;
+
+      @include xl {
+        left: 50%;
+      }
+
+      @include sm {
+        width: 95%;
+        padding: 10px;
+      }
+
+      .clientReview-card-desc {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        height: 400px;
+
+        justify-content: space-between;
+        .clientReview-card-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .clientReview-card-stars {
+            display: flex;
+            gap: 5px;
+
+            .star {
+              color: $primary-color;
+              font-size: 20px;
+            }
+          }
+
+          .clientReview-card-quotes {
+            .quotes {
+              color: #7a7575;
+              font-size: 80px;
+            }
+          }
+        }
+        .reviews {
+          font-size: 18px;
+          line-height: 30px;
+          color: #222;
+          text-align: center;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          transition: max-height 0.3s ease-in-out;
+        }
+
+        .reviews.expanded {
+          -webkit-line-clamp: unset; // Show full text when expanded
+        }
+
+        .read-more-btn {
+          background: none;
+          border: none;
+          color: $primary-color;
+          font-size: 14px;
+          cursor: pointer;
+          margin-top: 5px;
+          text-align: center;
+          display: block;
+          transition: color 0.2s;
+          text-transform: uppercase;
+        }
+
+        .line {
+          height: 1px;
+          width: 50%;
+          margin: 0 auto;
+          border-radius: 2px;
+          background-color: #dddddd;
+          border: none;
+          width: 100%;
+        }
+
+        .review-name {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+          }
+
+          .review-name-desc {
+            p {
+              &:first-child {
+                font-size: 18px;
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.clientReview-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 600px;
+  background: #fff;
+  padding: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 2001;
+  color: white;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+
+  // max-height: 80vh;
+  overflow-y: auto;
+
+
+  scrollbar-width: thin;
+  scrollbar-color: #444 #222;
+
+  &::-webkit-scrollbar {
+    width: 6px; // Slim scrollbar
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #222; // Darker track
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #666;
+  }
+  
+
+  @include md {
+    padding: 20px;
+  }
+
+  @include sm {
+    padding: 10px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: #000;
+  }
+
+  p {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #222;
+
+    @include md {
+      margin-top: 30px;
+      font-size: 14px;
+    }
+  }
+}
+
+.client-prev,
+.client-next {
+  position: absolute;
+  bottom: 45px;
+  right: 0;
+  width: 60px; 
+  height: 60px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: visible;
+  color: #000;
+  font-size: 20px;
+
+  @include sm {
+    display: none;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px dashed #000; // Ensure border is visible
+    border-radius: 50%;
+    z-index: 1; // Ensure it appears above background
+    pointer-events: none; // Prevents click interference
+    display: block;
+  }
+
+  &:hover::before {
+    animation: rotateBorder 5s linear infinite;
+    background: #ffffff86;
+  }
+
+  @keyframes rotateBorder {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+}
+
+.client-prev {
+  left: 75%;
+
+  @include md {
+    left: 70%;
+  }
+}
+
+.client-next {
+  right: 7%;
+}

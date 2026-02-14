@@ -1,0 +1,60 @@
+.dashboard {
+  margin-top: 20px;
+
+  .dashboard-top {
+    .dashboard-top-cards {
+      display: flex;
+      gap: 20px;
+      .dashboard-top-card {
+        background: #fff;
+        padding: 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-radius: 10px;
+        width: 300px;
+        height: 150px;
+        transition: all 0.3s ease-in-out;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        cursor: pointer;
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+        h3 {
+          transition: all 0.3s ease-in-out;
+          &:hover {
+            color: #ffa500;
+          }
+        }
+
+        .dashboard-top-card-desc {
+          display: flex;
+          gap: 5px;
+          h1 {
+            font-size: 40px;
+
+            transition: all 0.3s ease-in-out;
+            &:hover {
+              color: #ffa500;
+            }
+          }
+          span {
+            align-self: flex-end;
+            padding-bottom: 9px;
+            color: #585858;
+
+            .line-break {
+              margin-right: 2px;
+              color: #ffa500;
+              font-weight: 600;
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,166 @@
+@use "../../styles/responsive.scss" as *;
+
+.ourPorfolio {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  .ourPorfolio-top {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    h1 {
+      font-size: 50px;
+
+      @include sm {
+        font-size: 40px;
+      }
+    }
+    p {
+      font-size: 25px;
+
+      @include md {
+        font-size: 20px;
+      }
+
+      @include sm {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .ourPortfolio-cards {
+    column-count: 3;
+    column-gap: 15px;
+    margin-top: 50px;
+
+    @include md {
+      column-count: 2;
+    }
+
+    .ourPortfolio-card {
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 10px;
+      break-inside: avoid;
+      position: relative;
+      perspective: 50000px;
+
+      .ourPortfolio-card-inner {
+        width: 100%;
+        height: 100%;
+        transition: transform 0.5s ease-in-out;
+        transform-style: preserve-3d;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      h2 {
+        margin-top: 15px;
+      }
+    }
+  }
+
+  .portfolio-link {
+    width: 100%;
+
+    button {
+      position: relative;
+      margin-top: 40px;
+      width: 100%;
+      min-width: 190px;
+      height: 50px;
+      padding: 10px 35px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.3125rem;
+
+      text-transform: uppercase;
+      color: #fff;
+      background: $primary-color;
+      border: none;
+      border-radius: 0;
+      letter-spacing: 0.8px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.5s ease-in-out;
+
+      &::before {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        content: "";
+        top: -200%;
+        left: 50%;
+        background-color: $primary-color;
+        border-radius: 50%;
+        z-index: 1;
+        transform: translateX(-50%);
+        transition: all 0.5s ease-in-out;
+      }
+
+      &:hover {
+        background: #fff;
+        color: $primary-color;
+
+        .btn-wrap {
+          span {
+            color: $primary-color;
+          }
+        }
+
+        &::before {
+          top: -40%;
+          width: calc(50% - 5px);
+          height: calc(50% - 5px);
+        }
+      }
+
+      .btn-wrap {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        span {
+          display: block;
+          transition: all 0.3s ease;
+          color: #fff;
+
+          &:first-child {
+            position: relative;
+          }
+
+          &:last-child {
+            position: absolute;
+            top: 100%;
+          }
+        }
+      }
+
+      &:hover .btn-wrap {
+        span:first-child {
+          transform: translateY(-150%);
+        }
+
+        span:last-child {
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+  }
+}

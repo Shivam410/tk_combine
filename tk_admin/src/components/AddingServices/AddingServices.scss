@@ -1,0 +1,377 @@
+.addingServices {
+  .addingServices-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h1 {
+      display: flex;
+      align-items: center;
+    }
+
+    .addingServices-top-btns {
+      display: flex;
+      gap: 10px;
+
+      button {
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+        background-color: #ffa500;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        outline: none;
+        gap: 8px;
+
+       
+
+        &:hover {
+          background-color: #e69500;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .button-icon {
+          font-size: 20px;
+          transition: transform 0.3s ease;
+        }
+
+        &:hover .button-icon {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  .getting-photos {
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    .photo-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+
+      img {
+        width: 500px;
+        min-height: 500px;
+        object-fit: contain;
+      }
+
+      .deleteCard {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+
+        .deleteCard-desc {
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+          align-items: center;
+
+          h2{
+            white-space: nowrap;
+          }
+
+          .deleteCard-desc-btns {
+            display: flex;
+            gap: 10px;
+            button {
+              padding: 12px 24px;
+              font-size: 16px;
+              font-weight: 600;
+              color: #fff;
+              background-color: red;
+              width: fit-content;
+              align-self: flex-end;
+
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+              outline: none;
+              gap: 8px;
+
+              &:first-child {
+                background: #ffa500;
+
+                &:hover {
+                  transform: translateY(-2px);
+                  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+                  background-color: #e69500;
+                }
+              }
+
+              &:hover {
+                background: rgb(170, 28, 28);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+              }
+
+              .button-icon {
+                font-size: 20px;
+                transition: transform 0.3s ease;
+              }
+
+              &:hover .button-icon {
+                transform: scale(1.1);
+              }
+            }
+          }
+        }
+      }
+
+      .added-photos-btn {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        button {
+          padding: 12px 24px;
+          font-size: 16px;
+          font-weight: 600;
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          outline: none;
+          gap: 8px;
+
+          background-color: red;
+
+          &:hover {
+            background: rgb(170, 28, 28);
+          }
+
+          &:active {
+            background-color: rgb(224, 61, 61);
+          }
+
+          &:focus {
+            box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.76);
+          }
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+          }
+
+          &:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          }
+
+          &:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            opacity: 0.7;
+          }
+        }
+      }
+
+      .button-icon {
+        font-size: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover .button-icon {
+        transform: scale(1.1);
+      }
+
+
+      
+     
+    }
+  }
+
+  .added-photos {
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    .photo-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+      }
+
+      .added-photos-btn {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        button {
+          padding: 12px 24px;
+          font-size: 16px;
+          font-weight: 600;
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          outline: none;
+          gap: 8px;
+
+          background-color: red;
+
+          &:hover {
+            background: rgb(170, 28, 28);
+          }
+
+          &:active {
+            background-color: rgb(224, 61, 61);
+          }
+
+          &:focus {
+            box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.76);
+          }
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+          }
+
+          &:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          }
+
+          &:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            opacity: 0.7;
+          }
+        }
+      }
+
+      .button-icon {
+        font-size: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover .button-icon {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .service1-content {
+    margin-top: 30px;
+    width: 100%;
+
+    .service1-content-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      width: 600px;
+      margin: 0 auto;
+
+      .service1-content-left {
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 300px;
+        width: 100%;
+        cursor: pointer;
+        overflow: hidden;
+
+        &.bg-none {
+          background: transparent;
+        }
+
+        .main-image {
+          max-width: 100%;
+          max-height: 100%;
+          width: auto;
+          height: auto;
+          object-fit: contain;
+        }
+
+        .addimage {
+          width: 100px;
+        }
+      }
+
+      .photo-add-btn {
+        display: flex;
+        justify-content: center;
+        button {
+          padding: 12px 24px;
+          font-size: 16px;
+          font-weight: 600;
+          color: #fff;
+          background-color: green;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          outline: none;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+
+          .add-icon {
+            font-size: 20px;
+          }
+
+          &:hover {
+            background-color: rgb(21, 180, 21);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+          }
+
+          &:active {
+            background-color: #cc8400;
+            transform: translateY(0);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          }
+
+          &:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            opacity: 0.7;
+          }
+
+          .button-icon {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+          }
+
+          &:hover .button-icon {
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+  }
+}

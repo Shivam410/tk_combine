@@ -1,0 +1,130 @@
+.login {
+  height: 100vh;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  // background-image: url("../../assets/images/7.jpg");
+  // background-size: cover;
+
+  background-color: #ffdee9;
+  background-image: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%);
+
+  .login-logo {
+    margin: 20px 0px;
+    img {
+      width: 150px;
+    }
+  }
+  .login-box {
+    background-color: #1a1a1a;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 50px;
+      color: #ffa500;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: #ffa500;
+
+      
+      }
+
+      .input-group-botom{
+        display: flex;
+        align-items: center;
+         
+        background-color: #333;
+        border-radius: 5px;
+
+        
+
+        .viewIcon{
+        font-size: 25px;
+        margin-right: 10px;
+        }
+        input{
+          border: none;
+
+          &:focus{
+            outline: none;
+            box-shadow: none;
+          }
+        }
+
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #444;
+        border-radius: 5px;
+        background-color: #333;
+        color: #fff;
+        font-size: 16px;
+        font-family: "Sora", serif;
+        outline: none;
+
+        // &:focus {
+        //   outline: none;
+        //   border-color: #ffa500;
+        //   box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+        // }
+      }
+    }
+
+    .login-button {
+      width: 100%;
+      padding: 10px;
+      background-color: #ffa500;
+      border: none;
+      border-radius: 5px;
+      color: #000;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #e69500;
+      }
+    }
+
+    .signup-link {
+      margin-top: 15px;
+      color: #fff;
+
+      a {
+        color: #ffa500;
+        text-decoration: none;
+        font-weight: bold;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .login {
+    .login-box {
+      padding: 20px;
+    }
+  }
+}

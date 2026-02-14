@@ -1,0 +1,60 @@
+@use "../../../styles/responsive.scss" as *;
+
+.servicePageSidebar {
+  width: 400px;
+  color: #000;
+
+  // @include lg{
+  //   width: 350px;
+  // }
+
+  @include lg {
+    width: 100%;
+  }
+
+  .servicePageSidebar-link {
+    text-decoration: none;
+    color: inherit;
+
+    &.active {
+      .servicePageSidebar-item {
+        p,
+        .servicePageSidebar-icon {
+          color: #b90808;
+        }
+      }
+    }
+  }
+
+  .servicePageSidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 20px 0px;
+    cursor: pointer;
+    border-bottom: 1px dashed #dddddd;
+
+    &:hover {
+      p,
+      .servicePageSidebar-icon {
+        color: #b90808;
+      }
+    }
+
+    p {
+      font-size: 22px;
+      font-weight: 550;
+      margin-left: 10px;
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .servicePageSidebar-icon {
+      font-size: 30px;
+      flex-shrink: 0;
+      transition: all 0.5s ease-in-out;
+    }
+  }
+}

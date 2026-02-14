@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.tkproductionfilm.com/sitemap.xml
+Sitemap: https://www.tkproductionfilm.com/sitemaps/sitemap-homepage.xml
+Sitemap: https://www.tkproductionfilm.com/sitemaps/sitemap-about-us.xml
+Sitemap: https://www.tkproductionfilm.com/sitemaps/sitemap-contact.xml
+Sitemap: https://www.tkproductionfilm.com/sitemaps/sitemap-portfolio.xml
+Sitemap: https://www.tkproductionfilm.com/sitemaps/sitemap-wedding-photography.xml
+Sitemap: https://www.tkproductionfilm.com/sitemaps/sitemap-wedding-cinematography.xml
+Sitemap: https://www.tkproductionfilm.com/sitemaps/sitemap-pre-wedding-film.xml
+Sitemap: https://www.tkproductionfilm.com/sitemaps/sitemap-pre-wedding-photography.xml
+Sitemap: https://www.tkproductionfilm.com/sitemaps/sitemap-civil-marriage-photography.xml
+Sitemap: https://www.tkproductionfilm.com/sitemaps/sitemap-engagement-photography-couple-portraits.xml
+Sitemap: https://www.tkproductionfilm.com/sitemaps/sitemap-birthday-photography.xml
+Sitemap: https://www.tkproductionfilm.com/sitemaps/sitemap-baby-shower-photography.xml
+Sitemap: https://www.tkproductionfilm.com/sitemaps/sitemap-graduation-photography.xml

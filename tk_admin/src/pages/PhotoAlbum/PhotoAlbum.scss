@@ -1,0 +1,170 @@
+.portfolio {
+  .portfolio-top {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    h1 {
+      text-align: center;
+      text-transform: uppercase;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      background-color: #ffa500;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      outline: none;
+      gap: 8px;
+
+      &:hover {
+        background-color: #e69500;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      &:active {
+        background-color: #cc8400;
+        transform: translateY(0);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.5);
+      }
+
+      &:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+        opacity: 0.7;
+      }
+
+      .button-icon {
+        font-size: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover .button-icon {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .portfolio-imgs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    grid-auto-rows: 1fr;
+    margin-top: 30px;
+    .portfolio-img {
+      img {
+        object-fit: contain;
+        width: 100%;
+        height: 250px;
+        position: relative;
+      }
+
+      .portfolio-img-desc {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 10px;
+        button {
+          padding: 5px 10px;
+          font-size: 14px;
+          font-weight: 600;
+          color: #fff;
+          background-color: #ffa500;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          outline: none;
+          gap: 8px;
+
+          &:last-child {
+            background: red;
+
+            &:hover {
+              background: rgb(170, 28, 28);
+            }
+
+            &:active {
+              background-color: rgb(224, 61, 61);
+            }
+
+            &:focus {
+              box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.76);
+            }
+          }
+
+          &:hover {
+            background-color: #e69500;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+          }
+
+          &:active {
+            background-color: #cc8400;
+            transform: translateY(0);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          }
+
+          &:focus {
+            box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.5);
+          }
+
+          &:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            opacity: 0.7;
+          }
+
+          .button-icon {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+          }
+
+          &:hover .button-icon {
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+  }
+}
+
+///////////////
+
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  img {
+    max-width: 90%;
+    max-height: 90%;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+  }
+}

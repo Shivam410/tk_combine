@@ -1,0 +1,404 @@
+@use "../../styles/responsive.scss" as *;
+
+.contact {
+  padding: 20px;
+  padding: 100px 20px 20px 20px;
+  @include sm {
+    padding: 100px 10px 10px 10px;
+  }
+
+  .contact-title {
+    text-align: center;
+    font-size: 60px;
+
+    @include sm {
+      font-size: 50px;
+    }
+  }
+
+  .contact-desc {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+
+    @include sm {
+      font-size: 16px;
+    }
+  }
+
+  // Variables
+  $primary-color: #b90808;
+  $primary-light: lighten($primary-color, 10%);
+  $primary-dark: darken($primary-color, 10%);
+  $secondary-color: #333;
+  $light-gray: #f5f5f5;
+  $medium-gray: #e0e0e0;
+  $dark-gray: #777;
+  $white: #fff;
+  $black: #000;
+  $transition: all 0.3s ease;
+
+  // Mixins
+  @mixin box-shadow($level) {
+    @if $level == 1 {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    } @else if $level == 2 {
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    } @else if $level == 3 {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    }
+  }
+
+  @mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact-card-form {
+    max-width: 1000px;
+    margin: 0 auto;
+    .premium-contact-card {
+      background: $white;
+      border-radius: 12px;
+      @include box-shadow(2);
+      transition: $transition;
+
+      &:hover {
+        @include box-shadow(3);
+      }
+
+      // Form Layout
+      .premium-contact-form {
+        padding: 2.5rem;
+
+        @include sm {
+          padding: 10px;
+        }
+
+        .form-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
+
+          @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+          }
+
+          .form-group:nth-child(8) {
+            grid-column: 1 / -1;
+          }
+        }
+
+        .full-width {
+          grid-column: 1 / -1;
+        }
+      }
+
+      // Form Groups
+      .form-group {
+        position: relative;
+        margin-bottom: 1.5rem;
+
+        &.floating-label {
+          position: relative;
+          padding-top: 1.5rem;
+        }
+
+        .form-label {
+          position: absolute;
+          top: 2rem;
+          left: 1rem;
+          color: $dark-gray;
+          font-size: 1rem;
+          pointer-events: none;
+          transition: $transition;
+          transform-origin: left top;
+          background: $white;
+          padding: 0 0.5rem;
+          margin-left: -0.5rem;
+        }
+
+        .form-input {
+          width: 100%;
+          padding: 1rem;
+          border: 1px solid $medium-gray;
+          border-radius: 8px;
+          font-size: 1rem;
+          transition: $transition;
+          background: $white;
+
+          &:focus {
+            border-color: $primary-color;
+            outline: none;
+            @include box-shadow(1);
+
+            + .form-label {
+              color: $primary-color;
+              transform: translateY(-1.2rem) scale(0.85);
+            }
+          }
+
+          &:not(:placeholder-shown) + .form-label,
+          &:focus + .form-label {
+            transform: translateY(-1.2rem) scale(0.85);
+          }
+
+          &.textarea {
+            min-height: 120px;
+            resize: vertical;
+          }
+        }
+
+        .required-asterisk {
+          color: $primary-color;
+          margin-left: 0.2rem;
+        }
+      }
+
+      // Section Header
+      .section-header {
+        grid-column: 1 / -1;
+        margin: 1rem 0;
+        position: relative;
+
+        h3 {
+          font-size: 1.3rem;
+          color: $primary-color;
+          margin-bottom: 0.5rem;
+          font-weight: 600;
+        }
+
+        .divider {
+          height: 2px;
+          background: linear-gradient(to right, $primary-color, $medium-gray);
+          width: 100%;
+        }
+      }
+
+      // Checkbox Styles
+      .services-group {
+        .services-label {
+          display: block;
+          margin-bottom: 0.8rem;
+          font-weight: 500;
+        }
+
+        .checkbox-container {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1rem;
+        }
+
+        .checkbox-label {
+          @include flex-center;
+          position: relative;
+          cursor: pointer;
+          user-select: none;
+          padding-left: 2rem;
+          font-size: 0.95rem;
+
+          .checkbox-input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+
+            &:checked ~ .custom-checkbox {
+              background-color: $primary-color;
+              border-color: $primary-color;
+
+              &:after {
+                display: block;
+              }
+            }
+          }
+
+          .custom-checkbox {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 1.2rem;
+            width: 1.2rem;
+            background-color: $white;
+            border: 2px solid $medium-gray;
+            border-radius: 4px;
+            transition: $transition;
+
+            &:after {
+              content: "";
+              position: absolute;
+              display: none;
+              left: 4px;
+              top: 1px;
+              width: 4px;
+              height: 8px;
+              border: solid $white;
+              border-width: 0 2px 2px 0;
+              transform: rotate(45deg);
+            }
+          }
+
+          &:hover .checkbox-input ~ .custom-checkbox {
+            border-color: $primary-light;
+          }
+        }
+      }
+
+      // Custom Select Styles
+      .custom-select {
+        position: relative;
+
+        .select-label {
+          display: block;
+          margin-bottom: 0.8rem;
+          font-weight: 500;
+        }
+
+        .select-wrapper {
+          position: relative;
+        }
+
+        .select-header {
+          padding: 1rem;
+          border: 1px solid $medium-gray;
+          border-radius: 8px;
+          cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background: $white;
+          transition: $transition;
+
+          &.error {
+            border-color: $primary-color;
+          }
+
+          .select-value {
+            color: $secondary-color;
+          }
+
+          .select-icon {
+            transition: $transition;
+            font-size: 1.2rem;
+
+            &.open {
+              transform: rotate(180deg);
+            }
+          }
+
+          &:hover {
+            border-color: $primary-light;
+          }
+        }
+
+        .select-options {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: $white;
+          border: 1px solid $medium-gray;
+          border-top: none;
+          border-radius: 0 0 8px 8px;
+          max-height: 200px;
+          overflow-y: auto;
+          z-index: 10;
+          @include box-shadow(1);
+        }
+
+        .select-option {
+          padding: 0.8rem 1rem;
+          cursor: pointer;
+          transition: $transition;
+
+          &:hover {
+            background-color: $light-gray;
+            color: $primary-color;
+          }
+        }
+
+        .error-message {
+          color: $primary-color;
+          font-size: 0.8rem;
+          margin-top: 0.5rem;
+        }
+      }
+
+      // Submit Button
+      .submit-button {
+        background: $primary-color;
+        color: $white;
+        border: none;
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: $transition;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        @include box-shadow(1);
+
+        &:hover {
+          background: $primary-dark;
+          @include box-shadow(2);
+        }
+
+        &:disabled {
+          background: $medium-gray;
+          cursor: not-allowed;
+          opacity: 0.7;
+        }
+
+        .spinner {
+          display: inline-block;
+          width: 1rem;
+          height: 1rem;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          border-radius: 50%;
+          border-top-color: $white;
+          animation: spin 1s ease-in-out infinite;
+          margin-right: 0.5rem;
+        }
+      }
+
+      // Form Error
+      .form-error {
+        color: $primary-color;
+        text-align: center;
+        margin-top: 1rem;
+        font-weight: 500;
+      }
+
+      // Animations
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+
+  .contact2-section {
+    margin: 80px 0px;
+  }
+  .contact-maps {
+    display: flex;
+    gap: 30px;
+
+    @include md {
+      flex-direction: column;
+    }
+    .contact-map {
+      width: 100%;
+    }
+  }
+}

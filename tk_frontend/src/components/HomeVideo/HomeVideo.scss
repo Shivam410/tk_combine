@@ -1,0 +1,47 @@
+@use "../../styles/responsive.scss" as *;
+
+.homeVideo {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+
+  .videoWrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      border: none;
+    }
+  }
+  .homeVideo-btn {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    .more-video-btn {
+      margin-top: 20px;
+      background: $primary-color;
+      width: fit-content;
+      padding: 15px 10px;
+      color: #fff;
+      border-radius: 5px;
+      border: 1px solid transparent;
+      transition: all .3s ease-in-out;
+
+
+      &:hover{
+        background: #fff;
+        color: $primary-color;
+        border: 1px solid $primary-color;
+      }
+    }
+  }
+}

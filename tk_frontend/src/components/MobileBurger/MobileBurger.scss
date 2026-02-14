@@ -1,0 +1,166 @@
+@use "../../styles/responsive.scss" as *;
+
+.mobile-burger-menu {
+ 
+  @media (min-width: 1025px) {
+    display: none;
+  }
+}
+
+.mobile-class {
+  .mobile-menu-btn {
+    color: #fff;
+
+    .burger-line {
+      color: #fff;
+    }
+  }
+}
+
+.mobile-menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  z-index: 1200;
+  margin-left: 20px;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 70%;
+  max-width: 300px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1200;
+
+  will-change: transform, opacity;
+  opacity: 0;
+  transform: translateX(-100%);
+  visibility: hidden;
+  overflow-y: auto;
+
+  visibility: visible;
+  animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+
+  &.closing {
+    animation: slideOut 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideOut {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  }
+}
+
+// Close button for mobile menu
+.close-btn {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+// Menu links
+.menu-links {
+  .burger-link {
+    font-size: 18px;
+    font-weight: 500;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+    transition: color 0.3s;
+    display: flex;
+
+    .nav-icon {
+      color: #b90808;
+      font-size: 25px;
+      margin-right: 10px;
+    }
+  }
+}
+
+// Burger services dropdown
+.burger-services {
+  flex-direction: column;
+  cursor: pointer;
+
+  .services-menu {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .burger-link-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .chevron {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .chevron.rotate {
+      transform: rotate(90deg);
+    }
+  }
+
+  .services-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 10px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out,
+      padding-top 0.5s ease-in-out;
+
+    &.open {
+      max-height: 500px;
+      opacity: 1;
+      padding-top: 20px;
+    }
+
+    .services-link {
+      font-size: 15px;
+    }
+  }
+}
+
+// Scrolled state for mobile menu
+.scrolled {
+  &.mobile-class {
+    .mobile-menu-btn {
+      color: #fff;
+
+      .burger-line {
+        color: #fff;
+      }
+    }
+  }
+}

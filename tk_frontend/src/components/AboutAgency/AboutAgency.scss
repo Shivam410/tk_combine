@@ -1,0 +1,409 @@
+@use "../../styles/responsive.scss" as *;
+
+.aboutAgency {
+  max-width: 1140px;
+  margin: 0 auto;
+  .aboutAgency-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include sm {
+      flex-direction: column;
+      text-align: center;
+      gap: 20px;
+    }
+
+    h1 {
+      font-size: 50px;
+      text-transform: uppercase;
+
+      @include sm {
+        font-size: 35px;
+      }
+    }
+
+    button {
+      position: relative;
+      width: auto;
+      min-width: 190px;
+      height: 50px;
+      padding: 10px 35px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 550;
+      text-transform: uppercase;
+      background: #fff;
+      border-width: 0px;
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      -ms-border-radius: 0px;
+      -o-border-radius: 0px;
+      border-radius: 0px;
+      letter-spacing: 0.8px;
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      transition: all 0.5s ease-in-out;
+      &:last-child {
+        background: $primary-color;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+
+        &:hover {
+          background: #fff;
+          color: $primary-color;
+
+          .top-left {
+            border-color: $primary-color;
+            width: calc(50% - 5px);
+            height: calc(50% - 5px);
+          }
+
+          .bottom-left {
+            border-color: $primary-color;
+
+            width: calc(50% - 5px);
+            height: calc(50% - 5px);
+          }
+
+          .top-right {
+            border-color: $primary-color;
+
+            width: calc(50% - 5px);
+            height: calc(50% - 5px);
+          }
+
+          .bottom-right {
+            border-color: $primary-color;
+
+            width: calc(50% - 5px);
+            height: calc(50% - 5px);
+          }
+        }
+
+        .corner {
+          content: "";
+          position: absolute;
+          width: 12px;
+          height: 12px;
+          border-style: solid;
+          border-color: #000;
+          transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        // Top-left corner
+        .top-left {
+          left: 0;
+          top: 0;
+          border-width: 1px 0px 0px 1px;
+        }
+
+        // Top-right corner
+        .top-right {
+          right: 0;
+          top: 0;
+          border-width: 1px 1px 0px 0px;
+        }
+
+        // Bottom-left corner
+        .bottom-left {
+          left: 0;
+          bottom: 0;
+          border-width: 0px 0px 1px 1px;
+        }
+
+        // Bottom-right corner
+        .bottom-right {
+          right: 0;
+          bottom: 0;
+          border-width: 0px 1px 1px 0px;
+        }
+      }
+
+      &:hover {
+        &:first-child {
+          background: #fff;
+          color: $primary-color;
+        }
+        .arrows {
+          overflow: hidden;
+
+          .first-arrow {
+            transform: translate(20px, -20px);
+            transition: all 0.5s ease-in-out;
+          }
+
+          .second-arrow {
+            transform: translateX(0);
+            transition: all 0.5s ease-in-out;
+          }
+        }
+      }
+
+      .arrows {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+
+        .up-arrow {
+          font-size: 16px;
+          font-weight: normal;
+        }
+
+        .first-arrow {
+          transition: all 0.5s ease-in-out;
+        }
+
+        .second-arrow {
+          transition: transform 0.3s ease-in-out;
+          position: absolute;
+          top: 0;
+          left: 0;
+          transform: translateX(-25px) translateY(20px);
+        }
+      }
+    }
+  }
+
+  .aboutAgency-bottom {
+    display: flex;
+    gap: 80px;
+    margin-top: 40px;
+
+    @include md {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .aboutAgency-bottom-left {
+      position: relative;
+      flex: 1;
+      img {
+        width: 100%;
+        border-radius: 20px;
+      }
+
+      .aboutAgency-bottom-left-btn {
+        background: $primary-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        gap: 10px;
+        color: #fff;
+        min-width: auto;
+        padding: 10px;
+        width: 150px;
+        transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+        animation: icon-bounce 5s infinite linear;
+        margin-top: 10px;
+
+        @media screen and (min-width: 1025px) {
+          display: none;
+        }
+
+        @keyframes icon-bounce {
+          70% {
+            transform: translateY(0%);
+          }
+          80% {
+            transform: translateY(-15%);
+          }
+          90% {
+            transform: translateY(0%);
+          }
+          95% {
+            transform: translateY(-7%);
+          }
+          97% {
+            transform: translateY(0%);
+          }
+          99% {
+            transform: translateY(-3%);
+          }
+          100% {
+            transform: translateY(0);
+          }
+        }
+
+        .arrows {
+          position: relative;
+          display: inline-block;
+          overflow: hidden;
+
+          .up-arrow {
+            font-size: 16px;
+            font-weight: normal;
+          }
+
+          .first-arrow {
+            transition: all 0.5s ease-in-out;
+          }
+
+          .second-arrow {
+            transition: transform 0.3s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateX(-25px) translateY(20px);
+          }
+        }
+
+        &:hover {
+          background-color: #fff;
+          color: $primary-color;
+
+          .arrows {
+            overflow: hidden;
+
+            .first-arrow {
+              transform: translate(20px, -20px);
+              transition: all 0.5s ease-in-out;
+            }
+
+            .second-arrow {
+              transform: translateX(0);
+              transition: all 0.5s ease-in-out;
+            }
+          }
+
+          span {
+            color: $primary-color;
+          }
+        }
+      }
+
+      .aboutAgency-bottom-left-desc {
+        background: $primary-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        position: absolute;
+        top: 60%;
+        left: 80%;
+        cursor: pointer;
+        gap: 10px;
+        color: #fff;
+        width: 170px;
+        height: 170px;
+        min-width: auto;
+        padding: 0;
+        border-radius: 100%;
+        transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+        animation: icon-bounce 5s infinite linear;
+
+        @keyframes icon-bounce {
+          70% {
+            transform: translateY(0%);
+          }
+          80% {
+            transform: translateY(-15%);
+          }
+          90% {
+            transform: translateY(0%);
+          }
+          95% {
+            transform: translateY(-7%);
+          }
+          97% {
+            transform: translateY(0%);
+          }
+          99% {
+            transform: translateY(-3%);
+          }
+          100% {
+            transform: translateY(0);
+          }
+        }
+
+        @include lg {
+          display: none;
+        }
+
+        .arrows {
+          position: relative;
+          display: inline-block;
+          overflow: hidden;
+
+          .up-arrow {
+            font-size: 16px;
+            font-weight: normal;
+          }
+
+          .first-arrow {
+            transition: all 0.5s ease-in-out;
+          }
+
+          .second-arrow {
+            transition: transform 0.3s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateX(-25px) translateY(20px);
+          }
+        }
+
+        &:hover {
+          background-color: #fff;
+          color: $primary-color;
+
+          .arrows {
+            overflow: hidden;
+
+            .first-arrow {
+              transform: translate(20px, -20px);
+              transition: all 0.5s ease-in-out;
+            }
+
+            .second-arrow {
+              transform: translateX(0);
+              transition: all 0.5s ease-in-out;
+            }
+          }
+
+          span {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+
+    .aboutAgency-bottom-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      h2 {
+        font-size: 40px;
+
+        @include sm {
+          font-size: 30px;
+        }
+      }
+
+      .about-desc1 {
+        font-size: 20px;
+
+        @include sm {
+          text-align: justify;
+        }
+      }
+
+      .about-desc2 {
+        color: #989898;
+        font-size: 18px;
+
+        @include sm {
+          text-align: justify;
+        }
+      }
+    }
+  }
+}
