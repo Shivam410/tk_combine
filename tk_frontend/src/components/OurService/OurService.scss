@@ -1,226 +1,131 @@
 @use "../../styles/responsive.scss" as *;
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap");
 
 .ourService {
   max-width: 1300px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
   position: relative;
-  overflow: hidden;
+
   .ourService-top {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    gap: 10%;
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 38px;
+    align-items: start;
 
     @include lg {
-      flex-direction: column;
-      gap: 20px;
+      grid-template-columns: 1fr;
+      gap: 18px;
     }
 
     h1 {
-      font-size: 50px;
-      text-transform: uppercase;
-      white-space: nowrap;
-
-      @include sm {
-        white-space: wrap;
-        text-align: center;
-        font-size: 35px;
-      }
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 4.3vw, 3.5rem);
+      text-transform: none;
+      line-height: 1.05;
+      color: #1f1e1c;
     }
 
     .ourService-top-right {
-      display: flex;
-      flex-direction: column;
-
       p {
-        font-size: 18px;
-        color: #585858;
-        line-height: 1.75rem;
+        font-family: "Manrope", sans-serif;
+        font-size: 1rem;
+        color: #6a655c;
+        line-height: 1.9;
 
         .bold-text {
-          color: #000;
-          font-weight: 500;
-        }
-
-        @include md {
-          text-align: justify;
+          color: #1f1e1c;
+          font-weight: 600;
         }
       }
 
       .read-more {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         margin-top: 20px;
+        color: #a5874f;
         text-transform: uppercase;
-        font-size: 14px;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-        color: #000;
-        position: relative;
-        overflow: hidden;
-        align-self: flex-end;
+        letter-spacing: 0.07em;
+        font-size: 0.78rem;
         font-weight: 600;
-
-        &:hover {
-          color: $primary-color;
-          .right-arrow {
-            transform: translateX(5px);
-          }
-
-          &::after {
-            width: 100%;
-          }
-        }
+        font-family: "Manrope", sans-serif;
 
         .right-arrow {
-          font-size: 25px;
-          margin-left: 5px;
-          transition: transform 0.3s ease-in-out;
+          margin-left: 6px;
+          transition: transform 0.3s ease;
+        }
+
+        &:hover .right-arrow {
+          transform: translateX(5px);
         }
       }
     }
   }
 
   .overlay {
-    img {
-      object-fit: contain;
-      position: absolute;
-      bottom: 20%;
-    }
+    display: none;
   }
 
   .ourService-bottom {
+    margin-top: 26px;
+
     .ourService-top-cards {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      margin-top: 30px;
-      gap: 40px;
-
-      @include xl {
-        grid-template-columns: repeat(3, 1fr);
-      }
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
 
       @include lg {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       @include md {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       @include sm {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 20px;
+        grid-template-columns: 1fr;
       }
+
       .ourService-top-card {
-        width: 270px;
-        height: 340px;
-        padding: 40px 20px;
-        border-radius: 35px;
+        width: 100%;
+        height: 100%;
+        min-height: 280px;
+        padding: 30px 16px;
+        border-radius: 0;
+        border: 1px solid #e6e1d8;
+        background: #fff;
+        transition: all 0.35s ease;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        border: 1px solid #dddddd;
-        transition: all 0.5s ease-in-out;
-        position: relative;
-        overflow: hidden;
-        background: #f5f5f5;
-        margin: 0 auto;
+        justify-content: center;
         align-items: center;
-
-        @include lg {
-          margin: 0 auto;
-          padding: 20px 10px;
-          width: 250px;
-          height: 280px;
-        }
-
-        @include md {
-          width: 100%;
-          padding: 20px;
-          height: 280px;
-        }
-
-        @include sm {
-          margin: 0 auto;
-          width: 270px;
-          height: 220px;
-        }
+        gap: 26px;
 
         &:hover {
-          border: 1px solid #989898;
-          background: $primary-color;
-          box-shadow: 0px 35px 40px 10px rgba(0, 0, 0, 0.25);
-
-          p {
-            color: #fff;
-          }
-
-          h1 {
-            color: #fff;
-          }
+          transform: translateY(-6px);
+          border-color: rgba(184, 155, 103, 0.66);
+          box-shadow: 0 14px 30px rgba(20, 20, 20, 0.08);
 
           img {
-            filter: invert(1);
-            transition: filter 0.3s ease-in-out;
-            animation: bounce 0.8s ease-in-out;
+            transform: scale(1.05);
           }
 
-          .ourService-top-card-desc {
-            h5 {
-              color: #fff;
-            }
+          .ourService-top-card-desc h1 {
+            color: #a5874f;
           }
         }
 
         img {
-          width: 90px;
-          transition: transform 0.3s ease-in-out;
-
-          @include sm {
-            width: 70px;
-          }
+          width: 86px;
+          transition: transform 0.35s ease;
         }
 
-        .ourService-top-card-desc {
-          h1 {
-            font-size: 20px;
-            transition: all 0.5s ease-in-out;
-            text-align: center;
-
-            @include sm {
-              font-size: 20px;
-            }
-          }
-        }
-      }
-
-      @keyframes bounce {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-10px);
-        }
-      }
-
-      @keyframes border-glow {
-        0% {
-          opacity: 0.5;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 1;
-          transform: scale(1.05);
-        }
-        100% {
-          opacity: 0.5;
-          transform: scale(1);
+        .ourService-top-card-desc h1 {
+          font-family: "Cormorant Garamond", serif;
+          font-size: 1.6rem;
+          color: #1f1e1c;
+          transition: color 0.3s ease;
+          text-align: center;
+          line-height: 1.2;
         }
       }
     }

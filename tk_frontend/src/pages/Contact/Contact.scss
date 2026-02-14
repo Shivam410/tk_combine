@@ -1,404 +1,342 @@
 @use "../../styles/responsive.scss" as *;
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap");
 
 .contact {
-  padding: 20px;
-  padding: 100px 20px 20px 20px;
+  --lux-bg: #f7f6f2;
+  --lux-white: #ffffff;
+  --lux-text: #1f1e1c;
+  --lux-muted: #6a655c;
+  --lux-gold: #b89b67;
+  --lux-gold-deep: #a5874f;
+  --lux-border: #e6e1d8;
+
+  background: linear-gradient(180deg, var(--lux-white) 0%, var(--lux-bg) 100%);
+  color: var(--lux-text);
+  padding: 100px 18px 32px;
+
   @include sm {
-    padding: 100px 10px 10px 10px;
+    padding: 90px 12px 24px;
   }
 
   .contact-title {
     text-align: center;
-    font-size: 60px;
-
-    @include sm {
-      font-size: 50px;
-    }
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.3rem, 5.7vw, 4.6rem);
+    font-weight: 600;
   }
 
   .contact-desc {
     text-align: center;
-    font-size: 20px;
-    margin-bottom: 30px;
-    margin-top: 10px;
-
-    @include sm {
-      font-size: 16px;
-    }
-  }
-
-  // Variables
-  $primary-color: #b90808;
-  $primary-light: lighten($primary-color, 10%);
-  $primary-dark: darken($primary-color, 10%);
-  $secondary-color: #333;
-  $light-gray: #f5f5f5;
-  $medium-gray: #e0e0e0;
-  $dark-gray: #777;
-  $white: #fff;
-  $black: #000;
-  $transition: all 0.3s ease;
-
-  // Mixins
-  @mixin box-shadow($level) {
-    @if $level == 1 {
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    } @else if $level == 2 {
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    } @else if $level == 3 {
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    }
-  }
-
-  @mixin flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-top: 8px;
+    margin-bottom: 32px;
+    font-family: "Manrope", sans-serif;
+    color: var(--lux-muted);
+    letter-spacing: 0.02em;
   }
 
   .contact-card-form {
-    max-width: 1000px;
+    max-width: 1160px;
     margin: 0 auto;
+
     .premium-contact-card {
-      background: $white;
-      border-radius: 12px;
-      @include box-shadow(2);
-      transition: $transition;
+      background: var(--lux-white);
+      border: 1px solid var(--lux-border);
 
-      &:hover {
-        @include box-shadow(3);
-      }
-
-      // Form Layout
       .premium-contact-form {
-        padding: 2.5rem;
+        padding: clamp(18px, 3vw, 44px);
+      }
 
-        @include sm {
-          padding: 10px;
-        }
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
 
-        .form-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1.5rem;
-
-          @media (max-width: 768px) {
-            grid-template-columns: 1fr;
-          }
-
-          .form-group:nth-child(8) {
-            grid-column: 1 / -1;
-          }
-        }
-
-        .full-width {
-          grid-column: 1 / -1;
+        @include md {
+          grid-template-columns: 1fr;
         }
       }
 
-      // Form Groups
       .form-group {
         position: relative;
-        margin-bottom: 1.5rem;
 
         &.floating-label {
-          position: relative;
-          padding-top: 1.5rem;
+          padding-top: 18px;
         }
 
         .form-label {
           position: absolute;
-          top: 2rem;
-          left: 1rem;
-          color: $dark-gray;
-          font-size: 1rem;
+          left: 14px;
+          top: 28px;
+          font-family: "Manrope", sans-serif;
+          font-size: 0.92rem;
+          color: #8a847a;
           pointer-events: none;
-          transition: $transition;
-          transform-origin: left top;
-          background: $white;
-          padding: 0 0.5rem;
-          margin-left: -0.5rem;
+          transition: all 0.25s ease;
+          background: var(--lux-white);
+          padding: 0 4px;
         }
 
         .form-input {
           width: 100%;
-          padding: 1rem;
-          border: 1px solid $medium-gray;
-          border-radius: 8px;
-          font-size: 1rem;
-          transition: $transition;
-          background: $white;
+          border: 1px solid var(--lux-border);
+          padding: 14px;
+          border-radius: 0;
+          font-family: "Manrope", sans-serif;
+          color: var(--lux-text);
+          background: #fff;
+          transition: border-color 0.25s ease;
 
           &:focus {
-            border-color: $primary-color;
             outline: none;
-            @include box-shadow(1);
-
-            + .form-label {
-              color: $primary-color;
-              transform: translateY(-1.2rem) scale(0.85);
-            }
+            border-color: var(--lux-gold);
           }
 
-          &:not(:placeholder-shown) + .form-label,
-          &:focus + .form-label {
-            transform: translateY(-1.2rem) scale(0.85);
+          &:focus + .form-label,
+          &:not(:placeholder-shown) + .form-label {
+            transform: translateY(-18px) scale(0.9);
+            color: var(--lux-gold-deep);
           }
 
           &.textarea {
-            min-height: 120px;
+            min-height: 140px;
             resize: vertical;
           }
         }
 
         .required-asterisk {
-          color: $primary-color;
-          margin-left: 0.2rem;
+          color: var(--lux-gold-deep);
+          margin-left: 4px;
+          font-size: 0.8rem;
         }
       }
 
-      // Section Header
       .section-header {
         grid-column: 1 / -1;
-        margin: 1rem 0;
-        position: relative;
+        margin: 4px 0;
 
         h3 {
-          font-size: 1.3rem;
-          color: $primary-color;
-          margin-bottom: 0.5rem;
+          font-family: "Cormorant Garamond", serif;
+          color: var(--lux-text);
+          font-size: 2rem;
           font-weight: 600;
         }
 
         .divider {
-          height: 2px;
-          background: linear-gradient(to right, $primary-color, $medium-gray);
-          width: 100%;
+          margin-top: 8px;
+          height: 1px;
+          background: linear-gradient(90deg, var(--lux-gold), var(--lux-border));
         }
       }
 
-      // Checkbox Styles
+      .full-width,
+      .form-grid .form-group:nth-child(8) {
+        grid-column: 1 / -1;
+      }
+
       .services-group {
         .services-label {
           display: block;
-          margin-bottom: 0.8rem;
+          margin-bottom: 10px;
+          font-family: "Manrope", sans-serif;
           font-weight: 500;
+          color: var(--lux-text);
         }
 
         .checkbox-container {
           display: flex;
           flex-wrap: wrap;
-          gap: 1rem;
+          gap: 12px 18px;
         }
 
         .checkbox-label {
-          @include flex-center;
           position: relative;
+          padding-left: 28px;
+          font-family: "Manrope", sans-serif;
+          color: var(--lux-muted);
           cursor: pointer;
-          user-select: none;
-          padding-left: 2rem;
-          font-size: 0.95rem;
 
           .checkbox-input {
             position: absolute;
             opacity: 0;
-            cursor: pointer;
-            height: 0;
-            width: 0;
 
             &:checked ~ .custom-checkbox {
-              background-color: $primary-color;
-              border-color: $primary-color;
+              background: var(--lux-gold);
+              border-color: var(--lux-gold);
 
-              &:after {
-                display: block;
+              &::after {
+                opacity: 1;
               }
             }
           }
 
           .custom-checkbox {
             position: absolute;
-            top: 0;
             left: 0;
-            height: 1.2rem;
-            width: 1.2rem;
-            background-color: $white;
-            border: 2px solid $medium-gray;
-            border-radius: 4px;
-            transition: $transition;
+            top: 2px;
+            width: 16px;
+            height: 16px;
+            border: 1px solid var(--lux-border);
+            transition: all 0.2s ease;
 
-            &:after {
+            &::after {
               content: "";
               position: absolute;
-              display: none;
               left: 4px;
               top: 1px;
-              width: 4px;
-              height: 8px;
-              border: solid $white;
+              width: 5px;
+              height: 9px;
+              border: solid #fff;
               border-width: 0 2px 2px 0;
               transform: rotate(45deg);
+              opacity: 0;
             }
-          }
-
-          &:hover .checkbox-input ~ .custom-checkbox {
-            border-color: $primary-light;
           }
         }
       }
 
-      // Custom Select Styles
       .custom-select {
-        position: relative;
-
         .select-label {
           display: block;
-          margin-bottom: 0.8rem;
+          margin-bottom: 10px;
+          font-family: "Manrope", sans-serif;
           font-weight: 500;
         }
 
-        .select-wrapper {
-          position: relative;
-        }
-
         .select-header {
-          padding: 1rem;
-          border: 1px solid $medium-gray;
-          border-radius: 8px;
-          cursor: pointer;
+          border: 1px solid var(--lux-border);
+          padding: 13px 14px;
           display: flex;
-          justify-content: space-between;
           align-items: center;
-          background: $white;
-          transition: $transition;
+          justify-content: space-between;
+          cursor: pointer;
+          transition: border-color 0.25s ease;
 
           &.error {
-            border-color: $primary-color;
+            border-color: #bf4d4d;
+          }
+
+          &:hover {
+            border-color: var(--lux-gold);
           }
 
           .select-value {
-            color: $secondary-color;
+            color: var(--lux-muted);
+            font-family: "Manrope", sans-serif;
           }
 
           .select-icon {
-            transition: $transition;
-            font-size: 1.2rem;
+            transition: transform 0.2s ease;
 
             &.open {
               transform: rotate(180deg);
             }
           }
-
-          &:hover {
-            border-color: $primary-light;
-          }
         }
 
         .select-options {
-          position: absolute;
-          top: 100%;
-          left: 0;
-          right: 0;
-          background: $white;
-          border: 1px solid $medium-gray;
+          border: 1px solid var(--lux-border);
           border-top: none;
-          border-radius: 0 0 8px 8px;
-          max-height: 200px;
+          background: #fff;
+          max-height: 220px;
           overflow-y: auto;
-          z-index: 10;
-          @include box-shadow(1);
+          position: relative;
+          z-index: 2;
         }
 
         .select-option {
-          padding: 0.8rem 1rem;
+          padding: 10px 14px;
+          font-family: "Manrope", sans-serif;
           cursor: pointer;
-          transition: $transition;
 
           &:hover {
-            background-color: $light-gray;
-            color: $primary-color;
+            background: #f7f3ea;
+            color: var(--lux-gold-deep);
           }
         }
 
         .error-message {
-          color: $primary-color;
+          margin-top: 6px;
+          color: #bf4d4d;
           font-size: 0.8rem;
-          margin-top: 0.5rem;
+          font-family: "Manrope", sans-serif;
         }
       }
 
-      // Submit Button
       .submit-button {
-        background: $primary-color;
-        color: $white;
-        border: none;
-        padding: 1rem 2rem;
-        font-size: 1rem;
-        font-weight: 600;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: $transition;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+        margin-top: 10px;
         width: 100%;
-        margin-top: 1rem;
+        border: 1px solid var(--lux-gold);
+        background: var(--lux-gold);
+        color: #fff;
+        min-height: 48px;
+        font-family: "Manrope", sans-serif;
         text-transform: uppercase;
-        letter-spacing: 1px;
-        @include box-shadow(1);
+        letter-spacing: 0.08em;
+        font-size: 0.78rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
 
         &:hover {
-          background: $primary-dark;
-          @include box-shadow(2);
+          background: transparent;
+          color: var(--lux-gold-deep);
         }
 
         &:disabled {
-          background: $medium-gray;
+          opacity: 0.6;
           cursor: not-allowed;
-          opacity: 0.7;
         }
 
         .spinner {
           display: inline-block;
-          width: 1rem;
-          height: 1rem;
-          border: 2px solid rgba(255, 255, 255, 0.3);
+          width: 14px;
+          height: 14px;
+          border: 2px solid rgba(255, 255, 255, 0.36);
+          border-top-color: #fff;
           border-radius: 50%;
-          border-top-color: $white;
-          animation: spin 1s ease-in-out infinite;
-          margin-right: 0.5rem;
+          animation: contactSpin 0.8s linear infinite;
+          margin-right: 8px;
         }
       }
 
-      // Form Error
       .form-error {
-        color: $primary-color;
+        margin-top: 10px;
+        color: #bf4d4d;
         text-align: center;
-        margin-top: 1rem;
-        font-weight: 500;
-      }
-
-      // Animations
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
+        font-family: "Manrope", sans-serif;
       }
     }
   }
 
   .contact2-section {
-    margin: 80px 0px;
+    margin: 70px auto 0;
+    width: min(1320px, 100%);
   }
+
   .contact-maps {
-    display: flex;
-    gap: 30px;
+    width: min(1320px, 100%);
+    margin: 50px auto 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
 
     @include md {
-      flex-direction: column;
+      grid-template-columns: 1fr;
     }
+
     .contact-map {
-      width: 100%;
+      border: 1px solid var(--lux-border);
+      overflow: hidden;
+
+      iframe {
+        display: block;
+      }
     }
+  }
+}
+
+@keyframes contactSpin {
+  to {
+    transform: rotate(360deg);
   }
 }

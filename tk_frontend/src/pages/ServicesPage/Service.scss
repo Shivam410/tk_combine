@@ -1,315 +1,265 @@
 @use "../../styles/responsive.scss" as *;
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap");
 
 .service {
-  padding-bottom: 20px;
+  --lux-bg: #f7f6f2;
+  --lux-white: #ffffff;
+  --lux-text: #1f1e1c;
+  --lux-muted: #6a655c;
+  --lux-gold: #b89b67;
+  --lux-gold-deep: #a5874f;
+  --lux-border: #e6e1d8;
+
+  background: linear-gradient(180deg, var(--lux-white) 0%, var(--lux-bg) 100%);
+  color: var(--lux-text);
+  padding-bottom: 30px;
 
   .service-top-banner {
-    padding: 100px 30px 00px 30px;
+    padding: 100px 24px 0;
 
-    @include lg {
-      padding: 100px 10px 0px 10px;
+    @include md {
+      padding: 90px 12px 0;
     }
 
     .service-banner {
-      background-image: url("../../assets/images/bg22.jpg");
+      min-height: clamp(290px, 68vh, 720px);
+      background-image: linear-gradient(rgba(19, 19, 19, 0.5), rgba(19, 19, 19, 0.4)), url("../../assets/images/bg22.jpg");
       background-size: cover;
-      background-repeat: no-repeat;
       background-position: top;
-      height: 500px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
       position: relative;
-      z-index: 1;
-
-      &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-      }
-
-      @include md {
-        height: 300px;
-      }
 
       .service-banner-desc {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1;
-        width: 100%;
-
-        @include lg {
-          width: 90%;
-        }
-
-        @include sm {
-          width: 100%;
-        }
+        inset: 0;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 0 16px;
 
         h1 {
-          text-align: center;
-          font-size: 50px;
+          font-family: "Cormorant Garamond", serif;
+          font-size: clamp(2rem, 5.8vw, 4.8rem);
           color: #fff;
-          position: relative;
-
-          @include md {
-            font-size: 50px;
-          }
-
-          @include sm {
-            font-size: 40px;
-          }
-
-          @include xl {
-            &::before {
-              display: none;
-            }
-
-            &::after {
-              display: none;
-            }
-          }
+          line-height: 1.03;
+          font-weight: 600;
         }
       }
     }
   }
 
   .service-container {
-    padding: 50px 10px;
-    max-width: 1200px;
-    width: 100%;
+    width: min(1320px, calc(100% - 36px));
     margin: 0 auto;
-    gap: 50px;
-    overflow: hidden;
+    padding: 60px 0 20px;
 
-    @include lg {
-      padding: 50px 10px;
-      gap: 30px;
+    @include md {
+      width: calc(100% - 24px);
+      padding-top: 44px;
     }
 
     .service-container-content {
-      color: #000;
-      width: 100%;
-      overflow: hidden;
-
       .service-container-content-top {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        width: 100%;
-        overflow: hidden;
+        display: grid;
+        gap: 24px;
+
         .services-img-slide {
-          max-width: 100%;
-          width: 100%;
+          border: 1px solid var(--lux-border);
+          overflow: hidden;
+
           .services-slide {
             width: 100%;
-            height: 500px;
             aspect-ratio: 16 / 9;
 
-            @include md {
-              height: auto;
-            }
-
-            .service_slide {
+            .service_slide img {
               width: 100%;
               height: 100%;
-
-              img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-                display: block;
-              }
+              object-fit: cover;
             }
           }
         }
 
         h1 {
-          font-size: 35px;
-
-          @include sm {
-            font-size: 25px;
-          }
+          font-family: "Cormorant Garamond", serif;
+          font-size: clamp(2rem, 4vw, 3.4rem);
+          line-height: 1.06;
         }
 
         p {
-          color: #585858;
-          line-height: 1.5;
-          font-size: 18px;
+          font-family: "Manrope", sans-serif;
+          color: var(--lux-muted);
+          line-height: 1.9;
+          font-size: 1rem;
         }
       }
+
+      .service-images {
+        margin-top: 16px;
+
+        h2 {
+          text-align: center;
+          font-family: "Cormorant Garamond", serif;
+          font-size: clamp(1.8rem, 3.7vw, 3rem);
+          font-weight: 600;
+        }
+
+        hr {
+          margin: 12px auto 0;
+          width: 78px;
+          border: none;
+          height: 1px;
+          background: var(--lux-gold);
+        }
+
+        .service-image-cards {
+          margin-top: 34px;
+          column-count: 3;
+          column-gap: 12px;
+
+          @include md {
+            column-count: 2;
+          }
+
+          @include sm {
+            column-count: 1;
+          }
+
+          .service-image-card {
+            margin-bottom: 12px;
+            overflow: hidden;
+            border: 1px solid var(--lux-border);
+
+            img {
+              width: 100%;
+              display: block;
+              cursor: zoom-in;
+              transition: transform 0.45s ease;
+            }
+
+            &:hover img {
+              transform: scale(1.05);
+            }
+          }
+        }
+      }
+
       .service-steps-container {
-        display: flex;
-        justify-content: space-between;
+        margin-top: 28px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
 
         @include md {
-          flex-direction: column;
+          grid-template-columns: 1fr;
         }
-        .service-services {
-          display: flex;
-          flex-direction: column;
-          gap: 30px;
-          margin-top: 30px;
+
+        .service-services,
+        .service-steps {
+          border: 1px solid var(--lux-border);
+          padding: 22px;
+
           h1 {
-            text-transform: uppercase;
-            font-size: 20px;
-            position: relative;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 2rem;
+            text-transform: none;
+            margin-bottom: 12px;
 
             &::after {
               content: "";
-              width: 70px;
-              height: 2px;
-              border-radius: 1px;
-              background-color: #000;
               display: block;
+              width: 60px;
+              height: 1px;
+              margin-top: 8px;
+              background: var(--lux-gold);
             }
           }
+
           ul {
             list-style: none;
-            margin-left: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            display: grid;
+            gap: 14px;
+            margin: 0;
+
             li {
-              color: #585858;
               display: flex;
-              align-items: center;
+              align-items: flex-start;
+              gap: 10px;
+              font-family: "Manrope", sans-serif;
+              color: var(--lux-muted);
+              line-height: 1.7;
 
               .check-icon {
-                color: $primary-color;
-                margin-right: 30px;
+                color: var(--lux-gold-deep);
+                margin-top: 4px;
                 flex-shrink: 0;
               }
 
-              .services-desc {
-                p {
-                  font-size: 18px;
-                  white-space: normal;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                  &:first-child {
-                    color: #000;
-                    margin-bottom: 10px;
-                    font-weight: 500;
-                  }
-                }
+              .services-desc p {
+                font-size: 0.98rem;
               }
-            }
-          }
-        }
-
-        .service-steps {
-          display: flex;
-          flex-direction: column;
-          gap: 30px;
-          margin-top: 30px;
-          h1 {
-            text-transform: uppercase;
-            font-size: 20px;
-            position: relative;
-
-            &::after {
-              content: "";
-              width: 70px;
-              height: 2px;
-              border-radius: 1px;
-              background-color: #000;
-              display: block;
-            }
-          }
-          ul {
-            list-style: none;
-            margin-left: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            li {
-              color: #585858;
-              display: flex;
-              align-items: center;
 
               p {
-                font-size: 18px;
-                line-height: 1.5;
+                font-size: 0.98rem;
+
                 &:first-child {
-                  margin-right: 30px;
-                  color: $primary-color;
+                  color: var(--lux-gold-deep);
+                  margin-right: 6px;
+                  font-weight: 600;
                 }
 
                 span {
+                  color: var(--lux-text);
                   font-weight: 500;
-                  color: #000;
                 }
               }
             }
-          }
-
-          p {
-            line-height: 1.5;
-            font-size: 18px;
           }
         }
       }
     }
 
     hr {
-      margin: 10px 0px;
-      background: $primary-color;
-      height: 2px;
+      margin: 28px 0 0;
       border: none;
-      border-radius: 5px;
-    }
-
-    .service-images {
-      h2 {
-        text-align: center;
-
-        @include sm {
-          font-size: 22px;
-        }
-      }
-
-      .service-image-cards {
-        column-count: 3;
-        column-gap: 10px;
-        margin-top: 50px;
-
-        @include md {
-          column-count: 2;
-        }
-        .service-image-card {
-          margin-bottom: 10px;
-          img {
-            width: 100%;
-            height: auto;
-            display: block;
-          }
-
-          h2 {
-            @include sm {
-              font-size: 25px;
-            }
-          }
-        }
-      }
+      height: 1px;
+      background: var(--lux-border);
     }
   }
 
   .bottom-desc {
-    color: #585858;
-    line-height: 1.5;
-    font-size: 18px;
-    margin-top: 30px;
+    margin-top: 24px;
+    color: var(--lux-muted);
+    font-family: "Manrope", sans-serif;
+    line-height: 1.9;
   }
 
   .service-contact {
-    @include lg {
-      margin-top: 30px;
-    }
+    margin-top: 40px;
+  }
+}
+
+.image-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 12, 12, 0.92);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    max-width: 90%;
+    max-height: 88%;
+    border: 1px solid rgba(230, 225, 216, 0.6);
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 16px;
+    right: 28px;
+    font-size: 38px;
+    color: #fff;
+    cursor: pointer;
+    line-height: 1;
   }
 }

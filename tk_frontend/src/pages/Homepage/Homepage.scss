@@ -1,27 +1,431 @@
 @use "../../styles/responsive.scss" as *;
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap");
 
 .homepage {
+  --lux-bg: #f7f6f2;
+  --lux-white: #ffffff;
+  --lux-text: #1f1e1c;
+  --lux-muted: #6a655c;
+  --lux-gold: #b89b67;
+  --lux-gold-deep: #a5874f;
+  --lux-border: #e6e1d8;
+
+  background: linear-gradient(180deg, var(--lux-white) 0%, var(--lux-bg) 78%);
+  color: var(--lux-text);
   display: flex;
   flex-direction: column;
-  gap: 100px;
+  gap: 84px;
 
-  @include sm{
-    gap: 80px;
+  .homepage-hero {
+    width: 100%;
   }
 
-  .homepage-container{
+  .homepage-shell {
+    width: min(1320px, calc(100% - 48px));
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 100px;
-    padding: 0px 20px;
+    gap: 88px;
 
-    @include sm{
-      gap: 60px;
-      padding: 0px 10px;
+    @include md {
+      width: calc(100% - 28px);
+      gap: 72px;
     }
   }
 
-  .bottom-ring-line{
-    padding: 0px 20px;
+  .homepage-wide-section {
+    width: 100%;
+  }
+
+  .homepage-section {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid var(--lux-border);
+    padding: 46px 38px;
+
+    @include md {
+      padding: 28px 16px;
+    }
+  }
+
+  .homepage-intro {
+    border-top: 1px solid var(--lux-border);
+    border-bottom: 1px solid var(--lux-border);
+    padding: 44px 0;
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--lux-gold-deep);
+      font-size: 12px;
+      font-weight: 600;
+      font-family: "Manrope", sans-serif;
+      margin-bottom: 18px;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 38px;
+      align-items: start;
+
+      @include md {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.04;
+      font-weight: 600;
+      color: var(--lux-text);
+      max-width: 620px;
+    }
+
+    .intro-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      p {
+        font-family: "Manrope", sans-serif;
+        color: var(--lux-muted);
+        font-size: 1.02rem;
+        line-height: 1.9;
+      }
+    }
+
+    .luxury-btn {
+      align-self: flex-start;
+      border: 1px solid var(--lux-gold);
+      background: var(--lux-gold);
+      color: var(--lux-white);
+      font-family: "Manrope", sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 13px 26px;
+      transition: all 0.35s ease;
+
+      &:hover {
+        background: transparent;
+        color: var(--lux-gold-deep);
+      }
+    }
+  }
+
+  .reveal-up {
+    animation: luxuryFadeUp 0.7s ease both;
+  }
+
+  .photoAlbums,
+  .homeVideo,
+  .aboutAgency,
+  .ourFeatures,
+  .ourCore,
+  .getintouch,
+  .followSection {
+    h1,
+    h2 {
+      font-family: "Cormorant Garamond", serif;
+      color: var(--lux-text);
+      letter-spacing: 0.01em;
+      text-transform: none;
+    }
+
+    p,
+    li,
+    button,
+    a,
+    input,
+    textarea {
+      font-family: "Manrope", sans-serif;
+    }
+  }
+
+  .photoAlbums {
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      margin-bottom: 6px;
+    }
+
+    .photoAlbums-desc {
+      color: var(--lux-muted);
+      font-size: 1rem;
+      margin-bottom: 30px;
+    }
+
+    .photoAlbums-card-content {
+      overflow: hidden;
+
+      img {
+        border: 1px solid var(--lux-border);
+        transition: transform 0.45s ease;
+      }
+
+      &:hover img {
+        transform: scale(1.03);
+      }
+    }
+
+    .pa-swiper-prev,
+    .pa-swiper-next {
+      background: var(--lux-white);
+      color: var(--lux-gold-deep);
+      border: 1px solid var(--lux-border);
+
+      &:hover {
+        background: var(--lux-gold);
+        color: var(--lux-white);
+      }
+    }
+  }
+
+  .homeVideo {
+    max-width: 100%;
+
+    .videoWrapper iframe {
+      border-radius: 0;
+      border: 1px solid var(--lux-border);
+    }
+
+    .homeVideo-btn .more-video-btn {
+      margin-top: 26px;
+      background: var(--lux-gold);
+      border: 1px solid var(--lux-gold);
+      border-radius: 0;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      padding: 13px 24px;
+
+      &:hover {
+        background: transparent;
+        color: var(--lux-gold-deep);
+      }
+    }
+  }
+
+  .aboutAgency {
+    .aboutAgency-top button,
+    .aboutAgency-bottom-left-desc,
+    .aboutAgency-bottom-left-btn {
+      background: var(--lux-gold);
+      color: var(--lux-white);
+    }
+
+    .aboutAgency-bottom {
+      gap: 44px;
+    }
+
+    .aboutAgency-bottom-left img {
+      border-radius: 0;
+      border: 1px solid var(--lux-border);
+    }
+
+    .aboutAgency-bottom-right {
+      gap: 16px;
+
+      .about-desc1,
+      .about-desc2 {
+        color: var(--lux-muted);
+        line-height: 1.8;
+      }
+    }
+  }
+
+  .ourFeatures {
+    .ourFeatures-left h1,
+    .ourFeatures-mobile-title {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+    }
+
+    .ourFeatures-left-desc ul li {
+      border-bottom: 1px solid var(--lux-border);
+
+      &:hover {
+        color: var(--lux-gold-deep);
+      }
+
+      .up-arrow {
+        color: var(--lux-gold-deep);
+      }
+
+      .ourFeatures-left-card {
+        border: 1px solid var(--lux-border);
+        box-shadow: 0 14px 26px rgba(31, 30, 28, 0.08);
+
+        p {
+          color: var(--lux-muted);
+        }
+
+        .read-more {
+          color: var(--lux-gold-deep);
+        }
+      }
+    }
+
+    .ourFeatures-mobile button {
+      background: var(--lux-gold);
+      border: 1px solid var(--lux-gold);
+      font-weight: 600;
+
+      &:hover {
+        color: var(--lux-gold-deep);
+      }
+    }
+  }
+
+  .ourCore {
+    .ourCore-top p {
+      color: var(--lux-muted);
+    }
+
+    .ourCore-slider-card {
+      border: 1px solid var(--lux-border);
+      padding-bottom: 16px;
+
+      img {
+        height: 390px;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        padding: 0 16px;
+      }
+
+      p {
+        font-size: 0.96rem;
+        color: var(--lux-muted);
+        padding: 0 16px;
+      }
+    }
+
+    .custom-prev,
+    .custom-next {
+      color: var(--lux-gold-deep);
+
+      &::before {
+        border-color: var(--lux-gold);
+      }
+    }
+  }
+
+  .clientReview {
+    .clientReview-card {
+      border: 1px solid var(--lux-border);
+      box-shadow: 0 16px 34px rgba(20, 20, 20, 0.12);
+    }
+
+    .clientReview-card-stars .star {
+      color: var(--lux-gold);
+    }
+
+    .read-more-btn {
+      color: var(--lux-gold-deep);
+      letter-spacing: 0.08em;
+    }
+
+    .client-prev,
+    .client-next {
+      color: var(--lux-gold-deep);
+
+      &::before {
+        border-color: var(--lux-gold);
+      }
+    }
+  }
+
+  .getintouch {
+    .getintouch-content {
+      border: 1px solid var(--lux-border);
+      background: var(--lux-white);
+
+      p {
+        color: var(--lux-muted);
+      }
+
+      .form-group input,
+      .form-group textarea {
+        border-bottom: 1px solid var(--lux-border);
+
+        &:focus {
+          border-bottom-color: var(--lux-gold);
+        }
+      }
+
+      .submit-button {
+        background: var(--lux-gold);
+        border: 1px solid var(--lux-gold);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+
+        &:hover {
+          color: var(--lux-gold-deep);
+          background: transparent;
+        }
+      }
+    }
+  }
+
+  .follow-wrap {
+    margin-top: -32px;
+  }
+
+  .followSection {
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      letter-spacing: 0.09em;
+      color: var(--lux-text);
+    }
+
+    .followSection-cards {
+      gap: 18px;
+    }
+
+    .followSection-card {
+      background: var(--lux-white) !important;
+      border: 1px solid var(--lux-border);
+      color: var(--lux-text) !important;
+      border-radius: 0;
+      height: 132px;
+      width: 100%;
+      max-width: 250px;
+
+      .followSection-icon {
+        color: var(--lux-gold-deep);
+      }
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(31, 30, 28, 0.08);
+        border-color: rgba(184, 155, 103, 0.65);
+      }
+    }
+  }
+
+  @include sm {
+    gap: 64px;
+
+    .homepage-shell {
+      gap: 56px;
+    }
+
+    .homepage-intro {
+      padding: 24px 0;
+    }
+  }
+}
+
+@keyframes luxuryFadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }

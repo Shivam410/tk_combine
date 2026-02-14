@@ -1,374 +1,238 @@
 @use "../../styles/responsive.scss" as *;
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap");
 
 .service2 {
-  padding-bottom: 20px;
-  .service2-top-banner {
-    padding: 100px 30px 00px 30px;
+  --lux-bg: #f7f6f2;
+  --lux-white: #ffffff;
+  --lux-text: #1f1e1c;
+  --lux-muted: #6a655c;
+  --lux-gold: #b89b67;
+  --lux-gold-deep: #a5874f;
+  --lux-border: #e6e1d8;
 
-    @include lg {
-      padding: 100px 10px 0px 10px;
+  background: linear-gradient(180deg, var(--lux-white) 0%, var(--lux-bg) 100%);
+  color: var(--lux-text);
+  padding-bottom: 30px;
+
+  .service2-top-banner {
+    padding: 100px 24px 0;
+
+    @include md {
+      padding: 90px 12px 0;
     }
 
     .service2-banner {
-      background-image: url("../../assets/images/bg22.jpg");
+      min-height: clamp(290px, 68vh, 720px);
+      background-image: linear-gradient(rgba(19, 19, 19, 0.5), rgba(19, 19, 19, 0.4)), url("../../assets/images/bg22.jpg");
       background-size: cover;
-      background-repeat: no-repeat;
       background-position: top;
-      height: 500px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
       position: relative;
-      z-index: 1;
-
-      &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-      }
-
-      @include md {
-        height: 300px;
-      }
 
       .service2-banner-desc {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1;
-        width: 100%;
-
-        @include lg {
-          width: 90%;
-        }
-
-        @include sm {
-          width: 100%;
-        }
+        inset: 0;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 0 16px;
 
         h1 {
-          text-align: center;
-          font-size: 50px;
+          font-family: "Cormorant Garamond", serif;
+          font-size: clamp(2rem, 5.8vw, 4.8rem);
           color: #fff;
-          position: relative;
-
-          @include md {
-            font-size: 50px;
-          }
-
-          @include sm {
-            font-size: 35px;
-          }
-
-          @include xl {
-            &::before {
-              display: none;
-            }
-
-            &::after {
-              display: none;
-            }
-          }
+          line-height: 1.03;
+          font-weight: 600;
         }
       }
     }
   }
 
   .service2-container {
-    padding: 50px 10px;
-    max-width: 1200px;
-    width: 100%;
+    width: min(1320px, calc(100% - 36px));
     margin: 0 auto;
-    gap: 50px;
-    overflow: hidden;
+    padding: 60px 0 20px;
 
-    @include lg {
-      padding: 10px 10px;
-      gap: 30px;
-      margin-top: 30px;
+    @include md {
+      width: calc(100% - 24px);
+      padding-top: 44px;
     }
 
     .service2-container-content {
-      color: #000;
-      width: 100%;
-      overflow: hidden;
-
       .service2-container-content-top {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        width: 100%;
-        overflow: hidden;
+        display: grid;
+        gap: 24px;
+
         .services-img-slide {
-          max-width: 100%;
-          width: 100%;
+          border: 1px solid var(--lux-border);
+          overflow: hidden;
+
           .services-slide {
             width: 100%;
-            height: 500px;
             aspect-ratio: 16 / 9;
 
-            @include md {
-              height: auto;
-            }
-
-            .service_slide {
+            .service_slide img {
               width: 100%;
               height: 100%;
-
-              img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-                display: block;
-              }
+              object-fit: cover;
             }
           }
         }
 
         h1 {
-          font-size: 35px;
-
-          @include sm {
-            font-size: 30px;
-          }
+          font-family: "Cormorant Garamond", serif;
+          font-size: clamp(2rem, 4vw, 3.4rem);
         }
 
         p {
-          color: #585858;
-          line-height: 1.5;
-          font-size: 18px;
+          font-family: "Manrope", sans-serif;
+          color: var(--lux-muted);
+          line-height: 1.9;
         }
       }
 
-      .service2-services {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        margin-top: 30px;
+      .service2-steps-container {
+        margin-top: 28px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+
+        @include md {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .service2-services,
+      .service2-steps {
+        border: 1px solid var(--lux-border);
+        padding: 22px;
+
         h1 {
-          text-transform: uppercase;
-          font-size: 20px;
-          position: relative;
+          font-family: "Cormorant Garamond", serif;
+          font-size: 2rem;
+          text-transform: none;
+          margin-bottom: 12px;
 
           &::after {
             content: "";
-            width: 70px;
-            height: 2px;
-            border-radius: 1px;
-            background-color: #000;
             display: block;
+            width: 60px;
+            height: 1px;
+            margin-top: 8px;
+            background: var(--lux-gold);
           }
         }
+
         ul {
           list-style: none;
-          margin-left: 30px;
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
+          display: grid;
+          gap: 14px;
+          margin: 0;
+
           li {
-            color: #585858;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
+            gap: 10px;
+            font-family: "Manrope", sans-serif;
+            color: var(--lux-muted);
 
             .check-icon {
-              color: $primary-color;
-              margin-right: 30px;
-              flex-shrink: 0;
+              color: var(--lux-gold-deep);
+              margin-top: 4px;
             }
 
-            .services-desc {
-              p {
-                font-size: 18px;
-                white-space: normal;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                &:first-child {
-                  color: #000;
-                  margin-bottom: 10px;
-                  font-weight: 500;
-                }
+            p {
+              font-size: 0.98rem;
+
+              &:first-child {
+                color: var(--lux-gold-deep);
+                margin-right: 6px;
+                font-weight: 600;
+              }
+
+              span {
+                color: var(--lux-text);
+                font-weight: 500;
               }
             }
           }
         }
       }
-      
-      .service2-steps-container{
-        display: flex;
-        justify-content: space-between;
 
-        @include md{
-          flex-direction: column;
-        }
-
-        .service2-steps {
-          display: flex;
-          flex-direction: column;
-          gap: 30px;
-          margin-top: 30px;
-          h1 {
-            text-transform: uppercase;
-            font-size: 20px;
-            position: relative;
-  
-            &::after {
-              content: "";
-              width: 70px;
-              height: 2px;
-              border-radius: 1px;
-              background-color: #000;
-              display: block;
-            }
-          }
-          ul {
-            list-style: none;
-            margin-left: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            li {
-              color: #585858;
-              display: flex;
-              align-items: center;
-  
-              p {
-                font-size: 18px;
-                line-height: 1.5;
-                &:first-child {
-                  margin-right: 30px;
-                  color: $primary-color;
-                }
-  
-                span {
-                  font-weight: 500;
-                  color: #000;
-                }
-              }
-            }
-          }
-  
-          p {
-            line-height: 1.5;
-            font-size: 18px;
-          }
-        }
+      .bottom-desc {
+        margin-top: 22px;
+        color: var(--lux-muted);
+        font-family: "Manrope", sans-serif;
       }
-
-      .bottom-desc{
-        color: #585858;
-        line-height: 1.5;
-        font-size: 18px;
-        margin-top: 30px; 
-      }
-     
     }
 
     hr {
-      margin: 10px 0px;
-      background: $primary-color;
-      height: 2px;
+      margin: 28px 0 0;
       border: none;
-      border-radius: 5px;
+      height: 1px;
+      background: var(--lux-border);
     }
 
     .service-films {
+      margin-top: 16px;
+
       h2 {
         text-align: center;
-        // margin: 30px 0px;
-        @include sm {
-          font-size: 25px;
-        }
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(1.8rem, 3.7vw, 3rem);
+        font-weight: 600;
       }
 
       .subscribe-btn {
+        margin-top: 18px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 30px;
-        gap: 10px;
-        margin-bottom: 10px;
+        gap: 8px;
+
         p {
-          font-size: 20px;
-          font-weight: 500;
-          color: $primary-color;
+          font-family: "Manrope", sans-serif;
+          color: var(--lux-muted);
           text-align: center;
-
-          @include md {
-            font-size: 16px;
-          }
-
-          @include sm {
-            font-size: 14px;
-          }
         }
 
         .sub-btn {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          padding: 12px 24px;
-          font-size: 16px;
-          font-weight: 600;
+          border: 1px solid var(--lux-gold);
+          background: var(--lux-gold);
           color: #fff;
-          background-color: #ff0000;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: background 0.3s ease, transform 0.2s ease;
+          padding: 10px 18px;
+          font-family: "Manrope", sans-serif;
           text-transform: uppercase;
-          letter-spacing: 0.5px;
+          letter-spacing: 0.08em;
+          font-size: 0.72rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
 
           &:hover {
-            background-color: #cc0000;
-            transform: scale(1.05);
-          }
-
-          &:active {
-            background-color: #990000;
-            transform: scale(0.98);
-          }
-
-          &:focus {
-            outline: none;
-            box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
-          }
-
-          @include md {
-            padding: 10px 20px;
-            font-size: 14px;
-          }
-
-          @include sm {
-            padding: 8px 16px;
-            font-size: 12px;
+            background: transparent;
+            color: var(--lux-gold-deep);
           }
         }
       }
 
       .service-videos {
+        margin-top: 22px;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        margin-top: 30px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
 
         @include xl {
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
         @include md {
-          grid-template-columns: repeat(1, 1fr);
+          grid-template-columns: 1fr;
         }
       }
     }
   }
 
   .service-contact {
-    @include lg {
-      margin-top: 30px;
-    }
+    margin-top: 40px;
   }
 }
