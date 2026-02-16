@@ -5,76 +5,81 @@ import { catchAsyncError } from "../middlewares/catchAsyncError.js";
 import ErrorHandler from "../utils/errorHandler.js";
 
 // CREATE NEW CONTACT 2
-// Async function for handling the contact form submission
 export const newContact = catchAsyncError(async (req, res, next) => {
-  try {
-    const {
-      firstName,
-      lastName,
-      email,
-      phoneNumber,
-      location,
-      eventDate,
-      servicesNeeded,
-      weddingType,
-      howDidYouHear,
-      message,
-    } = req.body;
+  const {
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    location,
+    eventDate,
+    servicesNeeded,
+    weddingType,
+    howDidYouHear,
+    message,
+  } = req.body;
 
-    const servicesNeededArray = Array.isArray(servicesNeeded)
-      ? servicesNeeded
-      : [servicesNeeded];
+  const servicesNeededArray = (Array.isArray(servicesNeeded)
+    ? servicesNeeded
+    : [servicesNeeded]
+  ).filter(Boolean);
 
-    const missingFields = [];
-    if (!firstName) missingFields.push("firstName");
-    if (!lastName) missingFields.push("lastName");
-    if (!email) missingFields.push("email");
-    if (!phoneNumber) missingFields.push("phoneNumber");
-    if (!location) missingFields.push("location");
-    if (!eventDate) missingFields.push("eventDate");
-    if (!servicesNeededArray.length) missingFields.push("servicesNeeded");
-    if (!weddingType) missingFields.push("weddingType");
-    if (!howDidYouHear) missingFields.push("howDidYouHear");
-    if (!message) missingFields.push("message");
+  const missingFields = [];
+  if (!firstName) missingFields.push("firstName");
+  if (!lastName) missingFields.push("lastName");
+  if (!email) missingFields.push("email");
+  if (!phoneNumber) missingFields.push("phoneNumber");
+  if (!location) missingFields.push("location");
+  if (!eventDate) missingFields.push("eventDate");
+  if (!servicesNeededArray.length) missingFields.push("servicesNeeded");
+  if (!weddingType) missingFields.push("weddingType");
+  if (!howDidYouHear) missingFields.push("howDidYouHear");
+  if (!message) missingFields.push("message");
 
-    if (missingFields.length > 0) {
-      return next(
-        new ErrorHandler(
-          `Missing required fields: ${missingFields.join(", ")}`,
-          400
-        )
-      );
-    }
+  if (missingFields.length > 0) {
+    return next(
+      new ErrorHandler(
+        `Missing required fields: ${missingFields.join(", ")}`,
+        400
+      )
+    );
+  }
 
-    // Save the contact data to MongoDB using the Contact2 model
-    const newMessage = new Contact2({
-      firstName,
-      lastName,
-      email,
-      phoneNumber,
-      location,
-      eventDate,
-      servicesNeeded: servicesNeededArray,
-      weddingType,
-      howDidYouHear,
-      message,
-    });
+  // Save contact data first. Email notification is a secondary step.
+  const newMessage = new Contact2({
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    location,
+    eventDate,
+    servicesNeeded: servicesNeededArray,
+    weddingType,
+    howDidYouHear,
+    message,
+  });
 
-    await newMessage.save();
+  await newMessage.save();
 
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS,
-      },
-    });
+  let emailSent = false;
+  const canSendEmail = process.env.GMAIL_USER && process.env.GMAIL_PASS;
 
-    const mailOptions = {
-      from: email,
-      to: process.env.GMAIL_USER,
-      subject: `New Contact Form Submission - ${firstName} ${lastName}`,
-      html: `
+  if (canSendEmail) {
+    try {
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.GMAIL_USER,
+          pass: process.env.GMAIL_PASS,
+        },
+      });
+
+      const mailOptions = {
+        from: `TK Production Film <${process.env.GMAIL_USER}>`,
+        replyTo: email,
+        to: process.env.GMAIL_USER,
+        subject: `New Contact Form Submission - ${firstName} ${lastName}`,
+        html: `
         <html>
           <head>
             <style>
@@ -114,21 +119,26 @@ export const newContact = catchAsyncError(async (req, res, next) => {
           </body>
         </html>
       `,
-    };
+      };
 
-    await transporter.sendMail(mailOptions);
-
-    res.status(201).json({
-      success: true,
-      message: "Contact message sent successfully",
-      contact: newMessage,
-    });
-  } catch (error) {
-    console.error("Error in newContact:", error);
-    return next(
-      new ErrorHandler("An error occurred while processing the request.", 500)
-    );
+      await transporter.sendMail(mailOptions);
+      emailSent = true;
+    } catch (mailError) {
+      console.error(
+        "Contact2 email send failed:",
+        mailError?.message || mailError
+      );
+    }
   }
+
+  return res.status(201).json({
+    success: true,
+    message: emailSent
+      ? "Contact message sent successfully"
+      : "Contact received successfully. Email notification is currently unavailable.",
+    contact: newMessage,
+    emailSent,
+  });
 });
 
 // GET ALL CONTACTS
@@ -158,7 +168,6 @@ export const getSingleContact = catchAsyncError(async (req, res, next) => {
 });
 
 // DELETE SINGLE CONTACT
-
 export const deleteContact = catchAsyncError(async (req, res, next) => {
   const { id } = req.params;
   const contact = await Contact2.findById(id);

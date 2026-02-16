@@ -7,11 +7,16 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 
 const Table = ({ rowData, columnDefs, tableLink }) => {
   const navigate = useNavigate();
+  const defaultColDef = {
+    sortable: true,
+    filter: true,
+    resizable: true,
+    flex: 1,
+    minWidth: 130,
+  };
 
   const handleRowClick = (event) => {
     const id = event.data.id;
-    const bannertitle = event.data.bannerTitle;
-    // navigate(`/home-banner/${bannerId}`);
 
     if (tableLink === "homeBanner") {
       navigate(`/home-banner/${id}`);
@@ -32,17 +37,13 @@ const Table = ({ rowData, columnDefs, tableLink }) => {
 
   return (
     <div className="table">
-      <div
-        className="ag-theme-alpine admin-table"
-        style={{ height: "100vh", width: "100%" }}
-      >
+      <div className="ag-theme-alpine admin-table">
         <AgGridReact
           pagination={true}
           rowData={rowData}
-          columnDefs={columnDefs.map((col) => ({
-            ...col,
-            cellRendererFramework: col.cellRenderer, // Use React Component Renderer
-          }))}
+          columnDefs={columnDefs}
+          defaultColDef={defaultColDef}
+          animateRows={true}
           rowHeight={60}
           paginationPageSize={10}
           domLayout="normal"

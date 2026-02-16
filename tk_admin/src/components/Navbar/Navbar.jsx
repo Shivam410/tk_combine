@@ -3,39 +3,44 @@ import "./Navbar.scss";
 import { useContext } from "react";
 import { Context } from "../../context/Context";
 
-import { FaUser } from "react-icons/fa";
-import { useState } from "react";
-import { useEffect } from "react";
+import { HiOutlineMenuAlt2 } from "react-icons/hi";
+import { FaRegCalendarAlt } from "react-icons/fa";
 
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ onMenuClick }) => {
   const { user } = useContext(Context);
-
-  const [currentDate, setCurrentDate] = useState("");
-
-  useEffect(() => {
-    const today = new Date();
-    const options = { month: "long", day: "2-digit", year: "numeric" };
-    setCurrentDate(today.toLocaleDateString("en-US", options));
-  }, []);
+  const currentDate = new Intl.DateTimeFormat("en-US", {
+    weekday: "short",
+    month: "long",
+    day: "2-digit",
+    year: "numeric",
+  }).format(new Date());
+  const userName = user?.user?.name || "Admin User";
+  const userInitial = userName.charAt(0).toUpperCase();
 
   return (
     <div className="navbar">
       <div className="navbar-left">
+        <button type="button" className="menu-trigger" onClick={onMenuClick}>
+          <HiOutlineMenuAlt2 />
+        </button>
+
         <div className="date">
-          <p>Today's Plan</p>
-          <p>{currentDate}</p>
+          <p>Control Center</p>
+          <div className="date-row">
+            <FaRegCalendarAlt />
+            <span>{currentDate}</span>
+          </div>
         </div>
       </div>
 
       <Link to={"/profile"} className="navbar-right">
-
-        <FaUser className="usericon" />
+        <div className="usericon">{userInitial}</div>
 
         <div className="user-desc">
-          <p>{user?.user?.name}</p>
-          {/* <p>CEO</p> */}
+          <p>{userName}</p>
+          <p>Administrator</p>
         </div>
       </Link>
     </div>
