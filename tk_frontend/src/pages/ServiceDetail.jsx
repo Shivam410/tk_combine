@@ -1,22 +1,23 @@
 import "./ServicesPage/Service.scss";
 
-import { useRef, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFade, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/effect-fade";
 import { FaCheck } from "react-icons/fa";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 import ServiceContact from "../components/ServiceContact/ServiceContact";
 import Loader from "../components/Loader/Loader";
 import SEO from "../SEO/SEO";
 import { baseUrl } from "../main";
-import { serviceimages } from "../assets/data";
+import { useScrollContext } from "../context/ScrollContext";
+import {
+  getResponsiveImageSet,
+  optimizeImageUrl,
+} from "../utils/imageOptimization";
 
 const fetchServiceBySlug = async (slug) => {
   if (!navigator.onLine) {
@@ -27,43 +28,79 @@ const fetchServiceBySlug = async (slug) => {
   return data?.serviceImages;
 };
 
+const fetchAllServices = async () => {
+  const { data } = await axios.get(`${baseUrl}/services`);
+  return data?.services || [];
+};
+
 const ServiceDetail = () => {
-  const contentRef = useRef(null);
   const [selectedImg, setSelectedImg] = useState(null);
   const { serviceSlug } = useParams();
+  const { setSkipScroll } = useScrollContext();
+  const queryClient = useQueryClient();
 
-  const { data, isLoading, isError, error, refetch } = useQuery({
+  const {
+    data: serviceData,
+    isLoading: isServiceLoading,
+    isFetching: isServiceFetching,
+    isError: isServiceError,
+    error: serviceError,
+    refetch: refetchService,
+  } = useQuery({
     queryKey: ["dynamic-service", serviceSlug],
     queryFn: () => fetchServiceBySlug(serviceSlug),
     staleTime: 1000 * 60 * 5,
+    placeholderData: (previousData) => previousData,
     retry: false,
     enabled: !!serviceSlug,
   });
 
-  if (isError) {
-    if (error?.name === "AxiosError") {
-      const isNetworkError =
-        !error.response ||
-        error.message.includes("ECONNRESET") ||
-        error.response?.data?.message === "read ECONNRESET";
+  const {
+    data: allServices = [],
+    isLoading: isServicesLoading,
+  } = useQuery({
+    queryKey: ["all-services-sidebar"],
+    queryFn: fetchAllServices,
+    staleTime: 1000 * 60 * 5,
+    retry: false,
+  });
 
-      if (isNetworkError) {
-        setTimeout(() => {
-          toast.error("Network error. Please check your connection.");
-        }, 100);
-      }
+  useEffect(() => {
+    if (!isServiceError || serviceError?.name !== "AxiosError") {
+      return;
     }
-  }
+
+    const isNetworkError =
+      !serviceError.response ||
+      serviceError.message.includes("ECONNRESET") ||
+      serviceError.response?.data?.message === "read ECONNRESET";
+
+    if (isNetworkError) {
+      toast.error("Network error. Please check your connection.");
+    }
+  }, [isServiceError, serviceError]);
 
   const location = useLocation();
   const siteBaseUrl = import.meta.env.VITE_BASE_URL || "https://tkproductionfilm.com";
   const fullUrl = `${siteBaseUrl}${location.pathname}`;
 
-  const title = data?.serviceName || "Service";
-  const images = data?.images || [];
-  const description = data?.description || "";
-  const whatWeOffer = data?.whatWeOffer || [];
-  const howItWorks = data?.howItWorks || [];
+  const title = serviceData?.serviceName || "Service";
+  const images = serviceData?.images || [];
+  const heroImage = images[0];
+  const galleryImages = images.slice(1);
+  const description = serviceData?.description || "";
+  const whatWeOffer = serviceData?.whatWeOffer || [];
+  const howItWorks = serviceData?.howItWorks || [];
+  const showInitialLoader = isServiceLoading && !serviceData;
+
+  const prefetchService = (slug) => {
+    if (!slug) return;
+    queryClient.prefetchQuery({
+      queryKey: ["dynamic-service", slug],
+      queryFn: () => fetchServiceBySlug(slug),
+      staleTime: 1000 * 60 * 5,
+    });
+  };
 
   return (
     <div className="service">
@@ -83,115 +120,158 @@ const ServiceDetail = () => {
       </div>
 
       <div className="service-container">
-        <div className="service-container-content" ref={contentRef}>
-          <div className="service-container-content-top">
-            {isLoading && (
-              <div className="service-loader-container">
-                <Loader loaderSize="serviceLoader" />
-              </div>
-            )}
+        <div className="service-layout">
+          <aside className="service-sidebar">
+            <h3>All Services</h3>
+            <p className="service-sidebar-subtitle">Browse and switch quickly</p>
 
-            {isError && (
-              <div className="service-error-container">
-                <div className="service-error-desc">
-                  <p>{error?.response?.data?.message || error.message}</p>
-                  <button onClick={refetch}>Retry</button>
+            <div className="service-sidebar-list">
+              {isServicesLoading ? (
+                <div className="service-sidebar-loader">
+                  <Loader loaderSize="serviceLoader" />
                 </div>
-              </div>
-            )}
+              ) : allServices.length > 0 ? (
+                allServices.map((service) => (
+                  <Link
+                    key={service._id}
+                    to={`/${service.slug}`}
+                    className={`service-sidebar-link ${
+                      service.slug === serviceSlug ? "active" : ""
+                    }`}
+                    onClick={() => setSkipScroll(true)}
+                    onMouseEnter={() => prefetchService(service.slug)}
+                  >
+                    <span>{service.serviceName}</span>
+                    <MdKeyboardArrowRight />
+                  </Link>
+                ))
+              ) : (
+                <p className="service-sidebar-empty">No services available.</p>
+              )}
+            </div>
+          </aside>
 
-            {images.length > 0 ? (
-              <div className="services-img-slide">
-                <Swiper
-                  modules={[EffectFade, Autoplay]}
-                  effect="fade"
-                  loop={true}
-                  speed={1200}
-                  autoplay={{ delay: 3000, disableOnInteraction: false }}
-                  className="services-slide"
-                >
-                  {images.map((item, index) => (
-                    <SwiperSlide key={index} className="service_slide">
-                      <img src={item} loading="lazy" alt={title} />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </div>
-            ) : (
-              !isLoading && <p>No images available</p>
-            )}
+          <div className="service-container-content">
+            <div className={`service-content-wrap ${isServiceFetching && serviceData ? "is-switching" : ""}`}>
+              <div
+                key={serviceData?._id || serviceSlug}
+                className="service-content-switch"
+              >
+                <div className="service-container-content-top">
+                  {showInitialLoader && (
+                    <div className="service-loader-container">
+                      <Loader loaderSize="serviceLoader" />
+                    </div>
+                  )}
 
-            <div className="service-images">
-              <h2>Our {title} Gallery</h2>
-              <hr />
+                  {isServiceError && (
+                    <div className="service-error-container">
+                      <div className="service-error-desc">
+                        <p>{serviceError?.response?.data?.message || serviceError.message}</p>
+                        <button onClick={refetchService}>Retry</button>
+                      </div>
+                    </div>
+                  )}
 
-              <div className="service-image-cards">
-                {(images.length > 0 ? images : serviceimages.map((item) => item.img)).map(
-                  (item, index) => (
-                    <div className="service-image-card" key={index}>
+                  {heroImage ? (
+                    <div className="service-hero-image">
                       <img
-                        src={item}
-                        alt="service image"
-                        loading="lazy"
-                        onClick={() => setSelectedImg(item)}
+                        src={optimizeImageUrl(heroImage, { width: 1800 })}
+                        srcSet={getResponsiveImageSet(heroImage, [640, 960, 1366, 1800])}
+                        sizes="(max-width: 1200px) 100vw, 72vw"
+                        loading="eager"
+                        fetchPriority="high"
+                        decoding="sync"
+                        alt={title}
+                        onClick={() => setSelectedImg(heroImage)}
                       />
                     </div>
-                  )
-                )}
+                  ) : (
+                    !isServiceLoading && <p>No images available</p>
+                  )}
+
+                  {galleryImages.length > 0 && (
+                    <div className="service-images">
+                      <h2>{title} Gallery</h2>
+                      <hr />
+
+                      <div className="service-image-cards">
+                        {galleryImages.map((item, index) => (
+                          <div className="service-image-card" key={index}>
+                            <img
+                              src={optimizeImageUrl(item, { width: 1200 })}
+                              srcSet={getResponsiveImageSet(item, [420, 640, 900, 1200])}
+                              sizes="(max-width: 768px) 50vw, 25vw"
+                              alt={`${title} gallery`}
+                              loading="lazy"
+                              decoding="async"
+                              onClick={() => setSelectedImg(item)}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <h1>{title} by TK Production Film</h1>
+                  <p>{description || (
+                    <>
+                    We capture your most valuable moments with creativity and care, delivering
+                    high-quality visuals tailored to your event.
+                    </>
+                  )}</p>
+                </div>
+                <div className="service-steps-container">
+                  {whatWeOffer.length > 0 && (
+                    <div className="service-services">
+                      <h1>What We Offer</h1>
+                      <ul>
+                        {whatWeOffer.map((item, index) => (
+                          <li key={`${item}-${index}`}>
+                            <FaCheck className="check-icon" />
+                            <div className="services-desc">
+                              <p>{item}</p>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {howItWorks.length > 0 && (
+                    <div className="service-steps">
+                      <h1>How It Works?</h1>
+                      <ul>
+                        {howItWorks.map((item, index) => (
+                          <li key={`${item}-${index}`}>
+                            <p>{String(index + 1).padStart(2, "0")}</p>
+                            <p>
+                              <span>{item}</span>
+                            </p>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+
+                <p className="bottom-desc">Contact us to book this service.</p>
+                <hr />
               </div>
             </div>
-
-            <h1>{title} by TK Production Film</h1>
-            <p>{description || (
-              <>
-              We capture your most valuable moments with creativity and care, delivering
-              high-quality visuals tailored to your event.
-              </>
-            )}</p>
           </div>
-
-          <div className="service-steps-container">
-            {whatWeOffer.length > 0 && (
-              <div className="service-services">
-                <h1>What We Offer</h1>
-                <ul>
-                  {whatWeOffer.map((item, index) => (
-                    <li key={`${item}-${index}`}>
-                      <FaCheck className="check-icon" />
-                      <div className="services-desc">
-                        <p>{item}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {howItWorks.length > 0 && (
-              <div className="service-steps">
-                <h1>How It Works?</h1>
-                <ul>
-                  {howItWorks.map((item, index) => (
-                    <li key={`${item}-${index}`}>
-                      <p>{String(index + 1).padStart(2, "0")}</p>
-                      <p>
-                        <span>{item}</span>
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-
-          <p className="bottom-desc">Contact us to book this service.</p>
         </div>
-        <hr />
       </div>
 
       {selectedImg && (
         <div className="image-modal" onClick={() => setSelectedImg(null)}>
-          <img src={selectedImg} alt="Fullscreen Preview" loading="lazy" />
+          <img
+            src={optimizeImageUrl(selectedImg, { width: 2200 })}
+            alt="Fullscreen Preview"
+            loading="eager"
+            fetchPriority="high"
+            decoding="sync"
+          />
           <span className="close-btn" onClick={() => setSelectedImg(null)}>
             x
           </span>

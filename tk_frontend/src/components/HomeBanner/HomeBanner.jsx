@@ -14,6 +14,10 @@ import Loader from "../../components/Loader/Loader";
 import { toast } from "react-hot-toast";
 import { bigBanner } from "../../assets/data";
 import { Link } from "react-router-dom";
+import {
+  getResponsiveImageSet,
+  optimizeImageUrl,
+} from "../../utils/imageOptimization";
 
 const HomeBanner = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
@@ -62,6 +66,27 @@ const HomeBanner = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [isMobile, refetch]);
 
+  const slides = data?.length ? data : bigBanner;
+  const firstImage = slides?.[0]?.image;
+  const enableLoop = slides.length > 1;
+
+  useEffect(() => {
+    if (!firstImage) {
+      return;
+    }
+
+    const preloadLink = document.createElement("link");
+    preloadLink.rel = "preload";
+    preloadLink.as = "image";
+    preloadLink.href = optimizeImageUrl(firstImage, { width: 1920 });
+    preloadLink.fetchPriority = "high";
+    document.head.appendChild(preloadLink);
+
+    return () => {
+      document.head.removeChild(preloadLink);
+    };
+  }, [firstImage]);
+
   if (isLoading) return <Loader />;
 
   if (isError) {
@@ -76,14 +101,12 @@ const HomeBanner = () => {
     );
   }
 
-  const slides = data?.length ? data : bigBanner;
-
   return (
     <div className="homeBanner">
       <Swiper
         modules={[EffectFade, Pagination, Navigation, Autoplay]}
         effect="fade"
-        loop={true}
+        loop={enableLoop}
         speed={1200}
         autoplay={{ delay: 3800, disableOnInteraction: false }}
         pagination={{ clickable: true }}
@@ -98,7 +121,15 @@ const HomeBanner = () => {
           slides.map((slide, index) => (
             <SwiperSlide key={index} className="slide">
               <div className="homeBanner-imgs">
-                <img src={slide.image} alt={slide.title || "Banner"} loading="lazy" />
+                <img
+                  src={optimizeImageUrl(slide.image, { width: 1920 })}
+                  srcSet={getResponsiveImageSet(slide.image, [640, 1024, 1440, 1920])}
+                  sizes="100vw"
+                  alt={slide.title || "Banner"}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  fetchPriority={index === 0 ? "high" : "auto"}
+                  decoding={index === 0 ? "sync" : "async"}
+                />
               </div>
 
               <Link to={slide.link || "/"}>

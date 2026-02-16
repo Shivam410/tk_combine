@@ -10,6 +10,11 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { baseUrl } from "../../main";
 import Loader from "../../components/Loader/Loader";
+import toast from "react-hot-toast";
+import {
+  getResponsiveImageSet,
+  optimizeImageUrl,
+} from "../../utils/imageOptimization";
 
 const fetchBanner = async () => {
   if (!navigator.onLine) {
@@ -23,7 +28,7 @@ const fetchBanner = async () => {
 const PhotoAlbums = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["photo-album"],
     queryFn: fetchBanner,
     staleTime: 1000 * 60 * 5,
@@ -48,6 +53,9 @@ const PhotoAlbums = () => {
     }
   }
 
+  const albumCount = data?.length || 0;
+  const enableLoop = albumCount > 2;
+
   return (
     <div className="photoAlbums">
       <h1>Photo Albums</h1>
@@ -69,7 +77,7 @@ const PhotoAlbums = () => {
             slidesPerView={2}
             centeredSlides={false}
             spaceBetween={20}
-            loop={true}
+            loop={enableLoop}
             speed={2500}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             modules={[Autoplay, Navigation]}
@@ -99,9 +107,13 @@ const PhotoAlbums = () => {
                 <SwiperSlide key={album._id} className="photoAlbums-card">
                   <div className="photoAlbums-card-content">
                     <img
-                      src={album.image}
+                      src={optimizeImageUrl(album.image, { width: 1280 })}
+                      srcSet={getResponsiveImageSet(album.image, [480, 768, 1024, 1280])}
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       alt={album.title || "Album Image"}
-                      loading="lazy"
+                      loading={index === 0 ? "eager" : "lazy"}
+                      fetchPriority={index === 0 ? "high" : "auto"}
+                      decoding="async"
                     />
                     <div
                       className={`homeBanner-desc ${

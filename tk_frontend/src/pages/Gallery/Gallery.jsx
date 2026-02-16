@@ -8,6 +8,10 @@ import { baseUrl } from "../../main";
 import SEO from "../../SEO/SEO";
 import { useLocation } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
+import {
+  getResponsiveImageSet,
+  optimizeImageUrl,
+} from "../../utils/imageOptimization";
 
 const Gallery = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -98,7 +102,9 @@ const Gallery = () => {
               {currentCards.map((item, index) => (
                 <div key={index} className="gallery-card">
                   <img
-                    src={item.image}
+                    src={optimizeImageUrl(item.image, { width: 1200 })}
+                    srcSet={getResponsiveImageSet(item.image, [420, 640, 900, 1200])}
+                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                     alt="portfolio image"
                     onClick={() => setSelectedImg(item.image)}
                     loading="lazy"
@@ -142,7 +148,13 @@ const Gallery = () => {
 
       {selectedImg && (
         <div className="image-modal" onClick={() => setSelectedImg(null)}>
-          <img src={selectedImg} alt="Fullscreen Preview" loading="lazy" />
+          <img
+            src={optimizeImageUrl(selectedImg, { width: 2200 })}
+            alt="Fullscreen Preview"
+            loading="eager"
+            fetchPriority="high"
+            decoding="sync"
+          />
           <span className="close-btn" onClick={() => setSelectedImg(null)}>
             ×
           </span>
