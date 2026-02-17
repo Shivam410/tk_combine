@@ -96,55 +96,57 @@ const NewReview = () => {
       </div>
 
       <div className="newReview-contents">
-        <div className="newReview-contents-top">
-          <h1>Review Image</h1>
-        </div>
-
         <div className="newReview-contents-card">
-          {selectedImage ? (
-            <img
-              src={selectedImage}
-              alt="Selected Portfolio"
-              className="portfolio-img"
-            />
-          ) : (
-            <div className="add-img-portfolio">
-              <img src={AddImg} alt="" className="add-portfolio-img" />
-              <p>Add Review Image</p>
-            </div>
-          )}
+          <div className="review-form-grid">
+            <div className="review-upload-card" onClick={handleButtonClick}>
+              {selectedImage ? (
+                <img
+                  src={selectedImage}
+                  alt="Selected Review"
+                  className="portfolio-img"
+                />
+              ) : (
+                <div className="add-img-portfolio">
+                  <img src={AddImg} alt="" className="add-portfolio-img" />
+                  <p>Add Reviewer Image</p>
+                  <span>Max 200KB</span>
+                </div>
+              )}
 
-          <div className="portfolio-btn">
-            <button onClick={handleButtonClick}>
-              <FaPlus className="change-icon" /> Add Image
-            </button>
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleFileChange}
-              style={{ display: "none" }}
-              accept="image/*"
-            />
-          </div>
-          <div className="newReview-contents-card-desc">
-            <div className="update-content">
-              <span>Name: </span>{" "}
-              <input
-                type="text"
-                placeholder="Enter name..."
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
+              <div className="portfolio-btn">
+                <button onClick={handleButtonClick} type="button">
+                  <FaPlus className="change-icon" /> Add Image
+                </button>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  style={{ display: "none" }}
+                  accept="image/*"
+                />
+              </div>
             </div>
 
-            <div className="text-area">
-              <span>Revie: </span>
-              <textarea
-                type="text"
-                placeholder="Add Review..."
-                value={review}
-                onChange={(e) => setReview(e.target.value)}
-              />
+            <div className="newReview-contents-card-desc">
+              <div className="update-content">
+                <label>Name</label>
+                <input
+                  type="text"
+                  placeholder="Enter reviewer name..."
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+
+              <div className="text-area">
+                <label>Review</label>
+                <textarea
+                  type="text"
+                  placeholder="Write review..."
+                  value={review}
+                  onChange={(e) => setReview(e.target.value)}
+                />
+              </div>
             </div>
           </div>
         </div>

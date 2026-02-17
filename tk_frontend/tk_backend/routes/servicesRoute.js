@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  deleteService,
   getAllServicesImg,
   getServiceBySlug,
   getServicesImg,
@@ -16,7 +17,9 @@ router.get("/", getAllServicesImg);
 // Generic dynamic endpoints
 router.post("/new", upload.array("images"), newServicesImg);
 router.get("/by-id/:id", getServicesImg);
+router.delete("/by-id/:id", deleteService);
 router.put("/:id", upload.array("images"), updateServicesImg);
+router.delete("/:id", deleteService);
 router.get("/:slug", getServiceBySlug);
 
 // Legacy endpoints (kept for backward compatibility)

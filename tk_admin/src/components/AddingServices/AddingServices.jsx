@@ -16,7 +16,13 @@ const parseMultiline = (text = "") =>
     .map((item) => item.trim())
     .filter(Boolean);
 
-const AddingServices = ({ title, path, serviceId, isCreate = false }) => {
+const AddingServices = ({
+  title,
+  path,
+  serviceId,
+  isCreate = false,
+  readOnly = false,
+}) => {
   const [serviceImages, setServicesImage] = useState([]);
   const [singleData, setSingleData] = useState([]);
   const [serviceName, setServiceName] = useState("");
@@ -171,67 +177,86 @@ const AddingServices = ({ title, path, serviceId, isCreate = false }) => {
           </h1>
         </Link>
 
-        <div className="addingServices-top-btns">
-          <button onClick={handleSave} disabled={loading}>
-            {loading ? "Saving..." : isCreate ? "Create" : "Update"}
-          </button>
-        </div>
+        {!readOnly && (
+          <div className="addingServices-top-btns">
+            <button onClick={handleSave} disabled={loading}>
+              {loading ? "Saving..." : isCreate ? "Create" : "Update"}
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="service1-content">
         <div className="service1-content-card">
-          <div style={{ width: "100%", marginBottom: "16px" }}>
-            <input
-              type="text"
-              value={serviceName}
-              onChange={(e) => setServiceName(e.target.value)}
-              placeholder="Service name"
-              style={{ width: "100%", marginBottom: "10px", padding: "10px" }}
-            />
+          <div className="service-form">
+            <div className="form-field">
+              <label>Service Name</label>
+              <input
+                type="text"
+                value={serviceName}
+                onChange={(e) => setServiceName(e.target.value)}
+                placeholder="e.g. Wedding Photography"
+                readOnly={readOnly}
+              />
+            </div>
 
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Service description"
-              rows={4}
-              style={{ width: "100%", marginBottom: "10px", padding: "10px" }}
-            />
+            <div className="form-field">
+              <label>Description</label>
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Write a clear overview of this service..."
+                rows={4}
+                readOnly={readOnly}
+              />
+            </div>
 
-            <textarea
-              value={whatWeOfferText}
-              onChange={(e) => setWhatWeOfferText(e.target.value)}
-              placeholder="What We Offer (one line per point)"
-              rows={5}
-              style={{ width: "100%", marginBottom: "10px", padding: "10px" }}
-            />
+            <div className="form-field">
+              <label>What We Offer</label>
+              <textarea
+                value={whatWeOfferText}
+                onChange={(e) => setWhatWeOfferText(e.target.value)}
+                placeholder="One line per point"
+                rows={5}
+                readOnly={readOnly}
+              />
+            </div>
 
-            <textarea
-              value={howItWorksText}
-              onChange={(e) => setHowItWorksText(e.target.value)}
-              placeholder="How It Works (one line per step)"
-              rows={5}
-              style={{ width: "100%", padding: "10px" }}
-            />
+            <div className="form-field">
+              <label>How It Works</label>
+              <textarea
+                value={howItWorksText}
+                onChange={(e) => setHowItWorksText(e.target.value)}
+                placeholder="One line per step"
+                rows={5}
+                readOnly={readOnly}
+              />
+            </div>
           </div>
 
-          <div className="service1-content-left" onClick={handleClick} role="button" tabIndex={0}>
-            <img src={addImg} alt="Add Photo" className="addimage" />
-            <p>Select multiple images</p>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              multiple
-              style={{ display: "none" }}
-              onChange={handleImageChange}
-            />
-          </div>
+          {!readOnly && (
+            <>
+              <div className="service1-content-left" onClick={handleClick} role="button" tabIndex={0}>
+                <img src={addImg} alt="Add Photo" className="addimage" />
+                <p>Drop or choose multiple service images</p>
+                <span>Recommended max size: 300KB per image</span>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  style={{ display: "none" }}
+                  onChange={handleImageChange}
+                />
+              </div>
 
-          <div className="photo-add-btn">
-            <button onClick={handleClick} className="image-add-btn" type="button">
-              <FaPlus className="add-icon" /> Add Images
-            </button>
-          </div>
+              <div className="photo-add-btn">
+                <button onClick={handleClick} className="image-add-btn" type="button">
+                  <FaPlus className="add-icon" /> Add Images
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -239,15 +264,17 @@ const AddingServices = ({ title, path, serviceId, isCreate = false }) => {
         {singleData.map((photo, index) => (
           <div key={index} className="photo-item">
             <img src={photo} alt="Photo" className="photo-thumb" />
-            <div className="added-photos-btn">
-              <button
-                className="delete-btn"
-                onClick={() => setDeleteIndex(index)}
-                aria-label="Delete Photo"
-              >
-                Delete
-              </button>
-            </div>
+            {!readOnly && (
+              <div className="added-photos-btn">
+                <button
+                  className="delete-btn"
+                  onClick={() => setDeleteIndex(index)}
+                  aria-label="Delete Photo"
+                >
+                  Delete
+                </button>
+              </div>
+            )}
 
             {deleteIndex === index && (
               <div className="deleteCard">
@@ -268,15 +295,17 @@ const AddingServices = ({ title, path, serviceId, isCreate = false }) => {
         {serviceImages.map((photo, index) => (
           <div key={index} className="photo-item">
             <img src={photo.image} alt="Photo" className="photo-thumb" />
-            <div className="added-photos-btn">
-              <button
-                className="delete-btn"
-                onClick={() => handleRemovePhoto(index)}
-                aria-label="Delete Photo"
-              >
-                Delete
-              </button>
-            </div>
+            {!readOnly && (
+              <div className="added-photos-btn">
+                <button
+                  className="delete-btn"
+                  onClick={() => handleRemovePhoto(index)}
+                  aria-label="Delete Photo"
+                >
+                  Delete
+                </button>
+              </div>
+            )}
           </div>
         ))}
       </div>

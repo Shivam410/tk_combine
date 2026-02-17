@@ -47,7 +47,7 @@ const SingleReview = () => {
         </Link>
 
         <div className="singleReview-top-btns">
-          <Link to={`/review/${id}`} className="update-btn">
+          <Link to={`/update-review/${id}`} className="update-btn">
             Update
           </Link>
           <Link

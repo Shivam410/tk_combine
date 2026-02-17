@@ -117,46 +117,47 @@ const UpdateSingleTeams = () => {
       </div>
 
       <div className="updateSingleTeams-contents">
-        <div className="updateSingleTeams-contents-top">
-          <h1>Team Member</h1>
-        </div>
-
         <div className="updateSingleTeams-contents-card">
-          <img src={formData.image} alt="Selected Portfolio" />
+          <div className="team-form-grid">
+            <div className="team-upload-card" onClick={handleButtonClick}>
+              <img src={formData.image} alt="Selected Team Member" />
 
-          <div className="portfolio-btn">
-            <button onClick={handleButtonClick}>
-              <FaPlus className="change-icon" /> Change Image
-            </button>
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleFileChange}
-              style={{ display: "none" }}
-              accept="image/*"
-            />
-          </div>
-          <div className="updateSingleTeams-contents-card-desc">
-            <div className="update-content">
-              <span>Name: </span>{" "}
-              <input
-                type="text"
-                name="name"
-                placeholder="Enter name..."
-                value={formData.name}
-                onChange={handleChange}
-              />
+              <div className="portfolio-btn">
+                <button onClick={handleButtonClick} type="button">
+                  <FaPlus className="change-icon" /> Change Image
+                </button>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  style={{ display: "none" }}
+                  accept="image/*"
+                />
+              </div>
             </div>
 
-            <div className="update-content">
-              <span>Title: </span>{" "}
-              <input
-                type="text"
-                name="title"
-                placeholder="Enter title..."
-                value={formData.title}
-                onChange={handleChange}
-              />
+            <div className="updateSingleTeams-contents-card-desc">
+              <div className="update-content">
+                <label>Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Enter name..."
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="update-content">
+                <label>Title / Role</label>
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="Enter title..."
+                  value={formData.title}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -50,12 +50,15 @@ import NewMobileBanner from "./pages/NewDetails/NewMobileBanner/NewMobileBanner"
 import Review from "./pages/Review/Review";
 import SingleReview from "./pages/SingleDetail/SingleReview/SingleReview";
 import NewReview from "./pages/NewDetails/NewReview/NewReview";
+import UpdateSingleReview from "./pages/UpdateDetails/UpdateSingleReview/UpdateSingleReview";
 import Video1 from "./pages/Video/Video1";
 import NewVideo1 from "./pages/NewDetails/NewVideo/NewVideo1";
 import Video2 from "./pages/Video/Video2";
 import NewVideo2 from "./pages/NewDetails/NewVideo/NewVide2";
 import DynamicService from "./pages/Services/DynamicService/DynamicService";
 import NewService from "./pages/Services/NewService/NewService";
+import ServiceIndex from "./pages/Services/ServiceIndex/ServiceIndex";
+import ViewService from "./pages/Services/ViewService/ViewService";
 
 function App() {
   const { user } = useContext(Context);
@@ -137,6 +140,7 @@ function App() {
             />
             <Route path="/new-photo-album" element={<NewPhotoAlbum />} />
             <Route path="/new-review" element={<NewReview />} />
+            <Route path="/update-review/:id" element={<UpdateSingleReview />} />
 
             {/* Services */}
             <Route path="/wedding-photography/:id" element={<Service1 />} />
@@ -157,7 +161,9 @@ function App() {
             <Route path="/baby-shower-photography/:id" element={<Service8 />} />
 
             <Route path="/graduation-photography/:id" element={<Service9 />} />
+            <Route path="/services" element={<ServiceIndex />} />
             <Route path="/services/new" element={<NewService />} />
+            <Route path="/services/view/:id" element={<ViewService />} />
             <Route path="/services/:id" element={<DynamicService />} />
 
             <Route path="*" element={<Navigate to="/" />} />

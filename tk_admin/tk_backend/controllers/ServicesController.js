@@ -212,3 +212,35 @@ export const getAllServicesImg = catchAsyncError(async (req, res, next) => {
     services: normalizedServices,
   });
 });
+
+// DELETE SERVICE
+export const deleteService = catchAsyncError(async (req, res, next) => {
+  const { id } = req.params;
+  const service = await Service.findById(id);
+
+  if (!service) {
+    return next(new ErrorHandler("Service not found", 404));
+  }
+
+  // Best-effort cleanup of cloud images.
+  for (const imageUrl of service.images || []) {
+    try {
+      const uploadIndex = imageUrl.indexOf("/upload/");
+      if (uploadIndex === -1) continue;
+      const pathAfterUpload = imageUrl.slice(uploadIndex + "/upload/".length);
+      const publicPath = pathAfterUpload.split("/").slice(1).join("/").split(".")[0];
+      if (publicPath) {
+        await cloudinary.uploader.destroy(publicPath);
+      }
+    } catch (imageError) {
+      console.error("Cloudinary delete warning:", imageError?.message || imageError);
+    }
+  }
+
+  await service.deleteOne();
+
+  res.status(200).json({
+    success: true,
+    message: "Service deleted successfully",
+  });
+});

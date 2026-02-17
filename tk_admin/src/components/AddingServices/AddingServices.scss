@@ -3,372 +3,255 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+
     h1 {
       display: flex;
       align-items: center;
+      gap: 8px;
+      font-size: 1.35rem;
+      color: var(--admin-text);
     }
 
     .addingServices-top-btns {
-      display: flex;
-      gap: 10px;
-
       button {
-        padding: 12px 24px;
-        font-size: 16px;
-        font-weight: 600;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+        font-weight: 700;
         color: #fff;
-        background-color: #ffa500;
+        background: var(--admin-primary);
         border: none;
-        border-radius: 8px;
+        border-radius: 10px;
         cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        outline: none;
-        gap: 8px;
-
-       
+        transition: all 0.2s ease;
 
         &:hover {
-          background-color: #e69500;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+          opacity: 0.92;
+          transform: translateY(-1px);
         }
 
-        .button-icon {
-          font-size: 20px;
-          transition: transform 0.3s ease;
+        &:disabled {
+          opacity: 0.65;
+          cursor: not-allowed;
+          transform: none;
         }
-
-        &:hover .button-icon {
-          transform: scale(1.1);
-        }
-      }
-    }
-  }
-
-  .getting-photos {
-    width: 600px;
-    margin: 0 auto;
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-
-    .photo-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-
-      img {
-        width: 500px;
-        min-height: 500px;
-        object-fit: contain;
-      }
-
-      .deleteCard {
-        background: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-
-        .deleteCard-desc {
-          display: flex;
-          flex-direction: column;
-          gap: 40px;
-          align-items: center;
-
-          h2{
-            white-space: nowrap;
-          }
-
-          .deleteCard-desc-btns {
-            display: flex;
-            gap: 10px;
-            button {
-              padding: 12px 24px;
-              font-size: 16px;
-              font-weight: 600;
-              color: #fff;
-              background-color: red;
-              width: fit-content;
-              align-self: flex-end;
-
-              border: none;
-              border-radius: 8px;
-              cursor: pointer;
-              transition: all 0.3s ease;
-              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-              outline: none;
-              gap: 8px;
-
-              &:first-child {
-                background: #ffa500;
-
-                &:hover {
-                  transform: translateY(-2px);
-                  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-                  background-color: #e69500;
-                }
-              }
-
-              &:hover {
-                background: rgb(170, 28, 28);
-                transform: translateY(-2px);
-                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-              }
-
-              .button-icon {
-                font-size: 20px;
-                transition: transform 0.3s ease;
-              }
-
-              &:hover .button-icon {
-                transform: scale(1.1);
-              }
-            }
-          }
-        }
-      }
-
-      .added-photos-btn {
-        display: flex;
-        justify-content: center;
-        margin-top: 10px;
-        button {
-          padding: 12px 24px;
-          font-size: 16px;
-          font-weight: 600;
-          color: #fff;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          outline: none;
-          gap: 8px;
-
-          background-color: red;
-
-          &:hover {
-            background: rgb(170, 28, 28);
-          }
-
-          &:active {
-            background-color: rgb(224, 61, 61);
-          }
-
-          &:focus {
-            box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.76);
-          }
-
-          &:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-          }
-
-          &:active {
-            transform: translateY(0);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          }
-
-          &:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-            opacity: 0.7;
-          }
-        }
-      }
-
-      .button-icon {
-        font-size: 20px;
-        transition: transform 0.3s ease;
-      }
-
-      &:hover .button-icon {
-        transform: scale(1.1);
-      }
-
-
-      
-     
-    }
-  }
-
-  .added-photos {
-    width: 600px;
-    margin: 0 auto;
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-
-    .photo-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      img {
-        max-width: 100%;
-        max-height: 100%;
-        width: auto;
-        height: auto;
-        object-fit: contain;
-      }
-
-      .added-photos-btn {
-        display: flex;
-        justify-content: center;
-        margin-top: 10px;
-        button {
-          padding: 12px 24px;
-          font-size: 16px;
-          font-weight: 600;
-          color: #fff;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          outline: none;
-          gap: 8px;
-
-          background-color: red;
-
-          &:hover {
-            background: rgb(170, 28, 28);
-          }
-
-          &:active {
-            background-color: rgb(224, 61, 61);
-          }
-
-          &:focus {
-            box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.76);
-          }
-
-          &:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-          }
-
-          &:active {
-            transform: translateY(0);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          }
-
-          &:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-            opacity: 0.7;
-          }
-        }
-      }
-
-      .button-icon {
-        font-size: 20px;
-        transition: transform 0.3s ease;
-      }
-
-      &:hover .button-icon {
-        transform: scale(1.1);
       }
     }
   }
 
   .service1-content {
-    margin-top: 30px;
     width: 100%;
 
     .service1-content-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 30px;
-      width: 600px;
+      width: min(860px, 100%);
       margin: 0 auto;
+      display: grid;
+      gap: 16px;
+      background: #fff;
+      border: 1px solid var(--admin-border);
+      border-radius: 14px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+      padding: 18px;
+    }
+  }
 
-      .service1-content-left {
-        background: #fff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 300px;
-        width: 100%;
-        cursor: pointer;
-        overflow: hidden;
+  .service-form {
+    display: grid;
+    gap: 12px;
+  }
 
-        &.bg-none {
-          background: transparent;
-        }
+  .form-field {
+    display: grid;
+    gap: 6px;
 
-        .main-image {
-          max-width: 100%;
-          max-height: 100%;
-          width: auto;
-          height: auto;
-          object-fit: contain;
-        }
+    label {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--admin-text);
+      letter-spacing: 0.02em;
+    }
 
-        .addimage {
-          width: 100px;
-        }
+    input,
+    textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid var(--admin-border);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--admin-text-secondary);
+      font-size: 0.92rem;
+      outline: none;
+      transition: all 0.2s ease;
+
+      &:focus {
+        border-color: rgba(15, 23, 42, 0.28);
+        box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
       }
 
-      .photo-add-btn {
-        display: flex;
-        justify-content: center;
-        button {
-          padding: 12px 24px;
-          font-size: 16px;
-          font-weight: 600;
-          color: #fff;
-          background-color: green;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          outline: none;
+      &:read-only {
+        background: #f8fafc;
+        cursor: default;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 92px;
+    }
+  }
+
+  .service1-content-left {
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
+    background: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 220px;
+    cursor: pointer;
+    padding: 16px;
+    text-align: center;
+    transition: all 0.25s ease;
+
+    &:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    .addimage {
+      width: 72px;
+      opacity: 0.8;
+    }
+
+    p {
+      font-weight: 700;
+      color: var(--admin-text);
+      font-size: 0.95rem;
+    }
+
+    span {
+      color: var(--admin-text-muted);
+      font-size: 0.8rem;
+    }
+  }
+
+  .photo-add-btn {
+    display: flex;
+    justify-content: flex-start;
+
+    button {
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #fff;
+      background: #0f766e;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: #115e59;
+      }
+    }
+  }
+
+  .getting-photos,
+  .added-photos {
+    width: min(860px, 100%);
+    margin: 16px auto 0;
+    display: grid;
+    gap: 14px;
+  }
+
+  .photo-item {
+    background: #fff;
+    border: 1px solid var(--admin-border);
+    border-radius: 12px;
+    padding: 12px;
+    position: relative;
+
+    .photo-thumb {
+      width: 100%;
+      max-height: 520px;
+      object-fit: contain;
+      background: #f8fafc;
+      border-radius: 8px;
+    }
+
+    .added-photos-btn {
+      margin-top: 10px;
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        padding: 8px 12px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #fff;
+        background: #dc2626;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: #b91c1c;
+        }
+      }
+    }
+
+    .deleteCard {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+
+      .deleteCard-desc {
+        background: #fff;
+        border-radius: 10px;
+        padding: 16px;
+        width: min(360px, calc(100% - 20px));
+        display: grid;
+        gap: 14px;
+        text-align: center;
+
+        h2 {
+          font-size: 1rem;
+          color: var(--admin-text);
+        }
+
+        .deleteCard-desc-btns {
           display: flex;
-          align-items: center;
-          gap: 5px;
+          justify-content: center;
+          gap: 8px;
 
-          .add-icon {
-            font-size: 20px;
-          }
+          button {
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
 
-          &:hover {
-            background-color: rgb(21, 180, 21);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-          }
+            &:first-child {
+              background: #0f766e;
+              color: #fff;
+            }
 
-          &:active {
-            background-color: #cc8400;
-            transform: translateY(0);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          }
-
-          &:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-            opacity: 0.7;
-          }
-
-          .button-icon {
-            font-size: 20px;
-            transition: transform 0.3s ease;
-          }
-
-          &:hover .button-icon {
-            transform: scale(1.1);
+            &:last-child {
+              background: #ef4444;
+              color: #fff;
+            }
           }
         }
       }

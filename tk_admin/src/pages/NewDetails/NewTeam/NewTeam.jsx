@@ -91,53 +91,53 @@ const NewTeam = () => {
         </div>
       </div>
 
-      <div className="newTeam-contents">
-        <div className="newTeam-contents-top">
-          <h1>Team Member Image</h1>
-        </div>
+      <div className="newTeam-contents-card">
+        <div className="team-form-grid">
+          <div className="team-upload-card" onClick={handleButtonClick}>
+            {selectedImage ? (
+              <img
+                src={selectedImage}
+                alt="Selected Team Member"
+                className="portfolio-img"
+              />
+            ) : (
+              <div className="add-img-portfolio">
+                <img src={AddImg} alt="" className="add-portfolio-img" />
+                <p>Add Team Member Image</p>
+                <span>Max 500KB</span>
+              </div>
+            )}
 
-        <div className="newTeam-contents-card">
-          {selectedImage ? (
-            <img
-              src={selectedImage}
-              alt="Selected Portfolio"
-              className="portfolio-img"
-            />
-          ) : (
-            <div className="add-img-portfolio">
-              <img src={AddImg} alt="" className="add-portfolio-img" />
-              <p>Add Team Member Image</p>
+            <div className="portfolio-btn">
+              <button onClick={handleButtonClick} type="button">
+                <FaPlus className="change-icon" /> Add Image
+              </button>
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                style={{ display: "none" }}
+                accept="image/*"
+              />
             </div>
-          )}
-
-          <div className="portfolio-btn">
-            <button onClick={handleButtonClick}>
-              <FaPlus className="change-icon" /> Add Image
-            </button>
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleFileChange}
-              style={{ display: "none" }}
-              accept="image/*"
-            />
           </div>
+
           <div className="newTeam-contents-card-desc">
             <div className="update-content">
-              <span>Name: </span>{" "}
+              <label>Name</label>
               <input
                 type="text"
-                placeholder="Enter name..."
+                placeholder="Enter member name..."
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
 
             <div className="update-content">
-              <span>Title: </span>
+              <label>Title / Role</label>
               <input
                 type="text"
-                placeholder="Enter title..."
+                placeholder="Enter designation..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
