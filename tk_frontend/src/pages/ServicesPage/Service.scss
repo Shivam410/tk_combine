@@ -453,3 +453,145 @@
     line-height: 1;
   }
 }
+
+
+/* --- E-commerce Style Promo Banner --- */
+.promo-banner-wrapper {
+  margin: 40px 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+
+  .promo-banner-title {
+    font-size: 1.8rem;
+    color: #e63946;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+}
+
+.promo-offer-slide {
+  background: linear-gradient(90deg, #1d3557 0%, #457b9d 100%);
+  color: white;
+  border-radius: 12px;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 220px;
+  position: relative;
+  overflow: hidden;
+
+  .promo-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #e63946;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  h3 {
+    font-size: 2.2rem;
+    margin: 0 0 10px;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-bottom: 15px;
+    opacity: 0.9;
+  }
+
+  .promo-price {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+
+    span {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #ffd166; /* Gold emphasis color */
+    }
+  }
+
+  .promo-btn {
+    background: #ffd166;
+    color: #1d3557;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    width: max-content;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #ffc300;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+/* Ensure pagination dots sit nicely at the bottom */
+.promo-banner-slider {
+  padding-bottom: 40px !important;
+}
+
+
+/* --- Swiper Layout Fixes (Prevents Auto-Zooming & Jumping) --- */
+
+.service-container-content,
+.service-content-wrap,
+.service-content-switch {
+  /* Crucial fix to prevent Swiper from expanding parent containers infinitely */
+  min-width: 0; 
+  width: 100%;
+}
+
+.service-gallery-slider {
+  padding-bottom: 40px !important; /* Space for pagination dots */
+  width: 100%;
+  
+  .service-gallery-slide {
+    height: auto; 
+  }
+
+  .service-image-card {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 8px;
+    
+    img {
+      width: 100%;
+      height: 250px; /* Force all images to be exactly the same height */
+      object-fit: cover; /* Crops the image cleanly to fit the 250px height without stretching */
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.05); 
+    }
+  }
+}
+
+/* Ensure the wrapper respects constraints */
+.promo-banner-wrapper {
+  margin: 40px 0;
+  width: 100%;
+  min-width: 0; 
+}

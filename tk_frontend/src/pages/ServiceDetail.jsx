@@ -6,7 +6,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Keyboard } from "swiper/modules";
+import { Navigation, Pagination, Keyboard, Autoplay } from "swiper/modules"; 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -148,8 +148,6 @@ const ServiceDetail = () => {
 
   const title = serviceData?.serviceName || "Service";
   const images = serviceData?.images || [];
-  const heroImage = images[0];
-  const galleryImages = images.slice(1);
   const description = serviceData?.description || "";
   const whatWeOffer = serviceData?.whatWeOffer || [];
   const howItWorks = serviceData?.howItWorks || [];
@@ -190,14 +188,6 @@ const ServiceDetail = () => {
         keywords={`${title}, TK Production Film, photography service`}
         url={fullUrl}
       />
-
-      <div className="service-top-banner">
-        <div className="service-banner">
-          <div className="service-banner-desc">
-            <h1>{title}</h1>
-          </div>
-        </div>
-      </div>
 
       <div className="service-container">
         <div className="service-layout">
@@ -253,25 +243,17 @@ const ServiceDetail = () => {
                     </div>
                   )}
 
-                  {heroImage ? (
-                    <div className="service-hero-image">
-                      <img
-                        src={optimizeImageUrl(heroImage, { width: 1800 })}
-                        srcSet={getResponsiveImageSet(heroImage, [640, 960, 1366, 1800])}
-                        sizes="(max-width: 1200px) 100vw, 72vw"
-                        loading="eager"
-                        fetchPriority="high"
-                        decoding="sync"
-                        alt={title}
-                        onClick={() => setSelectedImg(heroImage)}
-                      />
-                    </div>
-                  ) : (
-                    !isServiceLoading && <p>No images available</p>
-                  )}
+                  <h1 style={{ marginTop: '20px' }}>{title} by TK Production Film</h1>
+                  <p>{description || (
+                    <>
+                    We capture your most valuable moments with creativity and care, delivering
+                    high-quality visuals tailored to your event.
+                    </>
+                  )}</p>
 
-                  {galleryImages.length > 0 && (
-                    <div className="service-images">
+                  {/* CRITICAL FIX: Added inline styles for minWidth and overflow */}
+                  {images.length > 0 && (
+                    <div className="service-images" style={{ minWidth: 0, overflow: 'hidden', width: '100%' }}>
                       <h2>{title} Gallery</h2>
                       <hr />
 
@@ -288,7 +270,7 @@ const ServiceDetail = () => {
                         }}
                         className="service-gallery-slider"
                       >
-                        {galleryImages.map((item, index) => (
+                        {images.map((item, index) => (
                           <SwiperSlide key={`${item}-${index}`} className="service-gallery-slide">
                             <button
                               type="button"
@@ -311,13 +293,6 @@ const ServiceDetail = () => {
                     </div>
                   )}
 
-                  <h1>{title} by TK Production Film</h1>
-                  <p>{description || (
-                    <>
-                    We capture your most valuable moments with creativity and care, delivering
-                    high-quality visuals tailored to your event.
-                    </>
-                  )}</p>
                 </div>
                 <div className="service-steps-container">
                   {whatWeOffer.length > 0 && (
@@ -353,20 +328,36 @@ const ServiceDetail = () => {
                   )}
                 </div>
 
+                {/* CRITICAL FIX: Added inline styles for minWidth and overflow */}
                 {serviceOffers.length > 0 && (
-                  <div className="service-special-offers">
-                    <h1>Special Offers</h1>
-                    <div className="service-special-offers-grid">
+                  <div className="promo-banner-wrapper" style={{ minWidth: 0, overflow: 'hidden', width: '100%' }}>
+                    <h2 className="promo-banner-title">🔥 Exclusive Offers</h2>
+                    <Swiper
+                      modules={[Navigation, Pagination, Autoplay]}
+                      spaceBetween={20}
+                      slidesPerView={1}
+                      autoplay={{ delay: 3500, disableOnInteraction: false }}
+                      pagination={{ clickable: true, dynamicBullets: true }}
+                      className="promo-banner-slider"
+                    >
                       {serviceOffers.map((offer) => (
-                        <article key={offer.id} className="service-special-offer-card">
-                          <h2>{offer.title}</h2>
-                          {offer.description && <p>{offer.description}</p>}
-                          {offer.price !== null && offer.price !== "" && (
-                            <p className="service-special-offer-price">Starting at Rs. {offer.price}</p>
-                          )}
-                        </article>
+                        <SwiperSlide key={offer.id}>
+                          <div className="promo-offer-slide">
+                            <div className="promo-content">
+                              <span className="promo-badge">Limited Time Deal</span>
+                              <h3>{offer.title}</h3>
+                              {offer.description && <p>{offer.description}</p>}
+                              {offer.price !== null && offer.price !== "" && (
+                                <div className="promo-price">
+                                  Starting at <span>Rs. {offer.price}</span>
+                                </div>
+                              )}
+                              <button className="promo-btn" onClick={() => window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})}>Grab This Offer</button>
+                            </div>
+                          </div>
+                        </SwiperSlide>
                       ))}
-                    </div>
+                    </Swiper>
                   </div>
                 )}
 
