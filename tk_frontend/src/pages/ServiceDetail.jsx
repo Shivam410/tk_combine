@@ -5,6 +5,11 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Keyboard } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 import { FaCheck } from "react-icons/fa";
 import { MdKeyboardArrowRight } from "react-icons/md";
@@ -32,6 +37,55 @@ const fetchAllServices = async () => {
   const { data } = await axios.get(`${baseUrl}/services`);
   return data?.services || [];
 };
+
+const normalizeOffer = (offer = {}) => ({
+  id: offer?._id || offer?.id || `${offer?.title || offer?.offerTitle}-${offer?.price || offer?.offerPrice}`,
+  title: offer?.offerTitle || offer?.title || offer?.name || "",
+  description: offer?.offerDescription || offer?.description || offer?.details || "",
+  price: offer?.offerPrice ?? offer?.price ?? offer?.finalPrice ?? offer?.discountedPrice ?? null,
+  serviceSlug: offer?.serviceSlug || offer?.service?.slug || "",
+  serviceName: offer?.serviceName || offer?.service?.serviceName || "",
+  serviceId:
+    offer?.serviceId ||
+    offer?.service?._id ||
+    (typeof offer?.service === "string" ? offer.service : ""),
+  isActive: offer?.isActive ?? offer?.active ?? true,
+});
+
+const fetchServiceOffers = async (serviceSlug) => {
+  if (!serviceSlug) return [];
+
+  const endpoints = [
+    `${baseUrl}/offers?serviceSlug=${encodeURIComponent(serviceSlug)}`,
+    `${baseUrl}/offers/service/${encodeURIComponent(serviceSlug)}`,
+    `${baseUrl}/special-offers?serviceSlug=${encodeURIComponent(serviceSlug)}`,
+  ];
+
+  for (const endpoint of endpoints) {
+    try {
+      const { data } = await axios.get(endpoint);
+      const rawOffers =
+        data?.offers ||
+        data?.specialOffers ||
+        data?.data ||
+        data?.results ||
+        [];
+
+      if (Array.isArray(rawOffers)) {
+        return rawOffers.map(normalizeOffer);
+      }
+    } catch (error) {
+      if (error?.response?.status === 404) {
+        continue;
+      }
+    }
+  }
+
+  return [];
+};
+
+const includesText = (source, target) =>
+  String(source || "").trim().toLowerCase() === String(target || "").trim().toLowerCase();
 
 const ServiceDetail = () => {
   const [selectedImg, setSelectedImg] = useState(null);
@@ -65,6 +119,14 @@ const ServiceDetail = () => {
     retry: false,
   });
 
+  const { data: fetchedOffers = [] } = useQuery({
+    queryKey: ["service-offers", serviceSlug],
+    queryFn: () => fetchServiceOffers(serviceSlug),
+    staleTime: 1000 * 60 * 5,
+    retry: false,
+    enabled: !!serviceSlug,
+  });
+
   useEffect(() => {
     if (!isServiceError || serviceError?.name !== "AxiosError") {
       return;
@@ -92,6 +154,24 @@ const ServiceDetail = () => {
   const whatWeOffer = serviceData?.whatWeOffer || [];
   const howItWorks = serviceData?.howItWorks || [];
   const showInitialLoader = isServiceLoading && !serviceData;
+
+  const inlineOffers = (serviceData?.offers || serviceData?.specialOffers || []).map(
+    normalizeOffer
+  );
+
+  const serviceOffers = [...inlineOffers, ...fetchedOffers].filter((offer, index, list) => {
+    if (!offer?.title || offer?.isActive === false) return false;
+
+    const belongsToService =
+      includesText(offer.serviceSlug, serviceSlug) ||
+      includesText(offer.serviceName, title) ||
+      includesText(offer.serviceId, serviceData?._id) ||
+      (!offer.serviceSlug && !offer.serviceName && !offer.serviceId);
+
+    if (!belongsToService) return false;
+
+    return list.findIndex((item) => item.id === offer.id) === index;
+  });
 
   const prefetchService = (slug) => {
     if (!slug) return;
@@ -195,21 +275,39 @@ const ServiceDetail = () => {
                       <h2>{title} Gallery</h2>
                       <hr />
 
-                      <div className="service-image-cards">
+                      <Swiper
+                        modules={[Navigation, Pagination, Keyboard]}
+                        navigation
+                        pagination={{ clickable: true }}
+                        keyboard={{ enabled: true }}
+                        spaceBetween={16}
+                        slidesPerView={1}
+                        breakpoints={{
+                          640: { slidesPerView: 2 },
+                          1024: { slidesPerView: 3 },
+                        }}
+                        className="service-gallery-slider"
+                      >
                         {galleryImages.map((item, index) => (
-                          <div className="service-image-card" key={index}>
-                            <img
-                              src={optimizeImageUrl(item, { width: 1200 })}
-                              srcSet={getResponsiveImageSet(item, [420, 640, 900, 1200])}
-                              sizes="(max-width: 768px) 50vw, 25vw"
-                              alt={`${title} gallery`}
-                              loading="lazy"
-                              decoding="async"
+                          <SwiperSlide key={`${item}-${index}`} className="service-gallery-slide">
+                            <button
+                              type="button"
+                              className="service-image-card"
                               onClick={() => setSelectedImg(item)}
-                            />
-                          </div>
+                              aria-label={`Open ${title} gallery image ${index + 1}`}
+                            >
+                              <img
+                                src={optimizeImageUrl(item, { width: 1200 })}
+                                srcSet={getResponsiveImageSet(item, [420, 640, 900, 1200])}
+                                sizes="(max-width: 768px) 80vw, (max-width: 1200px) 40vw, 30vw"
+                                alt={`${title} gallery ${index + 1}`}
+                                loading="lazy"
+                                decoding="async"
+                              />
+                            </button>
+                          </SwiperSlide>
                         ))}
-                      </div>
+                      </Swiper>
                     </div>
                   )}
 
@@ -254,6 +352,23 @@ const ServiceDetail = () => {
                     </div>
                   )}
                 </div>
+
+                {serviceOffers.length > 0 && (
+                  <div className="service-special-offers">
+                    <h1>Special Offers</h1>
+                    <div className="service-special-offers-grid">
+                      {serviceOffers.map((offer) => (
+                        <article key={offer.id} className="service-special-offer-card">
+                          <h2>{offer.title}</h2>
+                          {offer.description && <p>{offer.description}</p>}
+                          {offer.price !== null && offer.price !== "" && (
+                            <p className="service-special-offer-price">Starting at Rs. {offer.price}</p>
+                          )}
+                        </article>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 <p className="bottom-desc">Contact us to book this service.</p>
                 <hr />

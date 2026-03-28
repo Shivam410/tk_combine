@@ -200,6 +200,29 @@
           background: var(--lux-gold);
         }
 
+        .service-gallery-slider {
+          margin-top: 30px;
+          padding: 0 8px 36px;
+
+          .swiper-button-prev,
+          .swiper-button-next {
+            color: var(--lux-gold-deep);
+          }
+
+          .swiper-pagination-bullet {
+            background: var(--lux-gold);
+            opacity: 0.5;
+          }
+
+          .swiper-pagination-bullet-active {
+            opacity: 1;
+          }
+        }
+
+        .service-gallery-slide {
+          height: auto;
+        }
+
         .service-image-cards {
           margin-top: 34px;
           column-count: 3;
@@ -215,19 +238,27 @@
 
           .service-image-card {
             margin-bottom: 12px;
-            overflow: hidden;
-            border: 1px solid var(--lux-border);
+          }
+        }
 
-            img {
-              width: 100%;
-              display: block;
-              cursor: zoom-in;
-              transition: transform 0.45s ease;
-            }
+        .service-image-card {
+          width: 100%;
+          overflow: hidden;
+          border: 1px solid var(--lux-border);
+          background: #fff;
+          padding: 0;
+          cursor: pointer;
 
-            &:hover img {
-              transform: scale(1.05);
-            }
+          img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+          }
+
+          &:hover img {
+            transform: scale(1.04);
           }
         }
       }
@@ -302,6 +333,65 @@
                 }
               }
             }
+          }
+        }
+      }
+
+      .service-special-offers {
+        margin-top: 20px;
+        border: 1px solid var(--lux-border);
+        background: #fff;
+        padding: 22px;
+
+        h1 {
+          font-family: "Cormorant Garamond", serif;
+          font-size: 2rem;
+          margin-bottom: 12px;
+
+          &::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 1px;
+            margin-top: 8px;
+            background: var(--lux-gold);
+          }
+        }
+
+        .service-special-offers-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+
+          @include md {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .service-special-offer-card {
+          border: 1px solid var(--lux-border);
+          padding: 14px;
+          background: #fcfbf8;
+          display: grid;
+          gap: 8px;
+
+          h2 {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 1.45rem;
+            color: var(--lux-text);
+            line-height: 1.1;
+          }
+
+          p {
+            font-family: "Manrope", sans-serif;
+            color: var(--lux-muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+          }
+
+          .service-special-offer-price {
+            color: var(--lux-gold-deep);
+            font-weight: 700;
           }
         }
       }

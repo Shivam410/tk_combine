@@ -22,6 +22,7 @@ router.put("/:id", upload.array("images"), updateServicesImg);
 router.delete("/:id", deleteService);
 router.get("/:slug", getServiceBySlug);
 
+
 // Legacy endpoints (kept for backward compatibility)
 router.post("/new/wedding-photography", upload.array("images"), newServicesImg);
 router.get("/wedding-photography/:id", getServicesImg);

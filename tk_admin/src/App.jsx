@@ -59,6 +59,7 @@ import DynamicService from "./pages/Services/DynamicService/DynamicService";
 import NewService from "./pages/Services/NewService/NewService";
 import ServiceIndex from "./pages/Services/ServiceIndex/ServiceIndex";
 import ViewService from "./pages/Services/ViewService/ViewService";
+import Offers from "./pages/Offers/Offers";
 
 function App() {
   const { user } = useContext(Context);
@@ -165,6 +166,7 @@ function App() {
             <Route path="/services/new" element={<NewService />} />
             <Route path="/services/view/:id" element={<ViewService />} />
             <Route path="/services/:id" element={<DynamicService />} />
+            <Route path="/offers" element={<Offers />} />
 
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
