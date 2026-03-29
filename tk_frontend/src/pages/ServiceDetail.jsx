@@ -329,37 +329,52 @@ const ServiceDetail = () => {
                 </div>
 
                 {/* CRITICAL FIX: Added inline styles for minWidth and overflow */}
-                {serviceOffers.length > 0 && (
-                  <div className="promo-banner-wrapper" style={{ minWidth: 0, overflow: 'hidden', width: '100%' }}>
-                    <h2 className="promo-banner-title">🔥 Exclusive Offers</h2>
-                    <Swiper
-                      modules={[Navigation, Pagination, Autoplay]}
-                      spaceBetween={20}
-                      slidesPerView={1}
-                      autoplay={{ delay: 3500, disableOnInteraction: false }}
-                      pagination={{ clickable: true, dynamicBullets: true }}
-                      className="promo-banner-slider"
-                    >
-                      {serviceOffers.map((offer) => (
-                        <SwiperSlide key={offer.id}>
-                          <div className="promo-offer-slide">
-                            <div className="promo-content">
-                              <span className="promo-badge">Limited Time Deal</span>
-                              <h3>{offer.title}</h3>
-                              {offer.description && <p>{offer.description}</p>}
-                              {offer.price !== null && offer.price !== "" && (
-                                <div className="promo-price">
-                                  Starting at <span>Rs. {offer.price}</span>
-                                </div>
-                              )}
-                              <button className="promo-btn" onClick={() => window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})}>Grab This Offer</button>
-                            </div>
-                          </div>
-                        </SwiperSlide>
-                      ))}
-                    </Swiper>
+                {/* Sleek Rectangular Promo Banner */}
+{serviceOffers.length > 0 && (
+  <div className="promo-banner-wrapper" style={{ minWidth: 0, overflow: 'hidden', width: '100%' }}>
+    <h2 className="promo-banner-title">🔥 Exclusive Offers</h2>
+    <Swiper
+      modules={[Navigation, Pagination, Autoplay]}
+      spaceBetween={20}
+      slidesPerView={1}
+      autoplay={{ delay: 4000, disableOnInteraction: false }}
+      pagination={{ clickable: true, dynamicBullets: true }}
+      className="promo-banner-slider"
+    >
+      {serviceOffers.map((offer) => (
+        <SwiperSlide key={offer.id}>
+          <div className="promo-offer-slide">
+            <div className="promo-content">
+              
+              {/* Left Side: Text Content */}
+              <div className="promo-text-wrap">
+                <span className="promo-badge">Limited Deal</span>
+                <h3>{offer.title}</h3>
+                {offer.description && <p>{offer.description}</p>}
+              </div>
+
+              {/* Right Side: Price & Action */}
+              <div className="promo-action-wrap">
+                {offer.price !== null && offer.price !== "" && (
+                  <div className="promo-price">
+                    Starting at <br/><span>Rs. {offer.price}</span>
                   </div>
                 )}
+                <button 
+                  className="promo-btn" 
+                  onClick={() => window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})}
+                >
+                  Book Now
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  </div>
+)}
 
                 <p className="bottom-desc">Contact us to book this service.</p>
                 <hr />
