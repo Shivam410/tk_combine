@@ -8,6 +8,7 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import toast from "react-hot-toast";
 import { baseUrl } from "../../main";
 import Loader from "../../components/Loader/Loader";
 

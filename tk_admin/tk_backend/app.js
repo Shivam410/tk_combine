@@ -2,6 +2,7 @@ import express from "express";
 import { config } from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import ErrorHandler from "./utils/errorHandler.js";
 
 import { errorMiddleware } from "./middlewares/error.js";
 import authRouter from "./routes/authRoute.js";
@@ -37,10 +38,12 @@ config({
 // Configure CORS settings
 const allowedOrigins = [
   "http://localhost:5173",
+  "http://localhost:5174",
   "http://localhost:5000",
+  "https://tk-combine.vercel.app",
   process.env.FRONTEND_URL,
   process.env.ADMIN_URL,
-];
+].filter(Boolean);
 
 // Configure CORS
 app.use(

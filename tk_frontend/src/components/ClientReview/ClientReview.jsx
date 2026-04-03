@@ -15,6 +15,7 @@ import "swiper/css/navigation";
 import reviewBgImg from "../../assets/images/reviewbgimg.jpeg";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import toast from "react-hot-toast";
 import { baseUrl } from "../../main";
 import Loader from "../../components/Loader/Loader";
 
