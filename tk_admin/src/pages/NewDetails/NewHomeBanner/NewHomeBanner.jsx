@@ -19,13 +19,6 @@ const NewHomeBanner = () => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      const maxSize = 500 * 1024;
-  
-      if (file.size > maxSize) {
-        toast.error("Image size should be less than 500 KB");
-        return;
-      }
-  
       const imageUrl = URL.createObjectURL(file);
       setSelectedImage(imageUrl);
       setFile(file);

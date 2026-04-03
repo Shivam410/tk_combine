@@ -68,15 +68,9 @@ const AddingServices = ({
     const files = Array.from(event.target.files || []);
     if (!files.length) return;
 
-    const maxSize = 300 * 1024;
     const validFiles = [];
 
     files.forEach((selectedFile) => {
-      if (selectedFile.size > maxSize) {
-        toast.error(`${selectedFile.name}: image size should be less than 300 KB`);
-        return;
-      }
-
       validFiles.push({
         image: URL.createObjectURL(selectedFile),
         file: selectedFile,
@@ -239,7 +233,6 @@ const AddingServices = ({
               <div className="service1-content-left" onClick={handleClick} role="button" tabIndex={0}>
                 <img src={addImg} alt="Add Photo" className="addimage" />
                 <p>Drop or choose multiple service images</p>
-                <span>Recommended max size: 300KB per image</span>
                 <input
                   ref={fileInputRef}
                   type="file"

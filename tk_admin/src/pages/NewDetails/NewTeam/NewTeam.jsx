@@ -23,13 +23,6 @@ const NewTeam = () => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      const maxSize = 500 * 1024;
-
-      if (file.size > maxSize) {
-        toast.error("Image size should be less than 500 KB");
-        return;
-      }
-
       const imageUrl = URL.createObjectURL(file);
       setSelectedImage(imageUrl);
       setFile(file);
@@ -101,12 +94,11 @@ const NewTeam = () => {
                 className="portfolio-img"
               />
             ) : (
-              <div className="add-img-portfolio">
-                <img src={AddImg} alt="" className="add-portfolio-img" />
-                <p>Add Team Member Image</p>
-                <span>Max 500KB</span>
-              </div>
-            )}
+                <div className="add-img-portfolio">
+                  <img src={AddImg} alt="" className="add-portfolio-img" />
+                  <p>Add Team Member Image</p>
+                </div>
+              )}
 
             <div className="portfolio-btn">
               <button onClick={handleButtonClick} type="button">

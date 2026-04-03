@@ -45,12 +45,6 @@ const UpdateSingleReview = () => {
     const file = event.target.files[0];
     if (!file) return;
 
-    const maxSize = 200 * 1024;
-    if (file.size > maxSize) {
-      toast.error("Image size should be less than 200 KB");
-      return;
-    }
-
     setFormData((prev) => ({
       ...prev,
       image: URL.createObjectURL(file),

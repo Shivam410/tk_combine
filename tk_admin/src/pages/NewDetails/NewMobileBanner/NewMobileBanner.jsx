@@ -17,20 +17,13 @@ const NewMobileBanner = () => {
   const [loading, setLoading] = useState(false);
 
   const handleFileChange = (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    const maxSize = 500 * 1024; // 500 KB
-
-    if (file.size > maxSize) {
-      toast.error("Image size should be less than 500 KB");
-      return;
+    const file = event.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setSelectedImage(imageUrl);
+      setFile(file);
     }
-
-    const imageUrl = URL.createObjectURL(file);
-    setSelectedImage(imageUrl);
-    setFile(file);
-  }
-};
+  };
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
