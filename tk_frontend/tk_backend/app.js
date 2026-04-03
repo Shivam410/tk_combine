@@ -2,7 +2,6 @@ import express from "express";
 import { config } from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import ErrorHandler from "./utils/errorHandler.js";
 
 import { errorMiddleware } from "./middlewares/error.js";
 import authRouter from "./routes/authRoute.js";
@@ -35,28 +34,19 @@ config({
   path: "./data/config.env",
 });
 
-// Configure CORS settings
 const allowedOrigins = [
+  "https://tk-combine.vercel.app",
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:5000",
-  "https://tk-combine.vercel.app",
   process.env.FRONTEND_URL,
   process.env.ADMIN_URL,
 ].filter(Boolean);
 
-// Configure CORS
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        console.error(`Blocked by CORS: ${origin}`);
-        callback(new ErrorHandler("Not allowed by CORS", 403));
-      }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
