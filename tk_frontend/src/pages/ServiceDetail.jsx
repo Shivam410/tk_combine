@@ -11,6 +11,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+import bgImage from '../assets/images/service-details-banner.png';
+
 import { FaCheck } from "react-icons/fa";
 import { MdKeyboardArrowRight } from "react-icons/md";
 
@@ -24,9 +26,20 @@ import {
   optimizeImageUrl,
 } from "../utils/imageOptimization";
 
-const fetchServiceBySlug = async (slug) => {
+const fetchServiceByIdAndSlug = async (slug, serviceId) => {
   if (!navigator.onLine) {
     throw new Error("NETWORK_ERROR");
+  }
+
+  if (serviceId) {
+    try {
+      const { data } = await axios.get(`${baseUrl}/services/${slug}/${serviceId}`);
+      return data?.serviceImages;
+    } catch (error) {
+      if (error?.response?.status !== 404) {
+        throw error;
+      }
+    }
   }
 
   const { data } = await axios.get(`${baseUrl}/services/${slug}`);
@@ -87,9 +100,17 @@ const fetchServiceOffers = async (serviceSlug) => {
 const includesText = (source, target) =>
   String(source || "").trim().toLowerCase() === String(target || "").trim().toLowerCase();
 
+const toServiceLink = (service) => {
+  const slug = service?.slug || "";
+  if (service?._id) {
+    return `/service/${service._id}/${slug}`;
+  }
+  return `/${slug}`;
+};
+
 const ServiceDetail = () => {
   const [selectedImg, setSelectedImg] = useState(null);
-  const { serviceSlug } = useParams();
+  const { serviceId, serviceSlug } = useParams();
   const { setSkipScroll } = useScrollContext();
   const queryClient = useQueryClient();
 
@@ -101,8 +122,8 @@ const ServiceDetail = () => {
     error: serviceError,
     refetch: refetchService,
   } = useQuery({
-    queryKey: ["dynamic-service", serviceSlug],
-    queryFn: () => fetchServiceBySlug(serviceSlug),
+    queryKey: ["dynamic-service", serviceId, serviceSlug],
+    queryFn: () => fetchServiceByIdAndSlug(serviceSlug, serviceId),
     staleTime: 1000 * 60 * 5,
     placeholderData: (previousData) => previousData,
     retry: false,
@@ -163,6 +184,7 @@ const ServiceDetail = () => {
     const belongsToService =
       includesText(offer.serviceSlug, serviceSlug) ||
       includesText(offer.serviceName, title) ||
+      includesText(offer.serviceId, serviceId) ||
       includesText(offer.serviceId, serviceData?._id) ||
       (!offer.serviceSlug && !offer.serviceName && !offer.serviceId);
 
@@ -171,11 +193,11 @@ const ServiceDetail = () => {
     return list.findIndex((item) => item.id === offer.id) === index;
   });
 
-  const prefetchService = (slug) => {
-    if (!slug) return;
+  const prefetchService = (service) => {
+    if (!service?.slug) return;
     queryClient.prefetchQuery({
-      queryKey: ["dynamic-service", slug],
-      queryFn: () => fetchServiceBySlug(slug),
+      queryKey: ["dynamic-service", service?._id, service.slug],
+      queryFn: () => fetchServiceByIdAndSlug(service.slug, service?._id),
       staleTime: 1000 * 60 * 5,
     });
   };
@@ -188,6 +210,29 @@ const ServiceDetail = () => {
         keywords={`${title}, TK Production Film, photography service`}
         url={fullUrl}
       />
+
+      {/* --- NEW HERO SECTION --- */}
+    {/* --- NEW HERO SECTION --- */}
+      <div 
+        className="service-hero"
+        style={{
+          backgroundImage: `
+            linear-gradient(to bottom, #fafafa 0%, rgba(255,255,255,0) 40%),
+            linear-gradient(to top, #fafafa 0%, rgba(255,255,255,0) 30%),
+            url(${bgImage})
+          `,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div className="service-hero-content">
+          <span className="hero-subtitle">SERVICE EXCELLENCE</span>
+          {/* You can replace the text below with {title} if you want it to be dynamic */}
+          <h1 className="hero-title">The Art of <br/> Beginning.</h1>
+          <hr className="hero-divider" />
+        </div>
+      </div>
 
       <div className="service-container">
         <div className="service-layout">
@@ -204,12 +249,12 @@ const ServiceDetail = () => {
                 allServices.map((service) => (
                   <Link
                     key={service._id}
-                    to={`/${service.slug}`}
+                    to={toServiceLink(service)}
                     className={`service-sidebar-link ${
-                      service.slug === serviceSlug ? "active" : ""
+                      service._id === serviceId || service.slug === serviceSlug ? "active" : ""
                     }`}
                     onClick={() => setSkipScroll(true)}
-                    onMouseEnter={() => prefetchService(service.slug)}
+                    onMouseEnter={() => prefetchService(service)}
                   >
                     <span>{service.serviceName}</span>
                     <MdKeyboardArrowRight />
@@ -243,15 +288,15 @@ const ServiceDetail = () => {
                     </div>
                   )}
 
-                  <h1 style={{ marginTop: '20px' }}>{title} by TK Production Film</h1>
-                  <p>{description || (
+                  <p className="service-intro-desc" style={{ marginTop: '20px' }}>
+                    {description || (
                     <>
                     We capture your most valuable moments with creativity and care, delivering
                     high-quality visuals tailored to your event.
                     </>
-                  )}</p>
+                  )}
+                  </p>
 
-                  {/* CRITICAL FIX: Added inline styles for minWidth and overflow */}
                   {images.length > 0 && (
                     <div className="service-images" style={{ minWidth: 0, overflow: 'hidden', width: '100%' }}>
                       <h2>{title} Gallery</h2>
@@ -328,53 +373,49 @@ const ServiceDetail = () => {
                   )}
                 </div>
 
-                {/* CRITICAL FIX: Added inline styles for minWidth and overflow */}
-                {/* Sleek Rectangular Promo Banner */}
-{serviceOffers.length > 0 && (
-  <div className="promo-banner-wrapper" style={{ minWidth: 0, overflow: 'hidden', width: '100%' }}>
-    <h2 className="promo-banner-title">🔥 Exclusive Offers</h2>
-    <Swiper
-      modules={[Navigation, Pagination, Autoplay]}
-      spaceBetween={20}
-      slidesPerView={1}
-      autoplay={{ delay: 4000, disableOnInteraction: false }}
-      pagination={{ clickable: true, dynamicBullets: true }}
-      className="promo-banner-slider"
-    >
-      {serviceOffers.map((offer) => (
-        <SwiperSlide key={offer.id}>
-          <div className="promo-offer-slide">
-            <div className="promo-content">
-              
-              {/* Left Side: Text Content */}
-              <div className="promo-text-wrap">
-                <span className="promo-badge">Limited Deal</span>
-                <h3>{offer.title}</h3>
-                {offer.description && <p>{offer.description}</p>}
-              </div>
+                {serviceOffers.length > 0 && (
+                  <div className="promo-banner-wrapper" style={{ minWidth: 0, overflow: 'hidden', width: '100%' }}>
+                    <h2 className="promo-banner-title">🔥 Exclusive Offers</h2>
+                    <Swiper
+                      modules={[Navigation, Pagination, Autoplay]}
+                      spaceBetween={20}
+                      slidesPerView={1}
+                      autoplay={{ delay: 4000, disableOnInteraction: false }}
+                      pagination={{ clickable: true, dynamicBullets: true }}
+                      className="promo-banner-slider"
+                    >
+                      {serviceOffers.map((offer) => (
+                        <SwiperSlide key={offer.id}>
+                          <div className="promo-offer-slide">
+                            <div className="promo-content">
+                              
+                              <div className="promo-text-wrap">
+                                <span className="promo-badge">Limited Deal</span>
+                                <h3>{offer.title}</h3>
+                                {offer.description && <p>{offer.description}</p>}
+                              </div>
 
-              {/* Right Side: Price & Action */}
-              <div className="promo-action-wrap">
-                {offer.price !== null && offer.price !== "" && (
-                  <div className="promo-price">
-                    Starting at <br/><span>Rs. {offer.price}</span>
+                              <div className="promo-action-wrap">
+                                {offer.price !== null && offer.price !== "" && (
+                                  <div className="promo-price">
+                                    Starting at <br/><span>£. {offer.price}</span>
+                                  </div>
+                                )}
+                                <button 
+                                  className="promo-btn" 
+                                  onClick={() => window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})}
+                                >
+                                  Book Now
+                                </button>
+                              </div>
+
+                            </div>
+                          </div>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
                   </div>
                 )}
-                <button 
-                  className="promo-btn" 
-                  onClick={() => window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})}
-                >
-                  Book Now
-                </button>
-              </div>
-
-            </div>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  </div>
-)}
 
                 <p className="bottom-desc">Contact us to book this service.</p>
                 <hr />

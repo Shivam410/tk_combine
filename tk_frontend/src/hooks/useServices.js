@@ -13,7 +13,12 @@ const slugify = (value = "") =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
-const toLink = (slug) => `/${slug}`;
+const toLink = (slug, serviceId) => {
+  if (serviceId) {
+    return `/service/${serviceId}/${slug}`;
+  }
+  return `/${slug}`;
+};
 
 const normalizeApiServices = (apiServices = []) => {
   const staticByName = new Map(
@@ -29,7 +34,7 @@ const normalizeApiServices = (apiServices = []) => {
       _id: service?._id,
       service_name: serviceName,
       slug,
-      link: toLink(slug),
+      link: toLink(slug, service?._id),
       img: service?.images?.[0] || staticMatch?.img || staticServices[0]?.img,
       images: service?.images || [],
     };

@@ -263,13 +263,25 @@ const Contact = () => {
                     <input
                       type="checkbox"
                       name="servicesNeeded"
-                      value="videographer"
+                      value="traditional-photographs"
                       onChange={handleCheckboxChange}
                       className="checkbox-input"
-                      checked={formData.servicesNeeded.includes("videographer")}
+                      checked={formData.servicesNeeded.includes("traditional-photographs")}
                     />
                     <span className="custom-checkbox"></span>
-                    Videographer
+                    Traditional Photographs
+                  </label>
+                  <label className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      name="servicesNeeded"
+                      value="cinematographer"
+                      onChange={handleCheckboxChange}
+                      className="checkbox-input"
+                      checked={formData.servicesNeeded.includes("cinematographer")}
+                    />
+                    <span className="custom-checkbox"></span>
+                    Cinematographer
                   </label>
                   <label className="checkbox-label">
                     <input
@@ -287,13 +299,25 @@ const Contact = () => {
                     <input
                       type="checkbox"
                       name="servicesNeeded"
-                      value="both"
+                      value="drone-service"
                       onChange={handleCheckboxChange}
                       className="checkbox-input"
-                      checked={formData.servicesNeeded.includes("both")}
+                      checked={formData.servicesNeeded.includes("drone-service")}
                     />
                     <span className="custom-checkbox"></span>
-                    Both
+                    Drone Service
+                  </label>
+                  <label className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      name="servicesNeeded"
+                      value="aerial-view"
+                      onChange={handleCheckboxChange}
+                      className="checkbox-input"
+                      checked={formData.servicesNeeded.includes("aerial-view")}
+                    />
+                    <span className="custom-checkbox"></span>
+                    Aerial View
                   </label>
                 </div>
               </div>

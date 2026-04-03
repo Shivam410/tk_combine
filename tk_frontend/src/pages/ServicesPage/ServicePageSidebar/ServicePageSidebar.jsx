@@ -12,13 +12,13 @@ const ServicePageSidebar = ({ onSidebarClick }) => {
 
   return (
     <div className="servicePageSidebar">
-      {services.map((service, index) => (
+      {services.map((service) => (
         <Link
           to={service.link}
           className={`servicePageSidebar-link ${
             location.pathname === service.link ? "active" : ""
           }`}
-          key={index}
+          key={service._id || service.link || service.service_name}
           onClick={() => {
             setSkipScroll(true); // Skip ScrollToTop when clicking sidebar links
             onSidebarClick(); // Scroll smoothly within the service page

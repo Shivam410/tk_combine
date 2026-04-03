@@ -456,12 +456,11 @@
 
 
 /* --- E-commerce Style Promo Banner --- */
-/* --- Sleek Rectangular Banner Style --- */
+/* --- Sleek Rectangular Banner Style (Luxury Theme) --- */
 .promo-banner-wrapper {
   margin: 40px 0;
   width: 100%;
   min-width: 0; 
-  /* Removed the gradient and padding from the wrapper to make it flush */
 }
 
 .promo-banner-title {
@@ -470,18 +469,23 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
+  color: var(--lux-text); /* Updated */
 }
 
 .promo-offer-slide {
-  /* Banner Background - Change #111 to match your website's exact theme color */
-  background: #111; 
-  color: #fff;
-  border-radius: 4px; /* Very slight rounding, closer to a sharp rectangle */
-  border-left: 6px solid #e63946; /* Accent color line on the left */
+  background: var(--lux-white); /* Updated from #111 */
+  color: var(--lux-text); /* Updated from #fff */
+  border-radius: 4px;
+  
+  /* Adds a subtle border around the whole card, but keeps the left edge thick and gold */
+  border: 1px solid var(--lux-border);
+  border-left: 6px solid var(--lux-gold); /* Updated from #e63946 */
+  
   display: flex;
-  min-height: 140px; /* Shorter, more like a banner */
+  min-height: 140px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); /* Very faint shadow for depth */
 
   .promo-content {
     display: flex;
@@ -490,7 +494,6 @@
     padding: 25px 30px;
     z-index: 2;
 
-    /* On Desktop: Align horizontally */
     @media (min-width: 768px) {
       flex-direction: row;
       align-items: center;
@@ -511,8 +514,8 @@
 
   .promo-badge {
     display: inline-block;
-    background: #e63946;
-    color: white;
+    background: var(--lux-gold); /* Updated from #e63946 */
+    color: var(--lux-white);
     font-size: 0.75rem;
     font-weight: 700;
     padding: 4px 10px;
@@ -527,12 +530,13 @@
     margin: 0 0 8px;
     font-weight: 700;
     line-height: 1.2;
+    color: var(--lux-text); /* Explicitly set to text color */
   }
 
   p {
     font-size: 0.95rem;
     margin: 0;
-    opacity: 0.8;
+    color: var(--lux-muted); /* Replaced opacity with your specific muted color */
     max-width: 600px;
   }
 
@@ -543,33 +547,33 @@
     align-items: flex-start;
     
     @media (min-width: 768px) {
-      align-items: flex-end; /* Push button and price to the right */
+      align-items: flex-end; 
       text-align: right;
       min-width: 180px;
       padding-left: 20px;
-      border-left: 1px solid rgba(255, 255, 255, 0.2); /* Divider line */
+      border-left: 1px solid var(--lux-border); /* Updated divider line */
     }
   }
 
   .promo-price {
     font-size: 0.9rem;
     margin-bottom: 15px;
-    color: #ccc;
+    color: var(--lux-muted); /* Updated from #ccc */
     text-transform: uppercase;
     letter-spacing: 1px;
 
     span {
       font-size: 1.6rem;
       font-weight: 800;
-      color: #fff;
+      color: var(--lux-text); /* Updated from #fff */
       display: block;
       margin-top: 4px;
     }
   }
 
   .promo-btn {
-    background: #fff;
-    color: #111;
+    background: var(--lux-text); /* Dark premium button */
+    color: var(--lux-white);
     border: none;
     padding: 12px 24px;
     font-size: 0.9rem;
@@ -581,15 +585,26 @@
     width: max-content;
 
     &:hover {
-      background: #e63946;
-      color: #fff;
+      background: var(--lux-gold); /* Switches to gold on hover */
+      color: var(--lux-white);
     }
   }
 }
 
-/* Adjust pagination dots for the thinner banner */
+/* Adjust pagination dots */
 .promo-banner-slider {
   padding-bottom: 35px !important; 
+  
+  /* Overriding Swiper's default blue dots to match the luxury theme */
+  .swiper-pagination-bullet {
+    background: var(--lux-muted);
+    opacity: 0.5;
+  }
+  
+  .swiper-pagination-bullet-active {
+    background: var(--lux-gold);
+    opacity: 1;
+  }
 }
 
 
@@ -635,4 +650,68 @@
   }
 }
 
+/* --- NEW HERO SECTION STYLES --- */
+/* --- IMAGELESS HERO SECTION STYLES --- */
+.service-hero {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 450px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end; /* Pushes content to the bottom */
+  padding: 5% 10%; 
 
+  /* Matches the background color of the next section so the fade looks seamless */
+  background-color: #fafafa; 
+
+  .service-hero-content {
+    max-width: 600px;
+    text-align: left;
+    padding-bottom: 2rem;
+    z-index: 2; /* Ensures text stays above the background gradient */
+
+    .hero-subtitle {
+      font-family: sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #777;
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', Georgia, serif; 
+      font-style: italic;
+      font-size: 4rem;
+      font-weight: 500;
+      color: #1a1a1a;
+      margin: 0 0 1.5rem 0;
+      line-height: 1.1;
+    }
+
+    .hero-divider {
+      width: 40px;
+      height: 2px;
+      background-color: #c4a46a; /* Goldish tan from the image */
+      border: none;
+      margin: 0;
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    height: 40vh;
+    min-height: 350px;
+    padding: 10% 5%;
+
+    .service-hero-content {
+      .hero-title {
+        font-size: 2.8rem;
+      }
+    }
+  }
+}

@@ -108,7 +108,7 @@ const Navbar = () => {
             {dropdownOpen && (
               <ul className="dropdown-menu">
                 {services.map((service) => (
-                  <li key={service.service_name}>
+                  <li key={service._id || service.link || service.service_name}>
                     <Link
                       to={service.link}
                       className={`dropdown-item ${

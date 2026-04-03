@@ -80,6 +80,10 @@ function App() {
 
                 {/* type */}
                 <Route path="/hindu-wedding" element={<Wt />} />
+                <Route
+                  path="/service/:serviceId/:serviceSlug"
+                  element={<ServiceDetail />}
+                />
                 <Route path="/:serviceSlug" element={<ServiceDetail />} />
               </Routes>
               <Footer />
