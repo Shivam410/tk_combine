@@ -46,20 +46,22 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
+      // Allow requests with no origin (Postman, mobile apps)
       if (!origin) return callback(null, true);
 
+      console.log("Incoming Origin:", origin);
+
+      // Allow ALL vercel deployments + localhost
       if (
-        origin === "https://tk-combine.vercel.app" ||
-        origin.startsWith("http://localhost") ||
-        origin.endsWith(".vercel.app")
+        origin.includes("vercel.app") ||
+        origin.includes("localhost")
       ) {
-        callback(null, true);
-      } else {
-        console.log("Blocked by CORS:", origin);
-        callback(new Error("Not allowed by CORS"));
+        return callback(null, true);
       }
+
+      console.log("Blocked by CORS:", origin);
+      return callback(null, false);
     },
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
