@@ -5,7 +5,8 @@ import App from './App.jsx'
 import "./styles/global.scss"
 import { ContextProvider } from "./context/Context";
 
-export const baseUrl = import.meta.env.VITE_BASE_URL;
+const rawBaseUrl = (import.meta.env.VITE_BASE_URL || "").replace(/\/+$/, "");
+export const baseUrl = /\/api$/i.test(rawBaseUrl) ? rawBaseUrl : `${rawBaseUrl}/api`;
 
 
 

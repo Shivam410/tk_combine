@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import "./Offers.scss";
-const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+import { baseUrl as apiBaseUrl } from "../../main";
 
 const normalizeOffer = (offer = {}) => ({
   id: offer?._id || offer?.id || "",

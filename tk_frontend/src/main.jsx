@@ -4,7 +4,8 @@ import App from './App.jsx'
 
 import "./styles/global.scss"
 
-export const baseUrl = import.meta.env.VITE_BASE_URL
+const rawBaseUrl = (import.meta.env.VITE_BASE_URL || "").replace(/\/+$/, "");
+export const baseUrl = /\/api$/i.test(rawBaseUrl) ? rawBaseUrl : `${rawBaseUrl}/api`;
 
 
 createRoot(document.getElementById('root')).render(
