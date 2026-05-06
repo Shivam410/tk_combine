@@ -1,0 +1,222 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap");
+
+.packages-page {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+.packages-hero {
+  padding: clamp(64px, 8vw, 110px) 0 clamp(28px, 4vw, 40px);
+  background: linear-gradient(180deg, rgba(250, 247, 241, 1) 0%, rgba(255, 255, 255, 1) 70%);
+
+  .packages-hero-inner {
+    width: min(1100px, calc(100% - 40px));
+    margin: 0 auto;
+    text-align: center;
+    display: grid;
+    gap: 10px;
+  }
+
+  .packages-hero-kicker {
+    font-family: "Manrope", sans-serif;
+    letter-spacing: 0.28em;
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: rgba(26, 26, 26, 0.7);
+  }
+
+  .packages-hero-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.2rem, 4.8vw, 3.4rem);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  .packages-hero-subtitle {
+    font-family: "Manrope", sans-serif;
+    margin: 0 auto;
+    max-width: 60ch;
+    color: rgba(26, 26, 26, 0.72);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+}
+
+.packages-state {
+  width: min(1100px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 30px 0 60px;
+  text-align: center;
+  font-family: "Manrope", sans-serif;
+  color: rgba(26, 26, 26, 0.7);
+}
+
+.packages-list {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 0 0 clamp(60px, 7vw, 110px);
+}
+
+.package-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: clamp(520px, 65vh, 720px);
+
+  @media (max-width: 980px) {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  &.reverse {
+    .package-copy {
+      order: 2;
+    }
+    .package-image {
+      order: 1;
+    }
+
+    @media (max-width: 980px) {
+      .package-copy,
+      .package-image {
+        order: unset;
+      }
+    }
+  }
+}
+
+.package-copy {
+  background: #f6efe4; // beige
+  display: grid;
+  place-items: center;
+  padding: clamp(34px, 4.5vw, 64px);
+
+  .package-copy-inner {
+    width: min(460px, 100%);
+    text-align: center;
+    display: grid;
+    gap: 14px;
+  }
+}
+
+.package-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto;
+
+  .package-badge-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    border: 1px solid rgba(26, 26, 26, 0.18);
+    position: relative;
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 12px 22px rgba(26, 26, 26, 0.07);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(26, 26, 26, 0.18), rgba(26, 26, 26, 0.06));
+      transform: rotate(20deg);
+    }
+  }
+
+  .package-badge-text {
+    font-family: "Manrope", sans-serif;
+    font-size: 0.76rem;
+    letter-spacing: 0.34em;
+    font-weight: 600;
+    color: rgba(26, 26, 26, 0.75);
+  }
+}
+
+.package-title {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  font-size: clamp(1.35rem, 2.1vw, 1.8rem);
+  margin: 0;
+}
+
+.package-blocks {
+  display: grid;
+  gap: 10px;
+
+  p {
+    margin: 0;
+    font-family: "Manrope", sans-serif;
+    font-size: 0.96rem;
+    line-height: 1.75;
+    color: rgba(26, 26, 26, 0.78);
+  }
+}
+
+.package-price {
+  margin: 4px 0 0;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: rgba(26, 26, 26, 0.85);
+}
+
+.package-includes {
+  list-style: none;
+  padding: 0;
+  margin: 8px auto 0;
+  display: grid;
+  gap: 8px;
+  width: min(360px, 100%);
+
+  li {
+    font-family: "Manrope", sans-serif;
+    font-size: 0.92rem;
+    color: rgba(26, 26, 26, 0.78);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    &::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(26, 26, 26, 0.28);
+    }
+  }
+}
+
+.package-image {
+  position: relative;
+  overflow: hidden;
+  min-height: 520px;
+
+  @media (max-width: 980px) {
+    min-height: 420px;
+  }
+
+  .package-image-inner {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: saturate(0.98) contrast(0.98);
+    transform: scale(1.02);
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(1200px 500px at 50% 40%, rgba(255, 255, 255, 0.12), rgba(0, 0, 0, 0.22));
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+  }
+}
+

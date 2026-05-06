@@ -26,6 +26,7 @@ import { HelmetProvider } from "@dr.pogodin/react-helmet";
 import ReactQueryProvider from "../utils/ReactQueryProvider.jsx";
 import Wt from "./pages/WeddingTypePage/Wt.jsx";
 import ServiceDetail from "./pages/ServiceDetail.jsx";
+import Packages from "./pages/Packages/Packages.jsx";
 
 function App() {
   const ScrollToTop = () => {
@@ -55,6 +56,7 @@ function App() {
                 <Route path="/about-us" element={<About />} />
                 <Route path="/contact-us" element={<Contact />} />
                 <Route path="/portfolio" element={<Gallery />} />
+                <Route path="/packages" element={<Packages />} />
 
                 {/* services */}
                 <Route path="/wedding-photography" element={<Service1 />} />

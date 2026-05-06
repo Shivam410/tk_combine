@@ -14,6 +14,7 @@ import visitorRouter from "./routes/visiterRoute.js";
 import photoAlbumRouter from "./routes/photoAlbumRoute.js";
 
 import ServicesRouter from "./routes/servicesRoute.js";
+import packageRouter from "./routes/packageRoute.js";
 
 import mobileRouter from "./routes/mobileRoute.js";
 
@@ -82,6 +83,7 @@ app.use("/api/contact2", contact2Router);
 app.use("/api/visitors", visitorRouter);
 app.use("/api/photoAlbum", photoAlbumRouter);
 app.use("/api/services", ServicesRouter);
+app.use("/api/packages", packageRouter);
 
 app.use("/api/mobile", mobileRouter);
 app.use("/api/review", reviewRouter);

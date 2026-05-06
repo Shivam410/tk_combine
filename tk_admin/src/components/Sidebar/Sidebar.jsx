@@ -6,6 +6,7 @@ import { FaRegImage } from "react-icons/fa";
 import { GrGroup, GrContact } from "react-icons/gr";
 import { MdMiscellaneousServices } from "react-icons/md";
 import { MdLocalOffer } from "react-icons/md";
+import { FiPackage } from "react-icons/fi";
 import { IoLogOutOutline } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -44,6 +45,7 @@ const Sidebar = ({ isOpen, onClose }) => {
     { path: "/reviews", icon: <VscPreview />, label: "Reviews" },
     { path: "/services", icon: <MdMiscellaneousServices />, label: "Services" },
     { path: "/offers", icon: <MdLocalOffer />, label: "Offers" },
+    { path: "/packages", icon: <FiPackage />, label: "Packages" },
 
     { path: "/messages", icon: <GrContact />, label: "Contact Messages" },
 

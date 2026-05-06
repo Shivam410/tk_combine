@@ -96,6 +96,17 @@ const Navbar = () => {
             </NavLink>
           </li>
 
+          <li>
+            <NavLink
+              to="/packages"
+              className={`nav-link ${
+                location.pathname === "/packages" ? "active-link" : ""
+              }`}
+            >
+              Packages
+            </NavLink>
+          </li>
+
           {/* Services Dropdown */}
           <li
             className="dropdown"
