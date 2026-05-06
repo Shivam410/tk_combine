@@ -1,0 +1,56 @@
+.newReel {
+  padding: 20px;
+}
+
+.newReel-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  h1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+  }
+
+  .back-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .add-reel-btn {
+    padding: 15px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.newReel-content {
+  h1 {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .reel-link {
+    input {
+      width: 100%;
+      padding: 14px 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      outline: none;
+      font-size: 14px;
+    }
+  }
+}
+

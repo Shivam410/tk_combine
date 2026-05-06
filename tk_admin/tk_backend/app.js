@@ -23,6 +23,8 @@ import reviewRouter from "./routes/reviewRoute.js";
 import video1Router from "./routes/video1Route.js";
 import video2Router from "./routes/video2Route.js";
 import offerRouter from "./routes/offerRoute.js";
+import reelRouter from "./routes/reelRoute.js";
+import driveLinkRouter from "./routes/driveLinkRoute.js";
 
 
 
@@ -92,6 +94,8 @@ app.use("/api/wedding-cinematography", video1Router);
 app.use("/api/pre-wedding-film", video2Router);
 app.use("/api/offers", offerRouter);
 app.use("/api/special-offers", offerRouter);
+app.use("/api/reels", reelRouter);
+app.use("/api/drive-links", driveLinkRouter);
 
 
 

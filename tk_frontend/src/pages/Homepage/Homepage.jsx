@@ -17,6 +17,8 @@ import { baseUrl } from "../../main";
 import SEO from "../../SEO/SEO";
 import { useLocation, Link } from "react-router-dom";
 import HomeVideo from "../../components/HomeVideo/HomeVideo";
+import HomeReels from "../../components/HomeReels/HomeReels";
+import HomeDriveLinks from "../../components/HomeDriveLinks/HomeDriveLinks";
 
 const Homepage = () => {
   useEffect(() => {
@@ -77,6 +79,14 @@ const Homepage = () => {
 
         <section className="homepage-section reveal-up">
           <HomeVideo />
+        </section>
+
+        <section className="homepage-section reveal-up">
+          <HomeReels />
+        </section>
+
+        <section className="homepage-section reveal-up">
+          <HomeDriveLinks />
         </section>
 
         <section className="homepage-section reveal-up">

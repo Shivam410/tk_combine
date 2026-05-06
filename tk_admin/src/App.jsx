@@ -61,6 +61,10 @@ import ServiceIndex from "./pages/Services/ServiceIndex/ServiceIndex";
 import ViewService from "./pages/Services/ViewService/ViewService";
 import Offers from "./pages/Offers/Offers";
 import Packages from "./pages/Packages/Packages";
+import Reels from "./pages/Reels/Reels";
+import NewReel from "./pages/NewDetails/NewReel/NewReel";
+import DriveLinks from "./pages/DriveLinks/DriveLinks";
+import NewDriveLink from "./pages/NewDetails/NewDriveLink/NewDriveLink";
 
 function App() {
   const { user } = useContext(Context);
@@ -169,6 +173,10 @@ function App() {
             <Route path="/services/:id" element={<DynamicService />} />
             <Route path="/offers" element={<Offers />} />
             <Route path="/packages" element={<Packages />} />
+            <Route path="/reels" element={<Reels />} />
+            <Route path="/reels/new-reel" element={<NewReel />} />
+            <Route path="/drive-links" element={<DriveLinks />} />
+            <Route path="/drive-links/new" element={<NewDriveLink />} />
 
             <Route path="*" element={<Navigate to="/" />} />
           </Route>

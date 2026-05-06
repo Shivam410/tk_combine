@@ -7,6 +7,7 @@ import { GrGroup, GrContact } from "react-icons/gr";
 import { MdMiscellaneousServices } from "react-icons/md";
 import { MdLocalOffer } from "react-icons/md";
 import { FiPackage } from "react-icons/fi";
+import { MdOutlineVideoLibrary } from "react-icons/md";
 import { IoLogOutOutline } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -18,6 +19,7 @@ import { IoClose } from "react-icons/io5";
 
 import { baseUrl } from "../../main";
 import { IoVideocamOutline } from "react-icons/io5";
+import { AiOutlineLink } from "react-icons/ai";
 
 import axios from "axios";
 import { toast } from "react-hot-toast";
@@ -46,6 +48,8 @@ const Sidebar = ({ isOpen, onClose }) => {
     { path: "/services", icon: <MdMiscellaneousServices />, label: "Services" },
     { path: "/offers", icon: <MdLocalOffer />, label: "Offers" },
     { path: "/packages", icon: <FiPackage />, label: "Packages" },
+    { path: "/reels", icon: <MdOutlineVideoLibrary />, label: "Reels" },
+    { path: "/drive-links", icon: <AiOutlineLink />, label: "Drive Links" },
 
     { path: "/messages", icon: <GrContact />, label: "Contact Messages" },
 

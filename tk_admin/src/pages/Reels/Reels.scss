@@ -1,0 +1,83 @@
+.reels {
+  padding: 20px;
+}
+
+.reels-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  h1 {
+    font-size: 24px;
+  }
+
+  button {
+    padding: 15px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+.reels-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.reels-card {
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  display: grid;
+  gap: 10px;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.reels-link {
+  margin: 0;
+  font-size: 14px;
+  color: #111827;
+  line-height: 1.4;
+  word-break: break-all;
+}
+
+.reels-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #111827;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  button {
+    background-color: red;
+    color: white;
+    padding: 10px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+  }
+}
+

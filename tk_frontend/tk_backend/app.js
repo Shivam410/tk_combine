@@ -22,6 +22,8 @@ import reviewRouter from "./routes/reviewRoute.js";
 import video1Router from "./routes/video1Route.js";
 import video2Router from "./routes/video2Route.js";
 import offerRouter from "./routes/offerRoute.js";
+import reelRouter from "./routes/reelRoute.js";
+import packageRouter from "./routes/packageRoute.js";
 
 
 
@@ -67,6 +69,7 @@ app.use("/api/contact2", contact2Router);
 app.use("/api/visitors", visitorRouter);
 app.use("/api/photoAlbum", photoAlbumRouter);
 app.use("/api/services", ServicesRouter);
+app.use("/api/packages", packageRouter);
 
 app.use("/api/mobile", mobileRouter);
 app.use("/api/review", reviewRouter);
@@ -75,6 +78,7 @@ app.use("/api/wedding-cinematography", video1Router);
 app.use("/api/pre-wedding-film", video2Router);
 app.use("/api/offers", offerRouter);
 app.use("/api/special-offers", offerRouter);
+app.use("/api/reels", reelRouter);
 
 
 

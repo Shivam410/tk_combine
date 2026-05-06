@@ -1,0 +1,72 @@
+.newDriveLink {
+  padding: 20px;
+  display: grid;
+  gap: 18px;
+
+  .newDriveLink-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .back-link {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    h1 {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .add-drive-link-btn {
+      cursor: pointer;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: none;
+      background: #111827;
+      color: #fff;
+      font-weight: 700;
+    }
+  }
+
+  .newDriveLink-content {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    padding: 16px;
+    display: grid;
+    gap: 14px;
+
+    h1 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .drive-fields {
+      display: grid;
+      gap: 10px;
+
+      input {
+        padding: 12px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        font-size: 14px;
+      }
+    }
+
+    .thumb-preview {
+      display: grid;
+      place-items: start;
+
+      img {
+        width: min(520px, 100%);
+        border-radius: 14px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        object-fit: cover;
+      }
+    }
+  }
+}
+
